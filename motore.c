@@ -16,7 +16,7 @@
 #include "timers.h"
 #include <pic18f4480.h>
 #define _XTAL_FREQ 16000000
-
+#define prova 0b00
 #define start_measure 0b00000000000000000000000000110 //da spostare a centralina freno
 #define stop_measure 0b00000000000000000000000000101 //da spostare a centralina freno
 #define speed_info 0b00000000000000000000000001000 
