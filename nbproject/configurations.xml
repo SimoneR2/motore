@@ -60,7 +60,7 @@
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
         <property key="extra-include-directories"
-                  value="..\libreria;..\libreria\LaurTec_PIC_libraries_v_3.3.0\src;..\libreria\LaurTec_PIC_libraries_v_3.3.0\inc;..\libreria\LaurTec_PIC_libraries_v_3.3.0;C:\Program Files (x86)\Microchip\xc8\v1.35\lib"/>
+                  value="K:\Tesina\LaurTec_PIC_libraries_v_3.3.0\src;K:\Tesina\LaurTec_PIC_libraries_v_3.3.0\inc;K:\Tesina\LaurTec_PIC_libraries_v_3.3.0"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="free"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
@@ -186,6 +186,8 @@
         <property key="periphComp4.gte" value="gt"/>
         <property key="periphComp5.gte" value="gt"/>
         <property key="periphComp6.gte" value="gt"/>
+        <property key="reset.scl" value="false"/>
+        <property key="reset.type" value="MCLR"/>
         <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
         <property key="tracecontrol.select" value="0"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
@@ -311,6 +313,8 @@
         <property key="warningmessagebreakoptions.W0228_ADC_INVALID_ADCS"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0229_ADC_INVALID_ADCS"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0400_PWM_PWM_FASTER_THAN_FOSC"
                   value="report"/>
         <property key="warningmessagebreakoptions.W1201_DATAFLASH_MEM_OUTSIDE_RANGE"
                   value="report"/>

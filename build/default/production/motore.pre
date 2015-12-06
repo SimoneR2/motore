@@ -19365,7 +19365,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 #pragma config EBTRB = OFF
 
-# 49 "../libreria\CANlib.h"
+# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
 typedef unsigned char BYTE;
 
 
@@ -20416,7 +20416,7 @@ BYTE CANisRxReady (void)
 return (RXB0CONbits.RXFUL || RXB1CONbits.RXFUL);
 }
 
-# 74 "../libreria/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
+# 74 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
 void delay_ms (unsigned int value_ms);
 
 # 88
@@ -20425,7 +20425,7 @@ void delay_s (unsigned char value_s);
 # 102
 void delay_set_quartz (unsigned char frequency);
 
-# 49 "../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
 volatile unsigned char delay_quartz_frequency_value = 16;
 volatile unsigned int clock_counter_reference = 0;
 
@@ -20463,7 +20463,7 @@ delay_quartz_frequency_value = frequency;
 
 }
 
-# 31 "motore.c"
+# 30 "motore.c"
 void configurazione_iniziale(void);
 void send_data(void);
 
@@ -20487,7 +20487,7 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
-# 58
+# 57
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
 if (INTCONbits.INT0IF == 1) {
 delay_ms(1);
@@ -20498,7 +20498,7 @@ INTCONbits.INT0IF = 0;
 }
 }
 
-# 72
+# 71
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {
@@ -20613,7 +20613,7 @@ SetDCEPWM1(0);
 PORTAbits.RA0 = 1;
 }
 
-# 191
+# 190
 while ((timeCounter - previousTimeCounter) > 100) {
 SetDCEPWM1(0);
 PORTAbits.RA0 = 1;

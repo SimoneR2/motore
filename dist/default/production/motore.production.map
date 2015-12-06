@@ -3,15 +3,15 @@ Microchip MPLAB XC8 Compiler V1.35 ()
 Linker command line:
 
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
-  -h+dist/default/production\motore.X.production.sym \
-  --cmf=dist/default/production\motore.X.production.cmf -z -Q18F4480 \
-  -oC:\Users\LUIGINO\AppData\Local\Temp\sak4.2 \
-  -Mdist/default/production/motore.X.production.map -E1 -ver=XC8 \
-  --acfsm=1493 -ASTACK=0B9h-02ffh -pstack=STACK -ACODE=00h-03FFFh \
-  -ACONST=00h-03FFFh -ASMALLCONST=0300h-03FFhx61 -AMEDIUMCONST=0300h-03FFFh \
-  -ACOMRAM=01h-05Fh -AABS1=00h-02FFh -ABIGRAM=01h-02FFh \
-  -ARAM=060h-0FFh,0100h-01FFhx2 -ABANK0=060h-0FFh -ABANK1=0100h-01FFh \
-  -ABANK2=0200h-02FFh -ASFR=0D00h-0DFFhx2,0F00h-0F5Fh,0F60h-0FFFh \
+  -h+dist/default/production\motore.production.sym \
+  --cmf=dist/default/production\motore.production.cmf -z -Q18F4480 \
+  -oC:\Users\LUIGINO\AppData\Local\Temp\s88o.2 \
+  -Mdist/default/production/motore.production.map -E1 -ver=XC8 --acfsm=1493 \
+  -ASTACK=0B9h-02ffh -pstack=STACK -ACODE=00h-03FFFh -ACONST=00h-03FFFh \
+  -ASMALLCONST=0300h-03FFhx61 -AMEDIUMCONST=0300h-03FFFh -ACOMRAM=01h-05Fh \
+  -AABS1=00h-02FFh -ABIGRAM=01h-02FFh -ARAM=060h-0FFh,0100h-01FFhx2 \
+  -ABANK0=060h-0FFh -ABANK1=0100h-01FFh -ABANK2=0200h-02FFh \
+  -ASFR=0D00h-0DFFhx2,0F00h-0F5Fh,0F60h-0FFFh \
   -preset_vec=00h,intcode=08h,intcodelo=018h,powerup,init,end_init \
   -pramtop=0300h -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST \
   -pconst=CONST -AFARRAM=00h-00h -ACONFIG=0300000h-030000Dh -pconfig=CONFIG \
@@ -21,8 +21,8 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -pparam0=BANK0 \
-  C:\Users\LUIGINO\AppData\Local\Temp\sak4.obj \
-  dist/default/production\motore.X.production.obj 
+  C:\Users\LUIGINO\AppData\Local\Temp\s88o.obj \
+  dist/default/production\motore.production.obj 
 
 Object code version is 3.11
 
@@ -34,11 +34,11 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\LUIGINO\AppData\Local\Temp\sak4.obj
+C:\Users\LUIGINO\AppData\Local\Temp\s88o.obj
                 end_init                            19E      19E        4        C       0
                 reset_vec                             0        0        4        0       0
                 config                           300000   300000        E   300000       0
-dist/default/production\motore.X.production.obj
+dist/default/production\motore.production.obj
                 intcodelo                            18       18      186        C       0
                 intcode                               8        8        E        4       0
                 temp                                 47       47        1        1       1
@@ -760,7 +760,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 118 in file "motore.c"
+		line 117 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -799,7 +799,7 @@ Total ram usage:        9 bytes
 
  *************** function _send_data *****************
  Defined at:
-		line 201 in file "motore.c"
+		line 200 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -831,7 +831,7 @@ Total ram usage:        0 bytes
 
  *************** function _delay_ms *****************
  Defined at:
-		line 61 in file "../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+		line 61 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
  Parameters:    Size  Location     Type
   value_ms        2   28[BANK0 ] unsigned int 
  Auto vars:     Size  Location     Type
@@ -894,7 +894,7 @@ Total ram usage:        6 bytes
 
  *************** function _CANsendMessage *****************
  Defined at:
-		line 294 in file "../libreria\CANlib.h"
+		line 294 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   identifier      4   22[BANK0 ] unsigned long 
   data            2   26[BANK0 ] PTR unsigned char 
@@ -929,7 +929,7 @@ Total ram usage:       16 bytes
 
  *************** function _CANisTxReady *****************
  Defined at:
-		line 1154 in file "../libreria\CANlib.h"
+		line 1154 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -959,7 +959,7 @@ Total ram usage:        1 bytes
 
  *************** function _configurazione_iniziale *****************
  Defined at:
-		line 217 in file "motore.c"
+		line 216 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -989,7 +989,7 @@ Total ram usage:        0 bytes
 
  *************** function _CANInitialize *****************
  Defined at:
-		line 218 in file "../libreria\CANlib.h"
+		line 218 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   propSeg         1    wreg     unsigned char 
   phaseSeg1       1   36[BANK0 ] unsigned char 
@@ -1028,7 +1028,7 @@ Total ram usage:       12 bytes
 
  *************** function _CANSetMask *****************
  Defined at:
-		line 640 in file "../libreria\CANlib.h"
+		line 640 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   numBuffer       1    wreg     enum E16878
   mask            4   22[BANK0 ] unsigned long 
@@ -1061,7 +1061,7 @@ Total ram usage:       14 bytes
 
  *************** function _CANSetFilter *****************
  Defined at:
-		line 748 in file "../libreria\CANlib.h"
+		line 748 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   numBuffer       1    wreg     enum E16881
   filter          4   22[BANK0 ] unsigned long 
@@ -1094,7 +1094,7 @@ Total ram usage:       14 bytes
 
  *************** function _CANOperationMode *****************
  Defined at:
-		line 206 in file "../libreria\CANlib.h"
+		line 206 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   mode            1    wreg     enum E16838
  Auto vars:     Size  Location     Type
@@ -1278,7 +1278,7 @@ Total ram usage:        1 bytes
 
  *************** function _CANisTXwarningON *****************
  Defined at:
-		line 1119 in file "../libreria\CANlib.h"
+		line 1119 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1308,7 +1308,7 @@ Total ram usage:        0 bytes
 
  *************** function _CANisRXwarningON *****************
  Defined at:
-		line 1127 in file "../libreria\CANlib.h"
+		line 1127 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1338,7 +1338,7 @@ Total ram usage:        0 bytes
 
  *************** function _ISR_bassa *****************
  Defined at:
-		line 72 in file "motore.c"
+		line 71 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1369,7 +1369,7 @@ Total ram usage:       17 bytes
 
  *************** function _CANreceiveMessage *****************
  Defined at:
-		line 528 in file "../libreria\CANlib.h"
+		line 528 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
   msg             2    0[COMRAM] PTR struct .
 		 -> msg(15), 
@@ -1401,7 +1401,7 @@ Total ram usage:       12 bytes
 
  *************** function _CANisRxReady *****************
  Defined at:
-		line 1163 in file "../libreria\CANlib.h"
+		line 1163 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1431,7 +1431,7 @@ Total ram usage:        1 bytes
 
  *************** function _ISR_alta *****************
  Defined at:
-		line 58 in file "motore.c"
+		line 57 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1461,7 +1461,7 @@ Total ram usage:       14 bytes
 
  *************** function i2_delay_ms *****************
  Defined at:
-		line 61 in file "../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+		line 61 in file "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
  Parameters:    Size  Location     Type
   value_ms        2    6[BANK0 ] unsigned int 
  Auto vars:     Size  Location     Type
@@ -1523,22 +1523,22 @@ Total ram usage:        6 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
+K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+		_delay_ms      		CODE           	2722	0000	59
+
+K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c estimated size: 59
+
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
 		___awdiv       		CODE           	23F0	0000	191
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c estimated size: 191
-
-../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
-		_delay_ms      		CODE           	2722	0000	59
-
-../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c estimated size: 59
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c
 		_SetDCEPWM1    		CODE           	26DE	0000	69
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c estimated size: 69
 
-../libreria\CANlib.h
+K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
 		_CANisRXwarningON		CODE           	2892	0000	13
 		_CANSetFilter  		CODE           	01A2	0000	2823
 		_CANisRxReady  		CODE           	285E	0000	23
@@ -1550,7 +1550,7 @@ C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c est
 		_CANisTxReady  		CODE           	2802	0000	37
 		_CANSetMask    		CODE           	1E8C	0000	927
 
-../libreria\CANlib.h estimated size: 7540
+K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h estimated size: 7540
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
 		_OpenTimer2    		CODE           	2826	0000	35
