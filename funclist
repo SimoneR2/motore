@@ -1,0 +1,23 @@
+_CANisRXwarningON: CODE, 9396 0 12
+_configurazione_iniziale: CODE, 8844 0 94
+_SetOutputEPWM1: CODE, 8938 0 82
+_CANSetFilter: CODE, 326 0 3114
+_CANisRxReady: CODE, 9344 0 22
+_SetDCEPWM1: CODE, 9020 0 72
+_send_data: CODE, 8716 0 128
+_main: CODE, 8376 0 196
+_OpenEPWM1: CODE, 9366 0 18
+_CANreceiveMessage: CODE, 5606 0 1236
+__initialization: CODE, 9204 0 38
+_ISR_bassa: CODE, 24 0 298
+_OpenTimer2: CODE, 9288 0 34
+_CANisTXwarningON: CODE, 9384 0 12
+_CANsendMessage: CODE, 3440 0 2166
+_delay_ms: CODE, 9092 0 58
+_CANInitialize: CODE, 7868 0 508
+_CANOperationMode: CODE, 9322 0 22
+_CANisTxReady: CODE, 9252 0 36
+___wmul: CODE, 9150 0 54
+_CANSetMask: CODE, 6842 0 1026
+_ISR_alta: CODE, 8 0 8708
+Total: 17934
