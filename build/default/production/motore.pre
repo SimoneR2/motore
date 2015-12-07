@@ -19365,7 +19365,11 @@ extern __nonreentrant void _delay3(unsigned char);
 
 #pragma config EBTRB = OFF
 
+<<<<<<< HEAD
 # 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
+=======
+# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
+>>>>>>> origin/master
 typedef unsigned char BYTE;
 
 
@@ -20416,7 +20420,11 @@ BYTE CANisRxReady (void)
 return (RXB0CONbits.RXFUL || RXB1CONbits.RXFUL);
 }
 
+<<<<<<< HEAD
 # 74 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
+=======
+# 74 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
+>>>>>>> origin/master
 void delay_ms (unsigned int value_ms);
 
 # 88
@@ -20425,7 +20433,11 @@ void delay_s (unsigned char value_s);
 # 102
 void delay_set_quartz (unsigned char frequency);
 
+<<<<<<< HEAD
 # 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+=======
+# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+>>>>>>> origin/master
 volatile unsigned char delay_quartz_frequency_value = 16;
 volatile unsigned int clock_counter_reference = 0;
 
@@ -20463,6 +20475,7 @@ delay_quartz_frequency_value = frequency;
 
 }
 
+<<<<<<< HEAD
 # 30 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\math.h"
 extern double fabs(double);
 extern double floor(double);
@@ -20561,6 +20574,9 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 32 "motore.c"
+=======
+# 30 "motore.c"
+>>>>>>> origin/master
 void configurazione_iniziale(void);
 void send_data(void);
 
@@ -20586,7 +20602,11 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
+<<<<<<< HEAD
 # 61
+=======
+# 57
+>>>>>>> origin/master
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
 if (INTCONbits.INT0IF == 1) {
 delay_ms(1);
@@ -20597,7 +20617,11 @@ INTCONbits.INT0IF = 0;
 }
 }
 
+<<<<<<< HEAD
 # 75
+=======
+# 71
+>>>>>>> origin/master
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {
@@ -20703,7 +20727,11 @@ SetDCEPWM1(0);
 PORTAbits.RA0 = 1;
 }
 
+<<<<<<< HEAD
 # 185
+=======
+# 190
+>>>>>>> origin/master
 while ((timeCounter - previousTimeCounter) > 100) {
 SetDCEPWM1(0);
 PORTAbits.RA0 = 1;

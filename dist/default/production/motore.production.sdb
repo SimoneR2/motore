@@ -3,7 +3,11 @@
 [d edition pro ]
 [d chip 18F4480 ]
 [d frameptr 4065 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "207 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"207 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [e E16838 CAN_OP_MODE `uc
 CAN_OP_MODE_NORMAL 0
 CAN_OP_MODE_SLEEP 32
@@ -68,8 +72,11 @@ CAN_NORMAL_TX_FRAME 191
 CAN_RX_BUFFER_1_OVFL 1
 CAN_RX_BUFFER_2_OVFL 2
 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
+=======
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 "8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\float.c
@@ -103,7 +110,11 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
 "17 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
 [v _OpenTimer2 OpenTimer2 `(v  1 e 0 0 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "206 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"206 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _CANOperationMode CANOperationMode `(v  1 e 0 0 ]
 "218
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
@@ -123,6 +134,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisTxReady CANisTxReady `(uc  1 e 1 0 ]
 "1163
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "61 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
 [v i2_delay_ms delay_ms `(v  1 e 0 0 ]
@@ -135,6 +147,20 @@ CAN_RX_BUFFER_2_OVFL 2
 "196
 [v _send_data send_data `(v  1 e 0 0 ]
 "212
+=======
+"61 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+[v _delay_ms delay_ms `(v  1 e 0 0 ]
+[v i2_delay_ms delay_ms `(v  1 e 0 0 ]
+"57 D:\DOCUMENTI LUIGINO\tesina\motore\motore.c
+[v _ISR_alta ISR_alta `IIH(v  1 e 0 0 ]
+"71
+[v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
+"117
+[v _main main `(i  1 e 2 0 ]
+"200
+[v _send_data send_data `(v  1 e 0 0 ]
+"216
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 "16255 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4480.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
@@ -1423,11 +1449,16 @@ CAN_RX_BUFFER_2_OVFL 2
 "34968
 "34968
 [v _INTCONbits INTCONbits `VES2010  1 e 1 @4082 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "49 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+=======
+"49 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _delay_quartz_frequency_value delay_quartz_frequency_value `VEuc  1 e 1 0 ]
 "50
 [v _clock_counter_reference clock_counter_reference `VEui  1 e 2 0 ]
 [s S853 . 15 `ul 1 identifier 4 0 `[8]uc 1 data 8 4 `uc 1 type 1 12 `uc 1 length 1 13 `uc 1 RTR 1 14 ]
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "35 C:\Users\Simone\Documents\GitHub\motore\motore.c
 [v _msg msg `S853  1 e 15 0 ]
 "36
@@ -1477,6 +1508,55 @@ CAN_RX_BUFFER_2_OVFL 2
 "210
 } 0
 "61 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+=======
+"33 D:\DOCUMENTI LUIGINO\tesina\motore\motore.c
+[v _msg msg `S853  1 e 15 0 ]
+"34
+[v _misura misura `b  1 e 0 0 ]
+"35
+[v _remote_frame remote_frame `b  1 e 0 0 ]
+"36
+[v _dir dir `ui  1 e 2 0 ]
+"37
+[v _currentSpeed currentSpeed `uc  1 e 1 0 ]
+"38
+[v _requestSpeed requestSpeed `uc  1 e 1 0 ]
+"39
+[v _counter counter `ul  1 e 4 0 ]
+"40
+[v _id id `ul  1 e 4 0 ]
+"41
+[v _timeCounter timeCounter `ul  1 e 4 0 ]
+"42
+[v _previousTimeCounter previousTimeCounter `ul  1 e 4 0 ]
+"43
+[v _previousTimeCounter1 previousTimeCounter1 `ul  1 e 4 0 ]
+"44
+[v _previousPwm previousPwm `uc  1 e 1 0 ]
+"45
+[v _left_speed left_speed `uc  1 e 1 0 ]
+"46
+[v _right_speed right_speed `uc  1 e 1 0 ]
+"47
+[v _duty_set duty_set `uc  1 e 1 0 ]
+"48
+[v _duty_cycle duty_cycle `i  1 e 2 0 ]
+"51
+[v _data_array data_array `[8]uc  1 e 8 0 ]
+"117
+[v _main main `(i  1 e 2 0 ]
+{
+"118
+[v main@period period `uc  1 a 1 56 ]
+"198
+} 0
+"200
+[v _send_data send_data `(v  1 e 0 0 ]
+{
+"214
+} 0
+"61 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
 {
 [v delay_ms@value_ms value_ms `ui  1 p 2 36 ]
@@ -1492,7 +1572,11 @@ CAN_RX_BUFFER_2_OVFL 2
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 32 ]
 "53
 } 0
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "294 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"294 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _CANsendMessage CANsendMessage `(v  1 e 0 0 ]
 {
 "296
@@ -1509,12 +1593,21 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1157
 } 0
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "212 C:\Users\Simone\Documents\GitHub\motore\motore.c
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
 "254
 } 0
 "218 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"216 D:\DOCUMENTI LUIGINO\tesina\motore\motore.c
+[v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
+{
+"258
+} 0
+"218 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
 {
 [v CANInitialize@propSeg propSeg `uc  1 a 1 wreg ]
@@ -1627,7 +1720,11 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenEPWM1@period period `uc  1 a 1 22 ]
 "23
 } 0
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "1119 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"1119 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _CANisTXwarningON CANisTXwarningON `(uc  1 e 1 0 ]
 {
 "1122
@@ -1637,12 +1734,21 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1130
 } 0
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "75 C:\Users\Simone\Documents\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
 "119
 } 0
 "528 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+=======
+"71 D:\DOCUMENTI LUIGINO\tesina\motore\motore.c
+[v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
+{
+"115
+} 0
+"528 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v _CANreceiveMessage CANreceiveMessage `(uc  1 e 1 0 ]
 {
 "530
@@ -1659,12 +1765,21 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1166
 } 0
+<<<<<<< HEAD:dist/default/production/motore.production.sdb
 "61 C:\Users\Simone\Documents\GitHub\motore\motore.c
 [v _ISR_alta ISR_alta `IIH(v  1 e 0 0 ]
 {
 "69
 } 0
 "61 F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+=======
+"57 D:\DOCUMENTI LUIGINO\tesina\motore\motore.c
+[v _ISR_alta ISR_alta `IIH(v  1 e 0 0 ]
+{
+"65
+} 0
+"61 K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c
+>>>>>>> origin/master:dist/default/production/motore.production.sdb
 [v i2_delay_ms delay_ms `(v  1 e 0 0 ]
 {
 [v i2delay_ms@value_ms value_ms `ui  1 p 2 6 ]
