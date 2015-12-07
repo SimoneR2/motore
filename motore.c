@@ -1,5 +1,5 @@
 #define USE_AND_MASKS
-/*
+/*prova github
  *dato velocità espresso in km/h
  *interrupt can
  *PWM sul pin RC2
@@ -14,7 +14,8 @@
 #include "delay.c"
 #include <pwm.h>
 #include "timers.h"
-#include <pic18f4480.h>
+#include <math.h>
+#include <stdlib.h>
 #define _XTAL_FREQ 16000000
 
 #define start_measure 0b00000000000000000000000000110 //da spostare a centralina freno
@@ -47,6 +48,8 @@ char left_speed = 0;
 char right_speed = 0;
 unsigned char duty_set = 0;
 int duty_cycle = 0;
+int errore = 0;
+unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
@@ -103,21 +106,20 @@ __interrupt(low_priority) void ISR_bassa(void) {
                 left_speed = msg.data[0];
                 right_speed = msg.data[1];
             }
+            PIR3bits.RXB0IF = 0;
+            PIR3bits.RXB1IF = 0;
         }
-        PIR3bits.RXB0IF = 0;
-        PIR3bits.RXB1IF = 0;
-    }
-    if (PIR2bits.TMR3IF) { //interrupt timer, ogni 10mS
-        timeCounter++; //incrementa di 1 la variabile timer
-        TMR3H = 0x63; //reimposta il timer
-        TMR3L = 0xC0; //reimposta il timer
-        PIR2bits.TMR3IF = 0; //azzera flag interrupt timer
+        if (PIR2bits.TMR3IF) { //interrupt timer, ogni 10mS
+            timeCounter++; //incrementa di 1 la variabile timer
+            TMR3H = 0x63; //reimposta il timer
+            TMR3L = 0xC0; //reimposta il timer
+            PIR2bits.TMR3IF = 0; //azzera flag interrupt timer
+        }
     }
 }
 
 int main(void) {
     unsigned char period;
-
     configurazione_iniziale();
     OpenTimer2(TIMER_INT_OFF & T2_PS_1_1 & T2_POST_1_1);
     period = 249;
@@ -142,40 +144,32 @@ int main(void) {
             SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
         }
         if ((timeCounter - previousTimeCounter1 >= rampa)) {
-
             CANsendMessage(speed_frequency, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
             currentSpeed = ((left_speed + right_speed) / 2);
-//continuare da qui!
-            if (currentSpeed - requestSpeed > 0) {
-                duty_cycle = (requestSpeed * 4); //conversione da 8 a 10 bit pmw
-                if ((duty_cycle - previousPwm) > 0) {
-                    if ((duty_cycle - previousPwm) > soglia4) {
-                        duty_set = previousPwm + 300;
-                    } else if ((duty_cycle - previousPwm) > soglia3) {
-                        duty_set = previousPwm + 80;
-                    } else if ((duty_cycle - previousPwm) > soglia2) {
-                        duty_set = previousPwm + 20;
-                    } else if (((duty_cycle - previousPwm) < soglia1)&&((duty_cycle - previousPwm) > 0)) {
-                        duty_set = previousPwm;
+            if (currentSpeed - requestSpeed > 0) {//RAMPE
+                errore = currentSpeed - requestSpeed;
+                errore = abs(errore);
+                correzione = (errore / 17)*(errore / 17);
+                correzione = correzione * 4; //conversione da 8 a 10 bit per il pwm
+                if (correzione > 1) {
+                    if ((currentSpeed - requestSpeed) > 0) {
+                        if (previousPwm > correzione) {
+                            duty_set = previousPwm - correzione;
+                        }
+                        if ((currentSpeed - requestSpeed) < 0) {
+                            duty_set = previousPwm + correzione;
+                        }
                     }
-                } else {
-                    if ((previousPwm - duty_cycle) > soglia4) {
-                        duty_set = previousPwm - 50;
-                    } else if ((previousPwm - duty_cycle) > soglia3) {
-                        duty_set = previousPwm - 30;
-                    } else if ((previousPwm - duty_cycle) > soglia2) {
-                        duty_set = previousPwm - 10;
-                    } else if (((previousPwm - duty_cycle) < soglia1)&&((previousPwm - duty_cycle) > 0)) {
+                    if (correzione < 1) {
                         duty_set = previousPwm;
                     }
                 }
                 previousPwm = duty_set;
-
                 SetDCEPWM1(duty_set); //imposta pwm
                 if (remote_frame == 1) { //se è arrivato un remote frame la rispsota è immediata
                     send_data();
                 }
-                previousTimeCounter = timeCounter;
+                previousTimeCounter1 = timeCounter;
             }
         }
         if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
@@ -194,6 +188,7 @@ int main(void) {
             delay_ms(250);
             PORTAbits.RA0 = 0;
             delay_ms(250);
+            previousTimeCounter = timeCounter;
         }
     }
 }

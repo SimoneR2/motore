@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\motore.X.production.hex">
+  <executable name="dist/default/production\motore.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>16384</length>
-      <used>10394</used>
-      <free>5990</free>
+      <used>10062</used>
+      <free>6322</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
       <length>768</length>
-      <used>160</used>
-      <free>608</free>
+      <used>164</used>
+      <free>604</free>
     </memory>
   </executable>
 </project>

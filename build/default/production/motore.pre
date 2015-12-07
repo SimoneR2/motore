@@ -19365,7 +19365,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 #pragma config EBTRB = OFF
 
-# 49 "../libreria\CANlib.h"
+# 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
 typedef unsigned char BYTE;
 
 
@@ -20416,7 +20416,7 @@ BYTE CANisRxReady (void)
 return (RXB0CONbits.RXFUL || RXB1CONbits.RXFUL);
 }
 
-# 74 "../libreria/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
+# 74 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
 void delay_ms (unsigned int value_ms);
 
 # 88
@@ -20425,7 +20425,7 @@ void delay_s (unsigned char value_s);
 # 102
 void delay_set_quartz (unsigned char frequency);
 
-# 49 "../libreria/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+# 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
 volatile unsigned char delay_quartz_frequency_value = 16;
 volatile unsigned int clock_counter_reference = 0;
 
@@ -20463,7 +20463,104 @@ delay_quartz_frequency_value = frequency;
 
 }
 
-# 31 "motore.c"
+# 30 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\math.h"
+extern double fabs(double);
+extern double floor(double);
+extern double ceil(double);
+extern double modf(double, double *);
+extern double sqrt(double);
+extern double atof(const char *);
+extern double sin(double) ;
+extern double cos(double) ;
+extern double tan(double) ;
+extern double asin(double) ;
+extern double acos(double) ;
+extern double atan(double);
+extern double atan2(double, double) ;
+extern double log(double);
+extern double log10(double);
+extern double pow(double, double) ;
+extern double exp(double) ;
+extern double sinh(double) ;
+extern double cosh(double) ;
+extern double tanh(double);
+extern double eval_poly(double, const double *, int);
+extern double frexp(double, int *);
+extern double ldexp(double, int);
+extern double fmod(double, double);
+extern double trunc(double);
+extern double round(double);
+
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 32 "motore.c"
 void configurazione_iniziale(void);
 void send_data(void);
 
@@ -20483,11 +20580,13 @@ char left_speed = 0;
 char right_speed = 0;
 unsigned char duty_set = 0;
 int duty_cycle = 0;
+int errore = 0;
+unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
-# 58
+# 61
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
 if (INTCONbits.INT0IF == 1) {
 delay_ms(1);
@@ -20498,7 +20597,7 @@ INTCONbits.INT0IF = 0;
 }
 }
 
-# 72
+# 75
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {
@@ -20533,7 +20632,6 @@ if (msg.identifier == 0b00000000000000000000000000010) {
 left_speed = msg.data[0];
 right_speed = msg.data[1];
 }
-}
 PIR3bits.RXB0IF = 0;
 PIR3bits.RXB1IF = 0;
 }
@@ -20544,10 +20642,10 @@ TMR3L = 0xC0;
 PIR2bits.TMR3IF = 0;
 }
 }
+}
 
 int main(void) {
 unsigned char period;
-
 configurazione_iniziale();
 OpenTimer2(0b01111111 & 0b11111100 & 0b10000111);
 period = 249;
@@ -20572,40 +20670,32 @@ if (dir == 0) {
 SetOutputEPWM1(0b11111111, 0b11111100);
 }
 if ((timeCounter - previousTimeCounter1 >= 10)) {
-
 CANsendMessage(0b00000000000000000000000000010, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 currentSpeed = ((left_speed + right_speed) / 2);
-
 if (currentSpeed - requestSpeed > 0) {
-duty_cycle = (requestSpeed * 4);
-if ((duty_cycle - previousPwm) > 0) {
-if ((duty_cycle - previousPwm) > 5) {
-duty_set = previousPwm + 300;
-} else if ((duty_cycle - previousPwm) > 10) {
-duty_set = previousPwm + 80;
-} else if ((duty_cycle - previousPwm) > 30) {
-duty_set = previousPwm + 20;
-} else if (((duty_cycle - previousPwm) < 50)&&((duty_cycle - previousPwm) > 0)) {
-duty_set = previousPwm;
+errore = currentSpeed - requestSpeed;
+errore = abs(errore);
+correzione = (errore / 17)*(errore / 17);
+correzione = correzione * 4;
+if (correzione > 1) {
+if ((currentSpeed - requestSpeed) > 0) {
+if (previousPwm > correzione) {
+duty_set = previousPwm - correzione;
 }
-} else {
-if ((previousPwm - duty_cycle) > 5) {
-duty_set = previousPwm - 50;
-} else if ((previousPwm - duty_cycle) > 10) {
-duty_set = previousPwm - 30;
-} else if ((previousPwm - duty_cycle) > 30) {
-duty_set = previousPwm - 10;
-} else if (((previousPwm - duty_cycle) < 50)&&((previousPwm - duty_cycle) > 0)) {
+if ((currentSpeed - requestSpeed) < 0) {
+duty_set = previousPwm + correzione;
+}
+}
+if (correzione < 1) {
 duty_set = previousPwm;
 }
 }
 previousPwm = duty_set;
-
 SetDCEPWM1(duty_set);
 if (remote_frame == 1) {
 send_data();
 }
-previousTimeCounter = timeCounter;
+previousTimeCounter1 = timeCounter;
 }
 }
 if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
@@ -20613,13 +20703,14 @@ SetDCEPWM1(0);
 PORTAbits.RA0 = 1;
 }
 
-# 191
+# 185
 while ((timeCounter - previousTimeCounter) > 100) {
 SetDCEPWM1(0);
 PORTAbits.RA0 = 1;
 delay_ms(250);
 PORTAbits.RA0 = 0;
 delay_ms(250);
+previousTimeCounter = timeCounter;
 }
 }
 }
