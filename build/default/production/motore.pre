@@ -19365,11 +19365,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 #pragma config EBTRB = OFF
 
-<<<<<<< HEAD
-# 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
-=======
 # 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
->>>>>>> origin/master
 typedef unsigned char BYTE;
 
 
@@ -20420,11 +20416,7 @@ BYTE CANisRxReady (void)
 return (RXB0CONbits.RXFUL || RXB1CONbits.RXFUL);
 }
 
-<<<<<<< HEAD
-# 74 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
-=======
 # 74 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
->>>>>>> origin/master
 void delay_ms (unsigned int value_ms);
 
 # 88
@@ -20433,11 +20425,7 @@ void delay_s (unsigned char value_s);
 # 102
 void delay_set_quartz (unsigned char frequency);
 
-<<<<<<< HEAD
-# 49 "F:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
-=======
 # 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
->>>>>>> origin/master
 volatile unsigned char delay_quartz_frequency_value = 16;
 volatile unsigned int clock_counter_reference = 0;
 
@@ -20475,7 +20463,6 @@ delay_quartz_frequency_value = frequency;
 
 }
 
-<<<<<<< HEAD
 # 30 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\math.h"
 extern double fabs(double);
 extern double floor(double);
@@ -20573,13 +20560,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 32 "motore.c"
-=======
-# 30 "motore.c"
->>>>>>> origin/master
+# 29 "motore.c"
 void configurazione_iniziale(void);
 void send_data(void);
-
+void battery_measure(void);
 CANmessage msg;
 bit misura = 0;
 bit remote_frame = 0;
@@ -20591,37 +20575,25 @@ unsigned long id = 0;
 unsigned long timeCounter = 0;
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
+unsigned long previousTimeCounter2 = 0;
 char previousPwm = 0;
 char left_speed = 0;
 char right_speed = 0;
 unsigned char duty_set = 0;
 int duty_cycle = 0;
 int errore = 0;
+int vBatt = 0;
 unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
-<<<<<<< HEAD
-# 61
-=======
-# 57
->>>>>>> origin/master
+# 60
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
-if (INTCONbits.INT0IF == 1) {
-delay_ms(1);
-if (misura == 1) {
-counter++;
-}
-INTCONbits.INT0IF = 0;
-}
+
 }
 
-<<<<<<< HEAD
-# 75
-=======
-# 71
->>>>>>> origin/master
+# 68
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {
@@ -20655,6 +20627,9 @@ PORTAbits.RA1 = 1;
 if (msg.identifier == 0b00000000000000000000000000010) {
 left_speed = msg.data[0];
 right_speed = msg.data[1];
+}
+if (msg.identifier == 0b00000000000000000000000000001) {
+
 }
 PIR3bits.RXB0IF = 0;
 PIR3bits.RXB1IF = 0;
@@ -20697,10 +20672,8 @@ if ((timeCounter - previousTimeCounter1 >= 10)) {
 CANsendMessage(0b00000000000000000000000000010, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 currentSpeed = ((left_speed + right_speed) / 2);
 if (currentSpeed - requestSpeed > 0) {
-errore = currentSpeed - requestSpeed;
-errore = abs(errore);
-correzione = (errore / 17)*(errore / 17);
-correzione = correzione * 4;
+errore = abs(currentSpeed - requestSpeed);
+correzione = ((errore / 17)*(errore / 17))*4;
 if (correzione > 1) {
 if ((currentSpeed - requestSpeed) > 0) {
 if (previousPwm > correzione) {
@@ -20724,14 +20697,12 @@ previousTimeCounter1 = timeCounter;
 }
 if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
 SetDCEPWM1(0);
-PORTAbits.RA0 = 1;
+PORTAbits.RA7 = 1;
+} else {
+PORTAbits.RA7 = 0;
 }
 
-<<<<<<< HEAD
-# 185
-=======
-# 190
->>>>>>> origin/master
+# 181
 while ((timeCounter - previousTimeCounter) > 100) {
 SetDCEPWM1(0);
 PORTAbits.RA0 = 1;
@@ -20739,7 +20710,13 @@ delay_ms(250);
 PORTAbits.RA0 = 0;
 delay_ms(250);
 previousTimeCounter = timeCounter;
+while (!CANisTxReady());
+CANsendMessage(0b00000000000000000000000000001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 }
+}
+if ((timeCounter - previousTimeCounter2 >= 100)) {
+battery_measure();
+previousTimeCounter2 = timeCounter;
 }
 }
 
@@ -20756,6 +20733,17 @@ if (remote_frame == 1) {
 CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 remote_frame = 0;
 }
+}
+}
+
+void battery_measure(void) {
+ADCON0bits.GO = 1;
+while (ADCON0bits.GO);
+vBatt = ADRESH;
+vBatt = (vBatt * 14) / 1024;
+if (vBatt < 10) {
+while (!CANisTxReady());
+CANsendMessage(0b00000000000000000000000000001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 }
 }
 
@@ -20785,8 +20773,30 @@ TMR3L = 0xC0;
 PIE2bits.TMR3IE = 1;
 
 
+
+ADCON0bits.ADON = 1;
+ADCON0bits.CHS0 = 0;
+ADCON0bits.CHS1 = 0;
+ADCON0bits.CHS2 = 0;
+ADCON0bits.CHS3 = 0;
+ADCON1bits.PCFG0 = 0;
+ADCON1bits.PCFG1 = 1;
+ADCON1bits.PCFG2 = 1;
+ADCON1bits.PCFG3 = 1;
+ADCON1bits.VCFG0 = 0;
+ADCON1bits.VCFG1 = 0;
+ADCON2bits.ADCS0 = 1;
+ADCON2bits.ADCS1 = 0;
+ADCON2bits.ADCS2 = 1;
+ADCON2bits.ACQT0 = 0;
+ADCON2bits.ACQT1 = 1;
+ADCON2bits.ACQT2 = 1;
+ADCON2bits.ADFM = 0;
+
+
+
 LATA = 0x00;
-TRISA = 0b11111100;
+TRISA = 0b01111111;
 
 LATB = 0x00;
 TRISB = 0b11111011;
@@ -20795,10 +20805,9 @@ LATC = 0x00;
 TRISC = 0x00;
 
 LATD = 0x00;
-TRISD = 0b00000000;
+TRISD = 0x00;
 
 LATE = 0x00;
 TRISE = 0xFF;
 
-ADCON1 = 0xFF;
 }

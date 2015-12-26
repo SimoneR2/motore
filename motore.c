@@ -3,7 +3,7 @@
  *dato velocità espresso in km/h
  *interrupt can
  *PWM sul pin RC2
- *LED ROSSO su RA0 per segnalare errori can bus
+ *LED ROSSO su RA7 per segnalare errori can bus
  *RA1 sensore di tensione
  */
 
@@ -23,14 +23,12 @@
 #define speed_change 0b00000000000000000000000000010
 #define speed_frequency 0b00000000000000000000000000010 //da definire id
 #define emergency 0b00000000000000000000000000001
-#define soglia1 50
-#define soglia2 30
-#define soglia3 10
-#define soglia4 5
-#define rampa 10
+#define ecuState 0b00000000000000000000000000001//da definire ID
+#define lowBattery 0b00000000000000000000000000001//da definire ID
+#define attesaRampa 10
 void configurazione_iniziale(void);
 void send_data(void);
-
+void battery_measure(void);
 CANmessage msg;
 bit misura = 0;
 bit remote_frame = 0;
@@ -42,12 +40,14 @@ unsigned long id = 0;
 unsigned long timeCounter = 0; //1 = 10mS
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
+unsigned long previousTimeCounter2 = 0;
 char previousPwm = 0;
 char left_speed = 0;
 char right_speed = 0;
 unsigned char duty_set = 0;
 int duty_cycle = 0;
 int errore = 0;
+int vBatt = 0; //tensione batteria
 unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
@@ -58,13 +58,7 @@ BYTE data_array [8] = 0;
 //*************************************
 
 __interrupt(high_priority) void ISR_alta(void) {
-    if (INTCONbits.INT0IF == 1) { //Se c'è stato un interrupt su PORTB
-        delay_ms(1);
-        if (misura == 1) { //Se è richiesta la misura di spazio percorso
-            counter++; //Aggiunge 1 allo spazio percorso
-        }
-        INTCONbits.INT0IF = 0; //azzera flag interrupt
-    }
+
 }
 
 //*************************************
@@ -105,6 +99,9 @@ __interrupt(low_priority) void ISR_bassa(void) {
                 left_speed = msg.data[0];
                 right_speed = msg.data[1];
             }
+            if (msg.identifier == ecuState) { //funzione per presenza centraline
+
+            }
             PIR3bits.RXB0IF = 0;
             PIR3bits.RXB1IF = 0;
         }
@@ -142,14 +139,12 @@ int main(void) {
         if (dir == 0) { //direzione indietro
             SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
         }
-        if ((timeCounter - previousTimeCounter1 >= rampa)) {
+        if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
             CANsendMessage(speed_frequency, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
             currentSpeed = ((left_speed + right_speed) / 2);
             if (currentSpeed - requestSpeed > 0) {//RAMPE
-                errore = currentSpeed - requestSpeed;
-                errore = abs(errore);
-                correzione = (errore / 17)*(errore / 17);
-                correzione = correzione * 4; //conversione da 8 a 10 bit per il pwm
+                errore = abs(currentSpeed - requestSpeed);
+                correzione = ((errore / 17)*(errore / 17))*4;
                 if (correzione > 1) {
                     if ((currentSpeed - requestSpeed) > 0) {
                         if (previousPwm > correzione) {
@@ -173,7 +168,9 @@ int main(void) {
         }
         if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
             SetDCEPWM1(0); //ferma il mezzo
-            PORTAbits.RA0 = 1; //accendi led errore
+            PORTAbits.RA7 = 1; //accendi led errore
+        } else {
+            PORTAbits.RA7 = 0;
         }
 
         /*
@@ -188,7 +185,13 @@ int main(void) {
             PORTAbits.RA0 = 0;
             delay_ms(250);
             previousTimeCounter = timeCounter;
+            while (!CANisTxReady());
+            CANsendMessage(ecuState, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
         }
+    }
+    if ((timeCounter - previousTimeCounter2 >= 100)) {
+        battery_measure();
+        previousTimeCounter2 = timeCounter;
     }
 }
 
@@ -205,6 +208,17 @@ void send_data(void) {
             CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
             remote_frame = 0; //azzero flag risposta remote frame
         }
+    }
+}
+
+void battery_measure(void) {
+    ADCON0bits.GO = 1; //abilita conversione ADC;
+    while (ADCON0bits.GO);
+    vBatt = ADRESH;
+    vBatt = (vBatt * 14) / 1024;
+    if (vBatt < 10) {
+        while (!CANisTxReady());
+        CANsendMessage(lowBattery, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
     }
 }
 
@@ -225,17 +239,39 @@ void configurazione_iniziale(void) {
     INTCONbits.GIEL = 1; //abilita interrupt bassa priorità periferiche
     INTCON2bits.INTEDG0 = 1; //interrupt su fronte di salita
 
-    //impostazione timer3 per contatore
+    //impostazione timer3 per contatore========
     T3CON = 0x01; //abilita timer
     PIR2bits.TMR3IF = 0; //resetta flag interrupt timer 3
     IPR2bits.TMR3IP = 0; //interrupt bassa priorità timer 3
     TMR3H = 0x63;
     TMR3L = 0xC0;
     PIE2bits.TMR3IE = 1; //abilita interrupt timer 3 
+    //==========================================
+
+    //impostazione ADC ==================================
+    ADCON0bits.ADON = 1; //attiva modulo ADC
+    ADCON0bits.CHS0 = 0; //AN0 come input ADC
+    ADCON0bits.CHS1 = 0; //AN0 come input ADC
+    ADCON0bits.CHS2 = 0; //AN0 come input ADC
+    ADCON0bits.CHS3 = 0; //AN0 come input ADC
+    ADCON1bits.PCFG0 = 0; //AN0 input analogico
+    ADCON1bits.PCFG1 = 1; //AN0 input analogico
+    ADCON1bits.PCFG2 = 1; //AN0 input analogico
+    ADCON1bits.PCFG3 = 1; //AN0 input analogico
+    ADCON1bits.VCFG0 = 0; //reference interno
+    ADCON1bits.VCFG1 = 0; //reference interno
+    ADCON2bits.ADCS0 = 1; //Tad = Fosc/16
+    ADCON2bits.ADCS1 = 0; //Tad = Fosc/16
+    ADCON2bits.ADCS2 = 1; //Tad = Fosc/16
+    ADCON2bits.ACQT0 = 0; //tempo di acquisizione 16TAD
+    ADCON2bits.ACQT1 = 1; //tempo di acquisizione 16TAD
+    ADCON2bits.ACQT2 = 1; //tempo di acquisizione 16TAD
+    ADCON2bits.ADFM = 0; //Left Justified
+    //=======================================================
 
     //impostazione porte
     LATA = 0x00;
-    TRISA = 0b11111100;
+    TRISA = 0b01111111;
 
     LATB = 0x00;
     TRISB = 0b11111011;
@@ -244,10 +280,9 @@ void configurazione_iniziale(void) {
     TRISC = 0x00;
 
     LATD = 0x00;
-    TRISD = 0b00000000;
+    TRISD = 0x00;
 
     LATE = 0x00;
     TRISE = 0xFF;
 
-    ADCON1 = 0xFF;
 }
