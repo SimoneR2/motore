@@ -19365,7 +19365,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 #pragma config EBTRB = OFF
 
-# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
+# 49 "H:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\CANlib.h"
 typedef unsigned char BYTE;
 
 
@@ -20416,7 +20416,7 @@ BYTE CANisRxReady (void)
 return (RXB0CONbits.RXFUL || RXB1CONbits.RXFUL);
 }
 
-# 74 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
+# 74 "H:/Tesina/LaurTec_PIC_libraries_v_3.3.0/inc\delay.h"
 void delay_ms (unsigned int value_ms);
 
 # 88
@@ -20425,8 +20425,8 @@ void delay_s (unsigned char value_s);
 # 102
 void delay_set_quartz (unsigned char frequency);
 
-# 49 "K:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
-volatile unsigned char delay_quartz_frequency_value = 16;
+# 49 "H:/Tesina/LaurTec_PIC_libraries_v_3.3.0/src\delay.c"
+volatile unsigned char delay_quartz_frequency_value = 8;
 volatile unsigned int clock_counter_reference = 0;
 
 # 61
@@ -20565,13 +20565,21 @@ void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
 CANmessage msg;
-bit misura = 0;
 bit remote_frame = 0;
+bit remote_frame1 = 0;
+bit speed_fetched = 0;
+bit message_sent = 0;
+bit can_retry = 0;
+bit request_sent = 0;
+bit centralina_sterzo = 0;
+bit centralina_abs = 0;
+bit centralina_comando = 0;
 unsigned int dir = 0;
 unsigned char currentSpeed = 1;
 unsigned char requestSpeed = 0;
 unsigned long counter = 0;
 unsigned long id = 0;
+unsigned long id1 = 0;
 unsigned long timeCounter = 0;
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
@@ -20588,32 +20596,25 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
-# 60
+# 68
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
 
 }
 
-# 68
+# 76
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {
 CANreceiveMessage(&msg);
 if (msg.RTR == 1) {
+if (message_sent == 0) {
 id = msg.identifier;
 remote_frame = msg.RTR;
+message_sent = 1;
+} else {
+id1 = msg.identifier;
+remote_frame1 = msg.RTR;
 }
-if (msg.identifier == 0b00000000000000000000000000110) {
-misura = 1;
-}
-if (msg.identifier == 0b00000000000000000000000000101) {
-misura = 0;
-data_array[0] = counter;
-data_array[1] = counter >> 8;
-data_array[2] = counter >> 8;
-counter = 0;
-}
-if (msg.identifier == 0b00000000000000000000000001000) {
-data_array[0] = currentSpeed;
 }
 if (msg.identifier == 0b00000000000000000000000000010) {
 currentSpeed = msg.data[0];
@@ -20627,12 +20628,20 @@ PORTAbits.RA1 = 1;
 if (msg.identifier == 0b00000000000000000000000000010) {
 left_speed = msg.data[0];
 right_speed = msg.data[1];
+speed_fetched = 1;
 }
 if (msg.identifier == 0b00000000000000000000000000001) {
-
+switch (msg.data[0]) {
+case 1: centralina_abs = 1;
+break;
+case 2: centralina_sterzo = 1;
+break;
+case 3: centralina_comando = 1;
+break;
 }
 PIR3bits.RXB0IF = 0;
 PIR3bits.RXB1IF = 0;
+}
 }
 if (PIR2bits.TMR3IF) {
 timeCounter++;
@@ -20662,14 +20671,25 @@ delay_ms(500);
 
 
 while (1) {
+if (PORTAbits.RA7 == 0) {
 if (dir == 1) {
 SetOutputEPWM1(0b01111111, 0b11111100);
+PORTCbits.RC0 = 1;
+PORTCbits.RC1 = 0;
 }
 if (dir == 0) {
 SetOutputEPWM1(0b11111111, 0b11111100);
+PORTCbits.RC0 = 0;
+PORTCbits.RC1 = 1;
+}
+if (duty_set == 0) {
+PORTCbits.RC0 = 0;
+PORTCbits.RC1 = 0;
 }
 if ((timeCounter - previousTimeCounter1 >= 10)) {
 CANsendMessage(0b00000000000000000000000000010, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+if (speed_fetched == 1) {
+speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
 if (currentSpeed - requestSpeed > 0) {
 errore = abs(currentSpeed - requestSpeed);
@@ -20689,11 +20709,13 @@ duty_set = previousPwm;
 }
 previousPwm = duty_set;
 SetDCEPWM1(duty_set);
-if (remote_frame == 1) {
-send_data();
 }
 previousTimeCounter1 = timeCounter;
 }
+}
+}
+if ((remote_frame == 1) || (can_retry == 1)) {
+send_data();
 }
 if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
 SetDCEPWM1(0);
@@ -20702,21 +20724,31 @@ PORTAbits.RA7 = 1;
 PORTAbits.RA7 = 0;
 }
 
-# 181
-while ((timeCounter - previousTimeCounter) > 100) {
-SetDCEPWM1(0);
-PORTAbits.RA0 = 1;
-delay_ms(250);
-PORTAbits.RA0 = 0;
-delay_ms(250);
-previousTimeCounter = timeCounter;
-while (!CANisTxReady());
+
+if ((timeCounter - previousTimeCounter) > 100) {
+if (request_sent == 0) {
 CANsendMessage(0b00000000000000000000000000001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+request_sent = 1;
 }
+if (request_sent == 1) {
+
+if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) {
+centralina_abs = 0;
+centralina_sterzo = 0;
+centralina_comando = 0;
+PORTAbits.RA7 = 0;
+} else {
+SetDCEPWM1(0);
+PORTAbits.RA7 = 1;
+}
+}
+previousTimeCounter = timeCounter;
 }
 if ((timeCounter - previousTimeCounter2 >= 100)) {
+
 battery_measure();
 previousTimeCounter2 = timeCounter;
+}
 }
 }
 
@@ -20728,10 +20760,17 @@ remote_frame = 0;
 }
 }
 if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
-delay_ms(5);
-if (remote_frame == 1) {
-CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-remote_frame = 0;
+can_retry = 1;
+} else {
+can_retry = 0;
+if (remote_frame1 != 0) {
+remote_frame = remote_frame1;
+id = id1;
+message_sent = 1;
+remote_frame1 = 0;
+} else {
+
+message_sent = 0;
 }
 }
 }
@@ -20740,8 +20779,9 @@ void battery_measure(void) {
 ADCON0bits.GO = 1;
 while (ADCON0bits.GO);
 vBatt = ADRESH;
-vBatt = (vBatt * 14) / 1024;
+vBatt = (vBatt * 14) / 235;
 if (vBatt < 10) {
+
 while (!CANisTxReady());
 CANsendMessage(0b00000000000000000000000000001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 }

@@ -1,12 +1,37 @@
 #define USE_AND_MASKS
-/*prova github
- *dato velocità espresso in km/h
- *interrupt can
- *PWM sul pin RC2
- *LED ROSSO su RA7 per segnalare errori can bus
- *RA1 sensore di tensione
- */
+/*==============================================================================
+ *PROGRAM: MOTORE
+ *WRITTEN BY: Simone Righetti
+ *DATA: 18/01/2016
+ *VERSION: 3.0
+ *FILE SAVED AS: motore.c
+ *FOR PIC: 18F4480
+ *CLOCK FREQUENCY: 16 MHz
+ *PROGRAM FUNCTION: Centralina che gestisce il motore della macchina. Con 
+ *retroazione sulla velocità impostata rispetto al pwm. Il sistema utilizza
+ *una rampa a parabola con reazione piuttosto rapida durante i transistori
+ *e risposta più moderata a regime. Incorporata anche funzione di sicurezza
+ *che ogni secondo verifica il corretto funzionamento delle centraline 
+ *necessarie all'operatività in sicurezza del mezzo e che lo ferma in caso
+ *di risposta negativa. La centralina inoltre si occupa, attraverso un partitore
+ *con rapporto 1.8 : 1 e zener di protezione, di misurare la tensione della 
+ *batteria per progetterla dalle scariche eccessive che la rovinerebbero.
 
+======================================          
+=         INPUT AND OUTPUTS          =            
+=   RA0 => Tensione batteria (ADC)   =            
+=   RA1 => Warning LED               =            
+=   RD4-5-6-7 => ECCP (PWM Motore)   =   
+=   RB2/RB3 => CANBus                =            
+======================================
+
+ * CODICI CENTRALINE PER RISPOSTA ECU_STATE
+ *  -ABS : 1
+ *  -STERZO : 2
+ *  -COMANDO : 3
+ *Frequenza PWM: 20kHz.
+
+ */
 #include <xc.h>
 #include "motore.h"
 #include <CANlib.h>
@@ -30,13 +55,21 @@ void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
 CANmessage msg;
-bit misura = 0;
 bit remote_frame = 0;
+bit remote_frame1 = 0;
+bit speed_fetched = 0;
+bit message_sent = 0;
+bit can_retry = 0;
+bit request_sent = 0;
+bit centralina_sterzo = 0;
+bit centralina_abs = 0;
+bit centralina_comando = 0;
 unsigned int dir = 0;
 unsigned char currentSpeed = 1;
 unsigned char requestSpeed = 0;
 unsigned long counter = 0;
 unsigned long id = 0;
+unsigned long id1 = 0;
 unsigned long timeCounter = 0; //1 = 10mS
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
@@ -70,21 +103,14 @@ __interrupt(low_priority) void ISR_bassa(void) {
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
             if (msg.RTR == 1) { //Se il messaggio arrivato è un remote frame
-                id = msg.identifier;
-                remote_frame = msg.RTR;
-            }
-            if (msg.identifier == start_measure) { //richiesto inizio della misura
-                misura = 1;
-            }
-            if (msg.identifier == stop_measure) { //fine della misura, manda il dato (remote frame)
-                misura = 0; //smetti di contare
-                data_array[0] = counter; //LSB
-                data_array[1] = counter >> 8; //casting variabile
-                data_array[2] = counter >> 8; //casting variabile MSB
-                counter = 0; //azzera la variabile contatore
-            }
-            if (msg.identifier == speed_info) { //richiesta velocità (remote frame)
-                data_array[0] = currentSpeed; //impacchettamento dati velocità
+                if (message_sent == 0) {
+                    id = msg.identifier;
+                    remote_frame = msg.RTR;
+                    message_sent = 1;
+                } else {
+                    id1 = msg.identifier;
+                    remote_frame1 = msg.RTR;
+                }
             }
             if (msg.identifier == speed_change) { //variazione velocità 
                 currentSpeed = msg.data[0]; //velocità richiesta
@@ -98,12 +124,20 @@ __interrupt(low_priority) void ISR_bassa(void) {
             if (msg.identifier == speed_frequency) {
                 left_speed = msg.data[0];
                 right_speed = msg.data[1];
+                speed_fetched = 1;
             }
             if (msg.identifier == ecuState) { //funzione per presenza centraline
-
+                switch (msg.data[0]) {
+                    case 1: centralina_abs = 1;
+                        break;
+                    case 2: centralina_sterzo = 1;
+                        break;
+                    case 3: centralina_comando = 1;
+                        break;
+                }
+                PIR3bits.RXB0IF = 0;
+                PIR3bits.RXB1IF = 0;
             }
-            PIR3bits.RXB0IF = 0;
-            PIR3bits.RXB1IF = 0;
         }
         if (PIR2bits.TMR3IF) { //interrupt timer, ogni 10mS
             timeCounter++; //incrementa di 1 la variabile timer
@@ -133,38 +167,51 @@ int main(void) {
     //-----------------------
 
     while (1) {
-        if (dir == 1) { //direzione avanti
-            SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-        }
-        if (dir == 0) { //direzione indietro
-            SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
-        }
-        if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
-            CANsendMessage(speed_frequency, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-            currentSpeed = ((left_speed + right_speed) / 2);
-            if (currentSpeed - requestSpeed > 0) {//RAMPE
-                errore = abs(currentSpeed - requestSpeed);
-                correzione = ((errore / 17)*(errore / 17))*4;
-                if (correzione > 1) {
-                    if ((currentSpeed - requestSpeed) > 0) {
-                        if (previousPwm > correzione) {
-                            duty_set = previousPwm - correzione;
-                        }
-                        if ((currentSpeed - requestSpeed) < 0) {
-                            duty_set = previousPwm + correzione;
-                        }
-                    }
-                    if (correzione < 1) {
-                        duty_set = previousPwm;
-                    }
-                }
-                previousPwm = duty_set;
-                SetDCEPWM1(duty_set); //imposta pwm
-                if (remote_frame == 1) { //se è arrivato un remote frame la rispsota è immediata
-                    send_data();
-                }
-                previousTimeCounter1 = timeCounter;
+        if (PORTAbits.RA7 == 0) {
+            if (dir == 1) { //direzione avanti
+                SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+                PORTCbits.RC0 = 1;
+                PORTCbits.RC1 = 0;
             }
+            if (dir == 0) { //direzione indietro
+                SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
+                PORTCbits.RC0 = 0;
+                PORTCbits.RC1 = 1;
+            }
+            if (duty_set == 0) {
+                PORTCbits.RC0 = 0;
+                PORTCbits.RC1 = 0;
+            }
+            if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
+                CANsendMessage(speed_frequency, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+                if (speed_fetched == 1) {
+                    speed_fetched = 0;
+                    currentSpeed = ((left_speed + right_speed) / 2);
+                    if (currentSpeed - requestSpeed > 0) {//RAMPE
+                        errore = abs(currentSpeed - requestSpeed);
+                        correzione = ((errore / 17)*(errore / 17))*4;
+                        if (correzione > 1) {
+                            if ((currentSpeed - requestSpeed) > 0) {
+                                if (previousPwm > correzione) {
+                                    duty_set = previousPwm - correzione;
+                                }
+                                if ((currentSpeed - requestSpeed) < 0) {
+                                    duty_set = previousPwm + correzione;
+                                }
+                            }
+                            if (correzione < 1) {
+                                duty_set = previousPwm;
+                            }
+                        }
+                        previousPwm = duty_set;
+                        SetDCEPWM1(duty_set); //imposta pwm
+                    }
+                    previousTimeCounter1 = timeCounter;
+                }
+            }
+        }
+        if ((remote_frame == 1) || (can_retry == 1)) { //se è arrivato un remote frame la risposta è immediata
+            send_data();
         }
         if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
             SetDCEPWM1(0); //ferma il mezzo
@@ -173,25 +220,31 @@ int main(void) {
             PORTAbits.RA7 = 0;
         }
 
-        /*
-         *Funzione di sicurezza, se l'istruzione di velocità
-         *non è ripetuta almeno 1 volta al secondo blocca il mezzo
-         *perchè vi è stato un qualche errore sulle altre centraline. 
-         */
-        while ((timeCounter - previousTimeCounter) > 100) {
-            SetDCEPWM1(0);
-            PORTAbits.RA0 = 1;
-            delay_ms(250);
-            PORTAbits.RA0 = 0;
-            delay_ms(250);
+        //FUNZIONE DI SICUREZZA
+        if ((timeCounter - previousTimeCounter) > 100) {
+            if (request_sent == 0) {
+                CANsendMessage(ecuState, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
+                request_sent = 1;
+            }
+            if (request_sent == 1) {
+
+                if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) {
+                    centralina_abs = 0;
+                    centralina_sterzo = 0;
+                    centralina_comando = 0;
+                    PORTAbits.RA7 = 0;
+                } else {
+                    SetDCEPWM1(0);
+                    PORTAbits.RA7 = 1;
+                }
+            }
             previousTimeCounter = timeCounter;
-            while (!CANisTxReady());
-            CANsendMessage(ecuState, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
         }
-    }
-    if ((timeCounter - previousTimeCounter2 >= 100)) {
-        battery_measure();
-        previousTimeCounter2 = timeCounter;
+        if ((timeCounter - previousTimeCounter2 >= 100)) { //misura la tensione della batteria ogni secondo
+
+            battery_measure();
+            previousTimeCounter2 = timeCounter;
+        }
     }
 }
 
@@ -203,10 +256,17 @@ void send_data(void) {
         }
     }
     if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) { //se l'invio è stato abortito
-        delay_ms(5); //aspetta 5 millisecondi e ritenta l'invio
-        if (remote_frame == 1) { //se è una risposta a un remote frame deve avere lo stesso id della richiesta
-            CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-            remote_frame = 0; //azzero flag risposta remote frame
+        can_retry = 1;
+    } else {
+        can_retry = 0;
+        if (remote_frame1 != 0) {
+            remote_frame = remote_frame1;
+            id = id1;
+            message_sent = 1;
+            remote_frame1 = 0;
+        } else {
+
+            message_sent = 0;
         }
     }
 }
@@ -215,8 +275,9 @@ void battery_measure(void) {
     ADCON0bits.GO = 1; //abilita conversione ADC;
     while (ADCON0bits.GO);
     vBatt = ADRESH;
-    vBatt = (vBatt * 14) / 1024;
+    vBatt = (vBatt * 14) / 235; //il diodo zener interviene prima
     if (vBatt < 10) {
+
         while (!CANisTxReady());
         CANsendMessage(lowBattery, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
     }
