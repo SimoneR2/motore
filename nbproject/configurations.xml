@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>motore.h</itemPath>
+      <itemPath>idCan.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -37,6 +38,9 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
+            <linkerLibFileItem>CANlib.h</linkerLibFileItem>
+            <linkerLibFileItem>delay.c</linkerLibFileItem>
+            <linkerLibFileItem>delay.h</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>

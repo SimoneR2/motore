@@ -38,18 +38,9 @@
 #include "delay.h"
 #include "delay.c"
 #include <pwm.h>
-#include "timers.h"
-#include <math.h>
-#include <stdlib.h>
+//#include "timers.h"
+#include <idCan.h>
 #define _XTAL_FREQ 16000000
-#define start_measure 0b00000000000000000000000000110 //da spostare a centralina freno
-#define stop_measure 0b00000000000000000000000000101 //da spostare a centralina freno
-#define speed_info 0b00000000000000000000000001000 
-#define speed_change 0b00000000000000000000000000010
-#define speed_frequency 0b00000000000000000000000000010 //da definire id
-#define emergency 0b00000000000000000000000000001
-#define ecuState 0b00000000000000000000000000001//da definire ID
-#define lowBattery 0b00000000000000000000000000001//da definire ID
 #define attesaRampa 10
 void configurazione_iniziale(void);
 void send_data(void);
@@ -112,21 +103,21 @@ __interrupt(low_priority) void ISR_bassa(void) {
                     remote_frame1 = msg.RTR;
                 }
             }
-            if (msg.identifier == speed_change) { //variazione velocità 
+            if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
                 currentSpeed = msg.data[0]; //velocità richiesta
                 dir = msg.data[1]; //direzione richiesta
                 previousTimeCounter = timeCounter;
             }
-            if (msg.identifier == emergency) { //stop di emergenza
+            if (msg.identifier == EMERGENCY) { //stop di emergenza
                 currentSpeed = 0;
                 PORTAbits.RA1 = 1;
             }
-            if (msg.identifier == speed_frequency) {
+            if (msg.identifier == ACTUAL_SPEED) {
                 left_speed = msg.data[0];
                 right_speed = msg.data[1];
                 speed_fetched = 1;
             }
-            if (msg.identifier == ecuState) { //funzione per presenza centraline
+            if (msg.identifier == ECU_STATE) { //funzione per presenza centraline
                 switch (msg.data[0]) {
                     case 1: centralina_abs = 1;
                         break;
@@ -169,12 +160,12 @@ int main(void) {
     while (1) {
         if (PORTAbits.RA7 == 0) {
             if (dir == 1) { //direzione avanti
-                SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+                SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_4);
                 PORTCbits.RC0 = 1;
                 PORTCbits.RC1 = 0;
             }
             if (dir == 0) { //direzione indietro
-                SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
+                SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_4);
                 PORTCbits.RC0 = 0;
                 PORTCbits.RC1 = 1;
             }
@@ -183,7 +174,7 @@ int main(void) {
                 PORTCbits.RC1 = 0;
             }
             if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
-                CANsendMessage(speed_frequency, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+                CANsendMessage(ACTUAL_SPEED, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
                 if (speed_fetched == 1) {
                     speed_fetched = 0;
                     currentSpeed = ((left_speed + right_speed) / 2);
@@ -223,7 +214,7 @@ int main(void) {
         //FUNZIONE DI SICUREZZA
         if ((timeCounter - previousTimeCounter) > 100) {
             if (request_sent == 0) {
-                CANsendMessage(ecuState, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
+                CANsendMessage(ECU_STATE, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
                 request_sent = 1;
             }
             if (request_sent == 1) {
@@ -279,7 +270,7 @@ void battery_measure(void) {
     if (vBatt < 10) {
 
         while (!CANisTxReady());
-        CANsendMessage(lowBattery, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+        CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
     }
 }
 
