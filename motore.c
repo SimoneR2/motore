@@ -26,7 +26,7 @@
 ======================================
 
  * CODICI CENTRALINE PER RISPOSTA ECU_STATE
- *  -ABS : 1
+ *  -ABS! : 1
  *  -STERZO : 2
  *  -COMANDO : 3
  *Frequenza PWM: 20kHz.
@@ -34,12 +34,13 @@
  */
 #include <xc.h>
 #include "motore.h"
-#include <CANlib.h>
+#include "CANlib.h"
 #include "delay.h"
 #include "delay.c"
 #include <pwm.h>
-//#include "timers.h"
-#include <idCan.h>
+#include <math.h>
+#include <stdlib.h>
+#include "idCan.h"
 #define _XTAL_FREQ 16000000
 #define attesaRampa 10
 void configurazione_iniziale(void);

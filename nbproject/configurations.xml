@@ -38,9 +38,6 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>CANlib.h</linkerLibFileItem>
-            <linkerLibFileItem>delay.c</linkerLibFileItem>
-            <linkerLibFileItem>delay.h</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -64,7 +61,7 @@
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
         <property key="extra-include-directories"
-                  value="H:\Tesina\LaurTec_PIC_libraries_v_3.3.0\inc;H:\Tesina\LaurTec_PIC_libraries_v_3.3.0\src;H:\Tesina\LaurTec_PIC_libraries_v_3.3.0"/>
+                  value="..\..\Drive\librerie\LaurTec_PIC_libraries_v_3.3.0\inc;..\..\Drive\librerie\LaurTec_PIC_libraries_v_3.3.0\src;H:\Tesina\LaurTec_PIC_libraries_v_3.3.0"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="free"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
