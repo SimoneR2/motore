@@ -124,17 +124,17 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
 "61 D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
-"85 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"86 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _ISR_alta ISR_alta `IIH(v  1 e 0 0 ]
-"93
+"94
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
-"143
+"144
 [v _main main `(i  1 e 2 0 ]
-"243
+"244
 [v _send_data send_data `(v  1 e 0 0 ]
-"266
+"267
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
-"278
+"279
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 "16255 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4480.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
@@ -1554,71 +1554,71 @@ CAN_RX_BUFFER_2_OVFL 2
 "50
 [v _clock_counter_reference clock_counter_reference `VEui  1 e 2 0 ]
 [s S853 . 15 `ul 1 identifier 4 0 `[8]uc 1 data 8 4 `uc 1 type 1 12 `uc 1 length 1 13 `uc 1 RTR 1 14 ]
-"49 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"50 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _msg msg `S853  1 e 15 0 ]
-"50
-[v _remote_frame remote_frame `b  1 e 0 0 ]
 "51
-[v _remote_frame1 remote_frame1 `b  1 e 0 0 ]
+[v _remote_frame remote_frame `b  1 e 0 0 ]
 "52
-[v _speed_fetched speed_fetched `b  1 e 0 0 ]
+[v _remote_frame1 remote_frame1 `b  1 e 0 0 ]
 "53
-[v _message_sent message_sent `b  1 e 0 0 ]
+[v _speed_fetched speed_fetched `b  1 e 0 0 ]
 "54
-[v _can_retry can_retry `b  1 e 0 0 ]
+[v _message_sent message_sent `b  1 e 0 0 ]
 "55
-[v _request_sent request_sent `b  1 e 0 0 ]
+[v _can_retry can_retry `b  1 e 0 0 ]
 "56
-[v _centralina_sterzo centralina_sterzo `b  1 e 0 0 ]
+[v _request_sent request_sent `b  1 e 0 0 ]
 "57
-[v _centralina_abs centralina_abs `b  1 e 0 0 ]
+[v _centralina_sterzo centralina_sterzo `b  1 e 0 0 ]
 "58
-[v _centralina_comando centralina_comando `b  1 e 0 0 ]
+[v _centralina_abs centralina_abs `b  1 e 0 0 ]
 "59
-[v _dir dir `ui  1 e 2 0 ]
+[v _centralina_comando centralina_comando `b  1 e 0 0 ]
 "60
-[v _currentSpeed currentSpeed `uc  1 e 1 0 ]
+[v _dir dir `ui  1 e 2 0 ]
 "61
+[v _currentSpeed currentSpeed `uc  1 e 1 0 ]
+"62
 [v _requestSpeed requestSpeed `uc  1 e 1 0 ]
-"63
-[v _id id `ul  1 e 4 0 ]
 "64
-[v _id1 id1 `ul  1 e 4 0 ]
+[v _id id `ul  1 e 4 0 ]
 "65
-[v _timeCounter timeCounter `ul  1 e 4 0 ]
+[v _id1 id1 `ul  1 e 4 0 ]
 "66
-[v _previousTimeCounter previousTimeCounter `ul  1 e 4 0 ]
+[v _timeCounter timeCounter `ul  1 e 4 0 ]
 "67
-[v _previousTimeCounter1 previousTimeCounter1 `ul  1 e 4 0 ]
+[v _previousTimeCounter previousTimeCounter `ul  1 e 4 0 ]
 "68
-[v _previousTimeCounter2 previousTimeCounter2 `ul  1 e 4 0 ]
+[v _previousTimeCounter1 previousTimeCounter1 `ul  1 e 4 0 ]
 "69
-[v _previousPwm previousPwm `uc  1 e 1 0 ]
+[v _previousTimeCounter2 previousTimeCounter2 `ul  1 e 4 0 ]
 "70
-[v _left_speed left_speed `uc  1 e 1 0 ]
+[v _previousPwm previousPwm `uc  1 e 1 0 ]
 "71
-[v _right_speed right_speed `uc  1 e 1 0 ]
+[v _left_speed left_speed `uc  1 e 1 0 ]
 "72
+[v _right_speed right_speed `uc  1 e 1 0 ]
+"73
 [v _duty_set duty_set `uc  1 e 1 0 ]
-"74
-[v _errore errore `i  1 e 2 0 ]
 "75
-[v _vBatt vBatt `i  1 e 2 0 ]
+[v _errore errore `i  1 e 2 0 ]
 "76
+[v _vBatt vBatt `i  1 e 2 0 ]
+"77
 [v _correzione correzione `ui  1 e 2 0 ]
-"79
+"80
 [v _data_array data_array `[8]uc  1 e 8 0 ]
-"143
+"144
 [v _main main `(i  1 e 2 0 ]
 {
-"144
+"145
 [v main@period period `uc  1 a 1 48 ]
-"241
+"242
 } 0
-"243
+"244
 [v _send_data send_data `(v  1 e 0 0 ]
 {
-"264
+"265
 } 0
 "61 D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
@@ -1626,10 +1626,10 @@ CAN_RX_BUFFER_2_OVFL 2
 [v delay_ms@value_ms value_ms `ui  1 p 2 28 ]
 "96
 } 0
-"278 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"279 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
-"341
+"342
 } 0
 "218 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
@@ -1687,10 +1687,10 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANOperationMode@mode mode `E16838  1 a 1 14 ]
 "211
 } 0
-"266 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"267 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
 {
-"276
+"277
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -1786,10 +1786,10 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1130
 } 0
-"93 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"94 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
-"141
+"142
 } 0
 "528 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 [v _CANreceiveMessage CANreceiveMessage `(uc  1 e 1 0 ]
@@ -1808,8 +1808,8 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1166
 } 0
-"85 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"86 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 [v _ISR_alta ISR_alta `IIH(v  1 e 0 0 ]
 {
-"87
+"88
 } 0

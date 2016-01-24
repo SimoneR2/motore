@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\simon\AppData\Local\Temp\s4s4.obj
+$C:\Users\simon\AppData\Local\Temp\s8cs.obj
 reset_vec CODE 0 0 0 4 1
 end_init CODE 0 1AA 1AA 4 1
 config CONFIG 0 300000 300000 E 1
@@ -90,51 +90,51 @@ MEDIUMCONST 2824-3FFF 1
 %LINETAB
 $dist/default/production\motore.production.obj
 18 intcodelo CODE >1130:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
-18 intcodelo CODE >93:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-5E intcodelo CODE >94:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-66 intcodelo CODE >95:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-70 intcodelo CODE >96:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-7C intcodelo CODE >97:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-82 intcodelo CODE >98:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-86 intcodelo CODE >99:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-96 intcodelo CODE >100:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-A0 intcodelo CODE >101:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-A2 intcodelo CODE >102:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-A4 intcodelo CODE >103:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-B4 intcodelo CODE >104:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-BE intcodelo CODE >107:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-CC intcodelo CODE >108:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-D0 intcodelo CODE >109:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-D8 intcodelo CODE >110:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-E8 intcodelo CODE >112:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-F4 intcodelo CODE >113:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-FA intcodelo CODE >114:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-FC intcodelo CODE >116:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-10A intcodelo CODE >117:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-10E intcodelo CODE >118:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-112 intcodelo CODE >119:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-114 intcodelo CODE >121:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-124 intcodelo CODE >123:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-126 intcodelo CODE >124:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-128 intcodelo CODE >125:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-12A intcodelo CODE >126:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-12C intcodelo CODE >127:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-12E intcodelo CODE >129:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-130 intcodelo CODE >122:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-144 intcodelo CODE >129:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+18 intcodelo CODE >94:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+5E intcodelo CODE >95:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+66 intcodelo CODE >96:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+70 intcodelo CODE >97:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+7C intcodelo CODE >98:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+82 intcodelo CODE >99:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+86 intcodelo CODE >100:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+96 intcodelo CODE >101:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+A0 intcodelo CODE >102:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+A2 intcodelo CODE >103:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+A4 intcodelo CODE >104:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+B4 intcodelo CODE >105:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+BE intcodelo CODE >108:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+CC intcodelo CODE >109:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+D0 intcodelo CODE >110:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+D8 intcodelo CODE >111:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+E8 intcodelo CODE >113:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+F4 intcodelo CODE >114:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+FA intcodelo CODE >115:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+FC intcodelo CODE >117:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+10A intcodelo CODE >118:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+10E intcodelo CODE >119:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+112 intcodelo CODE >120:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+114 intcodelo CODE >122:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+124 intcodelo CODE >124:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+126 intcodelo CODE >125:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+128 intcodelo CODE >126:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+12A intcodelo CODE >127:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+12C intcodelo CODE >128:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+12E intcodelo CODE >130:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+130 intcodelo CODE >123:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 144 intcodelo CODE >130:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-146 intcodelo CODE >131:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-148 intcodelo CODE >133:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+144 intcodelo CODE >131:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+146 intcodelo CODE >132:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 148 intcodelo CODE >134:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-14C intcodelo CODE >135:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-158 intcodelo CODE >136:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-15C intcodelo CODE >137:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-160 intcodelo CODE >138:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-162 intcodelo CODE >141:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+148 intcodelo CODE >135:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+14C intcodelo CODE >136:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+158 intcodelo CODE >137:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+15C intcodelo CODE >138:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+160 intcodelo CODE >139:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+162 intcodelo CODE >142:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 8 intcode CODE >1166:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
-8 intcode CODE >85:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-25A4 intcode_body CODE >85:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-25D6 intcode_body CODE >87:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+8 intcode CODE >86:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+25A4 intcode_body CODE >86:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+25D6 intcode_body CODE >88:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 27E2 text22 CODE >1163:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 27E2 text22 CODE >1165:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 1440 text21 CODE >528:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
@@ -455,15 +455,15 @@ FFE text11 CODE >402:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 2734 text9 CODE >38:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
 2742 text9 CODE >39:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
 2750 text9 CODE >52:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
-249C text8 CODE >266:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 249C text8 CODE >267:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-249E text8 CODE >268:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-24A2 text8 CODE >269:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-24AA text8 CODE >270:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-24DE text8 CODE >271:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-24F4 text8 CODE >273:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-24FE text8 CODE >274:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-252E text8 CODE >276:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+249C text8 CODE >268:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+249E text8 CODE >269:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+24A2 text8 CODE >270:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+24AA text8 CODE >271:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+24DE text8 CODE >272:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+24F4 text8 CODE >274:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+24FE text8 CODE >275:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+252E text8 CODE >277:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 27CC text7 CODE >206:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 27D0 text7 CODE >208:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 27D4 text7 CODE >210:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
@@ -812,55 +812,55 @@ CAE text6 CODE >1075:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 2320 text4 CODE >285:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 233C text4 CODE >287:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 2342 text4 CODE >289:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
-2402 text3 CODE >278:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2402 text3 CODE >281:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2426 text3 CODE >282:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2428 text3 CODE >283:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-242A text3 CODE >284:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-242C text3 CODE >285:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-242E text3 CODE >286:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2430 text3 CODE >287:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2432 text3 CODE >288:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2434 text3 CODE >289:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2436 text3 CODE >290:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2438 text3 CODE >291:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-243A text3 CODE >292:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-243C text3 CODE >293:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-243E text3 CODE >296:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2442 text3 CODE >297:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2444 text3 CODE >298:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2446 text3 CODE >299:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-244A text3 CODE >300:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-244E text3 CODE >301:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2450 text3 CODE >305:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2452 text3 CODE >306:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2454 text3 CODE >307:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2456 text3 CODE >308:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2458 text3 CODE >309:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-245A text3 CODE >310:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-245C text3 CODE >311:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-245E text3 CODE >312:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2460 text3 CODE >313:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2462 text3 CODE >314:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2464 text3 CODE >315:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2466 text3 CODE >316:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2468 text3 CODE >317:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-246A text3 CODE >318:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-246C text3 CODE >319:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-246E text3 CODE >320:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2470 text3 CODE >321:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2472 text3 CODE >322:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2474 text3 CODE >326:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2478 text3 CODE >327:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-247C text3 CODE >329:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2480 text3 CODE >330:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2484 text3 CODE >332:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2488 text3 CODE >333:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-248C text3 CODE >335:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2490 text3 CODE >336:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2494 text3 CODE >338:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2498 text3 CODE >339:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-249A text3 CODE >341:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2402 text3 CODE >279:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2402 text3 CODE >282:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2426 text3 CODE >283:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2428 text3 CODE >284:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+242A text3 CODE >285:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+242C text3 CODE >286:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+242E text3 CODE >287:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2430 text3 CODE >288:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2432 text3 CODE >289:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2434 text3 CODE >290:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2436 text3 CODE >291:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2438 text3 CODE >292:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+243A text3 CODE >293:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+243C text3 CODE >294:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+243E text3 CODE >297:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2442 text3 CODE >298:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2444 text3 CODE >299:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2446 text3 CODE >300:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+244A text3 CODE >301:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+244E text3 CODE >302:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2450 text3 CODE >306:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2452 text3 CODE >307:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2454 text3 CODE >308:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2456 text3 CODE >309:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2458 text3 CODE >310:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+245A text3 CODE >311:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+245C text3 CODE >312:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+245E text3 CODE >313:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2460 text3 CODE >314:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2462 text3 CODE >315:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2464 text3 CODE >316:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2466 text3 CODE >317:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2468 text3 CODE >318:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+246A text3 CODE >319:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+246C text3 CODE >320:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+246E text3 CODE >321:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2470 text3 CODE >322:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2472 text3 CODE >323:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2474 text3 CODE >327:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2478 text3 CODE >328:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+247C text3 CODE >330:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2480 text3 CODE >331:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2484 text3 CODE >333:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2488 text3 CODE >334:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+248C text3 CODE >336:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2490 text3 CODE >337:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2494 text3 CODE >339:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2498 text3 CODE >340:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+249A text3 CODE >342:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 26EA text2 CODE >61:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 26EA text2 CODE >73:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 2706 text2 CODE >75:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
@@ -868,129 +868,129 @@ CAE text6 CODE >1075:D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
 270E text2 CODE >88:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 2716 text2 CODE >75:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
 2716 text2 CODE >89:D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
-2530 text1 CODE >243:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 2530 text1 CODE >244:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2538 text1 CODE >245:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-253C text1 CODE >246:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2568 text1 CODE >247:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-256A text1 CODE >250:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2576 text1 CODE >251:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2578 text1 CODE >252:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-257A text1 CODE >253:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-257C text1 CODE >254:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-2580 text1 CODE >255:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-258A text1 CODE >256:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-259A text1 CODE >257:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-259C text1 CODE >258:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-259E text1 CODE >259:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-25A0 text1 CODE >261:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-25A2 text1 CODE >262:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-194C text0 CODE >143:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-194C text0 CODE >145:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1950 text0 CODE >146:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1956 text0 CODE >147:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-195C text0 CODE >148:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1964 text0 CODE >151:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1966 text0 CODE >152:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1974 text0 CODE >153:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1978 text0 CODE >154:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1986 text0 CODE >155:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1988 text0 CODE >156:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1996 text0 CODE >157:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-199A text0 CODE >158:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19A8 text0 CODE >162:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19AC text0 CODE >163:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19B8 text0 CODE >164:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19C4 text0 CODE >165:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19C6 text0 CODE >166:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19C8 text0 CODE >168:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19D4 text0 CODE >169:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19E0 text0 CODE >170:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19E2 text0 CODE >171:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19E4 text0 CODE >173:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19EE text0 CODE >174:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19F0 text0 CODE >175:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-19F2 text0 CODE >177:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1A56 text0 CODE >178:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1A84 text0 CODE >179:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1A88 text0 CODE >180:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1A8A text0 CODE >181:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1AB4 text0 CODE >182:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1AF6 text0 CODE >183:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1B2C text0 CODE >184:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1B84 text0 CODE >185:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1B94 text0 CODE >186:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1BD6 text0 CODE >187:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1BE6 text0 CODE >188:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1BF4 text0 CODE >189:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2530 text1 CODE >245:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2538 text1 CODE >246:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+253C text1 CODE >247:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2568 text1 CODE >248:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+256A text1 CODE >251:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2576 text1 CODE >252:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2578 text1 CODE >253:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+257A text1 CODE >254:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+257C text1 CODE >255:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+2580 text1 CODE >256:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+258A text1 CODE >257:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+259A text1 CODE >258:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+259C text1 CODE >259:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+259E text1 CODE >260:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+25A0 text1 CODE >262:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+25A2 text1 CODE >263:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+194C text0 CODE >144:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+194C text0 CODE >146:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1950 text0 CODE >147:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1956 text0 CODE >148:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+195C text0 CODE >149:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1964 text0 CODE >152:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1966 text0 CODE >153:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1974 text0 CODE >154:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1978 text0 CODE >155:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1986 text0 CODE >156:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1988 text0 CODE >157:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1996 text0 CODE >158:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+199A text0 CODE >159:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19A8 text0 CODE >163:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19AC text0 CODE >164:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19B8 text0 CODE >165:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19C4 text0 CODE >166:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19C6 text0 CODE >167:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19C8 text0 CODE >169:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19D4 text0 CODE >170:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19E0 text0 CODE >171:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19E2 text0 CODE >172:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19E4 text0 CODE >174:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19EE text0 CODE >175:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19F0 text0 CODE >176:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+19F2 text0 CODE >178:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1A56 text0 CODE >179:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1A84 text0 CODE >180:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1A88 text0 CODE >181:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1A8A text0 CODE >182:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1AB4 text0 CODE >183:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1AF6 text0 CODE >184:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1B2C text0 CODE >185:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1B84 text0 CODE >186:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1B94 text0 CODE >187:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1BD6 text0 CODE >188:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1BE6 text0 CODE >189:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 1BF4 text0 CODE >190:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C28 text0 CODE >191:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C34 text0 CODE >193:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1BF4 text0 CODE >191:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C28 text0 CODE >192:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 1C34 text0 CODE >194:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C3E text0 CODE >195:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C42 text0 CODE >197:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C34 text0 CODE >195:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C3E text0 CODE >196:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
 1C42 text0 CODE >198:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C46 text0 CODE >199:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C52 text0 CODE >201:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C62 text0 CODE >205:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C6A text0 CODE >206:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C6E text0 CODE >208:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C82 text0 CODE >209:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C90 text0 CODE >210:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C92 text0 CODE >211:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C94 text0 CODE >212:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1C96 text0 CODE >216:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1CFA text0 CODE >217:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1CFE text0 CODE >218:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D2C text0 CODE >219:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D2E text0 CODE >221:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D32 text0 CODE >223:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D3C text0 CODE >224:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D3E text0 CODE >225:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D40 text0 CODE >226:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D42 text0 CODE >227:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D44 text0 CODE >228:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D46 text0 CODE >229:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D54 text0 CODE >230:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D56 text0 CODE >233:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1D66 text0 CODE >235:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1DCA text0 CODE >237:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1DCE text0 CODE >238:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-1DDE text0 CODE >161:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
-26A8 cinit CODE >1450:C:\Users\simon\AppData\Local\Temp\s4s4.
-26A8 cinit CODE >1452:C:\Users\simon\AppData\Local\Temp\s4s4.
-26A8 cinit CODE >1455:C:\Users\simon\AppData\Local\Temp\s4s4.
-26A8 cinit CODE >1581:C:\Users\simon\AppData\Local\Temp\s4s4.
-26AC cinit CODE >1582:C:\Users\simon\AppData\Local\Temp\s4s4.
-26AE cinit CODE >1583:C:\Users\simon\AppData\Local\Temp\s4s4.
-26AE cinit CODE >1584:C:\Users\simon\AppData\Local\Temp\s4s4.
-26B0 cinit CODE >1585:C:\Users\simon\AppData\Local\Temp\s4s4.
-26B2 cinit CODE >1586:C:\Users\simon\AppData\Local\Temp\s4s4.
-26B4 cinit CODE >1589:C:\Users\simon\AppData\Local\Temp\s4s4.
-26B6 cinit CODE >1590:C:\Users\simon\AppData\Local\Temp\s4s4.
-26B8 cinit CODE >1593:C:\Users\simon\AppData\Local\Temp\s4s4.
-26BC cinit CODE >1594:C:\Users\simon\AppData\Local\Temp\s4s4.
-26BE cinit CODE >1595:C:\Users\simon\AppData\Local\Temp\s4s4.
-26BE cinit CODE >1596:C:\Users\simon\AppData\Local\Temp\s4s4.
-26C0 cinit CODE >1597:C:\Users\simon\AppData\Local\Temp\s4s4.
-26C2 cinit CODE >1598:C:\Users\simon\AppData\Local\Temp\s4s4.
-26C4 cinit CODE >1603:C:\Users\simon\AppData\Local\Temp\s4s4.
-26C6 cinit CODE >1604:C:\Users\simon\AppData\Local\Temp\s4s4.
-26C8 cinit CODE >1605:C:\Users\simon\AppData\Local\Temp\s4s4.
-26CA cinit CODE >1606:C:\Users\simon\AppData\Local\Temp\s4s4.
-26CC cinit CODE >1607:C:\Users\simon\AppData\Local\Temp\s4s4.
-26CE cinit CODE >1608:C:\Users\simon\AppData\Local\Temp\s4s4.
-26D0 cinit CODE >1609:C:\Users\simon\AppData\Local\Temp\s4s4.
-26D2 cinit CODE >1610:C:\Users\simon\AppData\Local\Temp\s4s4.
-26D6 cinit CODE >1611:C:\Users\simon\AppData\Local\Temp\s4s4.
-26D8 cinit CODE >1612:C:\Users\simon\AppData\Local\Temp\s4s4.
-26DC cinit CODE >1618:C:\Users\simon\AppData\Local\Temp\s4s4.
-26DC cinit CODE >1620:C:\Users\simon\AppData\Local\Temp\s4s4.
-26DE cinit CODE >1621:C:\Users\simon\AppData\Local\Temp\s4s4.
-26E0 cinit CODE >1623:C:\Users\simon\AppData\Local\Temp\s4s4.
-26E2 cinit CODE >1624:C:\Users\simon\AppData\Local\Temp\s4s4.
-26E4 cinit CODE >1625:C:\Users\simon\AppData\Local\Temp\s4s4.
-26E6 cinit CODE >1626:C:\Users\simon\AppData\Local\Temp\s4s4.
+1C42 text0 CODE >199:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C46 text0 CODE >200:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C52 text0 CODE >202:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C62 text0 CODE >206:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C6A text0 CODE >207:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C6E text0 CODE >209:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C82 text0 CODE >210:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C90 text0 CODE >211:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C92 text0 CODE >212:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C94 text0 CODE >213:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1C96 text0 CODE >217:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1CFA text0 CODE >218:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1CFE text0 CODE >219:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D2C text0 CODE >220:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D2E text0 CODE >222:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D32 text0 CODE >224:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D3C text0 CODE >225:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D3E text0 CODE >226:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D40 text0 CODE >227:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D42 text0 CODE >228:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D44 text0 CODE >229:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D46 text0 CODE >230:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D54 text0 CODE >231:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D56 text0 CODE >234:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1D66 text0 CODE >236:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1DCA text0 CODE >238:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1DCE text0 CODE >239:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+1DDE text0 CODE >162:D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+26A8 cinit CODE >1450:C:\Users\simon\AppData\Local\Temp\s8cs.
+26A8 cinit CODE >1452:C:\Users\simon\AppData\Local\Temp\s8cs.
+26A8 cinit CODE >1455:C:\Users\simon\AppData\Local\Temp\s8cs.
+26A8 cinit CODE >1581:C:\Users\simon\AppData\Local\Temp\s8cs.
+26AC cinit CODE >1582:C:\Users\simon\AppData\Local\Temp\s8cs.
+26AE cinit CODE >1583:C:\Users\simon\AppData\Local\Temp\s8cs.
+26AE cinit CODE >1584:C:\Users\simon\AppData\Local\Temp\s8cs.
+26B0 cinit CODE >1585:C:\Users\simon\AppData\Local\Temp\s8cs.
+26B2 cinit CODE >1586:C:\Users\simon\AppData\Local\Temp\s8cs.
+26B4 cinit CODE >1589:C:\Users\simon\AppData\Local\Temp\s8cs.
+26B6 cinit CODE >1590:C:\Users\simon\AppData\Local\Temp\s8cs.
+26B8 cinit CODE >1593:C:\Users\simon\AppData\Local\Temp\s8cs.
+26BC cinit CODE >1594:C:\Users\simon\AppData\Local\Temp\s8cs.
+26BE cinit CODE >1595:C:\Users\simon\AppData\Local\Temp\s8cs.
+26BE cinit CODE >1596:C:\Users\simon\AppData\Local\Temp\s8cs.
+26C0 cinit CODE >1597:C:\Users\simon\AppData\Local\Temp\s8cs.
+26C2 cinit CODE >1598:C:\Users\simon\AppData\Local\Temp\s8cs.
+26C4 cinit CODE >1603:C:\Users\simon\AppData\Local\Temp\s8cs.
+26C6 cinit CODE >1604:C:\Users\simon\AppData\Local\Temp\s8cs.
+26C8 cinit CODE >1605:C:\Users\simon\AppData\Local\Temp\s8cs.
+26CA cinit CODE >1606:C:\Users\simon\AppData\Local\Temp\s8cs.
+26CC cinit CODE >1607:C:\Users\simon\AppData\Local\Temp\s8cs.
+26CE cinit CODE >1608:C:\Users\simon\AppData\Local\Temp\s8cs.
+26D0 cinit CODE >1609:C:\Users\simon\AppData\Local\Temp\s8cs.
+26D2 cinit CODE >1610:C:\Users\simon\AppData\Local\Temp\s8cs.
+26D6 cinit CODE >1611:C:\Users\simon\AppData\Local\Temp\s8cs.
+26D8 cinit CODE >1612:C:\Users\simon\AppData\Local\Temp\s8cs.
+26DC cinit CODE >1618:C:\Users\simon\AppData\Local\Temp\s8cs.
+26DC cinit CODE >1620:C:\Users\simon\AppData\Local\Temp\s8cs.
+26DE cinit CODE >1621:C:\Users\simon\AppData\Local\Temp\s8cs.
+26E0 cinit CODE >1623:C:\Users\simon\AppData\Local\Temp\s8cs.
+26E2 cinit CODE >1624:C:\Users\simon\AppData\Local\Temp\s8cs.
+26E4 cinit CODE >1625:C:\Users\simon\AppData\Local\Temp\s8cs.
+26E6 cinit CODE >1626:C:\Users\simon\AppData\Local\Temp\s8cs.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -1027,7 +1027,7 @@ _RXM1SIDL F1D 0 ABS 0 - dist/default/production\motore.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\motore.production.obj
 __size_of_ISR_bassa 0 0 ABS 0 - dist/default/production\motore.production.obj
 _RXB1DLCbits F55 0 ABS 0 - dist/default/production\motore.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\simon\AppData\Local\Temp\s4s4.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\simon\AppData\Local\Temp\s8cs.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\motore.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/production\motore.production.obj
 __size_of_CANInitialize 0 0 ABS 0 - dist/default/production\motore.production.obj
@@ -1040,11 +1040,11 @@ _LATC F8B 0 ABS 0 - dist/default/production\motore.production.obj
 _LATD F8C 0 ABS 0 - dist/default/production\motore.production.obj
 _LATE F8D 0 ABS 0 - dist/default/production\motore.production.obj
 _TMR2 FCC 0 ABS 0 - dist/default/production\motore.production.obj
-___sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s4s4.obj
+___sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s8cs.obj
 _main 194C 0 CODE 0 text0 dist/default/production\motore.production.obj
 abs@a 6E 0 BANK0 1 cstackBANK0 dist/default/production\motore.production.obj
 btemp 49 0 COMRAM 1 temp dist/default/production\motore.production.obj
-start 1AA 0 CODE 0 init C:\Users\simon\AppData\Local\Temp\s4s4.obj
+start 1AA 0 CODE 0 init C:\Users\simon\AppData\Local\Temp\s8cs.obj
 __size_of___awdiv 0 0 ABS 0 - dist/default/production\motore.production.obj
 _CANisTxReady 2786 0 CODE 0 text12 dist/default/production\motore.production.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\motore.production.obj
@@ -1065,11 +1065,11 @@ _speed_fetched 240 -1F1 COMRAM 1 bitbssCOMRAM dist/default/production\motore.pro
 __end_of_CANInitialize 2344 0 CODE 0 text4 dist/default/production\motore.production.obj
 __end_of_battery_measure 2530 0 CODE 0 text8 dist/default/production\motore.production.obj
 _previousPwm B1 0 BANK0 1 bssBANK0 dist/default/production\motore.production.obj
-__accesstop 60 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s4s4.obj
-intlevel0 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s4s4.obj
-intlevel1 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s4s4.obj
-intlevel2 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s4s4.obj
-intlevel3 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s4s4.obj
+__accesstop 60 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s8cs.obj
+intlevel0 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s8cs.obj
+intlevel1 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s8cs.obj
+intlevel2 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s8cs.obj
+intlevel3 0 0 CODE 0 text C:\Users\simon\AppData\Local\Temp\s8cs.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\motore.production.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\motore.production.obj
 __size_of_OpenTimer2 0 0 ABS 0 - dist/default/production\motore.production.obj
@@ -1092,8 +1092,8 @@ _ADRESH FC4 0 ABS 0 - dist/default/production\motore.production.obj
 ___awdiv@dividend 6E 0 BANK0 1 cstackBANK0 dist/default/production\motore.production.obj
 CANSetFilter@tamp 78 0 BANK0 1 cstackBANK0 dist/default/production\motore.production.obj
 CANSetFilter@type 72 0 BANK0 1 cstackBANK0 dist/default/production\motore.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s4s4.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s4s4.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s8cs.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\simon\AppData\Local\Temp\s8cs.obj
 __end_of_send_data 25A4 0 CODE 0 text1 dist/default/production\motore.production.obj
 _CANCON F6F 0 ABS 0 - dist/default/production\motore.production.obj
 __size_of_send_data 0 0 ABS 0 - dist/default/production\motore.production.obj
@@ -1216,7 +1216,7 @@ __Htext9 0 0 ABS 0 text9 dist/default/production\motore.production.obj
 __end_of_SetOutputEPWM1 2664 0 CODE 0 text14 dist/default/production\motore.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\motore.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\motore.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\simon\AppData\Local\Temp\s4s4.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\simon\AppData\Local\Temp\s8cs.obj
 _previousTimeCounter1 9D 0 BANK0 1 bssBANK0 dist/default/production\motore.production.obj
 _previousTimeCounter2 A1 0 BANK0 1 bssBANK0 dist/default/production\motore.production.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\motore.production.obj
@@ -1356,8 +1356,8 @@ ___wmul@multiplier 76 0 BANK0 1 cstackBANK0 dist/default/production\motore.produ
 _RXM0SIDLbits F19 0 ABS 0 - dist/default/production\motore.production.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\motore.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\motore.production.obj
-stackhi 2FF 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s4s4.obj
-stacklo BE 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s4s4.obj
+stackhi 2FF 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s8cs.obj
+stacklo BE 0 ABS 0 - C:\Users\simon\AppData\Local\Temp\s8cs.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/production\motore.production.obj
 __Lintret 0 0 ABS 0 intret dist/default/production\motore.production.obj
 __Lirdata 0 0 CODE 0 irdata dist/default/production\motore.production.obj
@@ -1444,7 +1444,7 @@ __Ltext18 0 0 ABS 0 text18 dist/default/production\motore.production.obj
 __Ltext19 0 0 ABS 0 text19 dist/default/production\motore.production.obj
 __Ltext21 0 0 ABS 0 text21 dist/default/production\motore.production.obj
 __Ltext22 0 0 ABS 0 text22 dist/default/production\motore.production.obj
-__ramtop 300 0 RAM 0 ramtop C:\Users\simon\AppData\Local\Temp\s4s4.obj
+__ramtop 300 0 RAM 0 ramtop C:\Users\simon\AppData\Local\Temp\s8cs.obj
 _CANOperationMode 27CC 0 CODE 0 text7 dist/default/production\motore.production.obj
 __Lpowerup 1AA 0 CODE 0 powerup dist/default/production\motore.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\motore.production.obj

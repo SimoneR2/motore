@@ -20560,7 +20560,7 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 46 "motore.c"
+# 47 "motore.c"
 void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
@@ -20596,12 +20596,12 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 
-# 85
+# 86
 __attribute__((interrupt("__high_priority"))) void ISR_alta(void) {
 
 }
 
-# 93
+# 94
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
 if (CANisRxReady()) {

@@ -41,6 +41,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "idCan.h"
+#include "timers.h"
 #define _XTAL_FREQ 16000000
 #define attesaRampa 10
 void configurazione_iniziale(void);

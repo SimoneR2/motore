@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Sun Jan 24 15:59:08 2016
+                                                                                               Sun Jan 24 16:02:46 2016
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F4480
@@ -637,7 +637,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    631 ;;
    632 ;; *************** function _main *****************
    633 ;; Defined at:
-   634 ;;		line 143 in file "motore.c"
+   634 ;;		line 144 in file "motore.c"
    635 ;; Parameters:    Size  Location     Type
    636 ;;		None
    637 ;; Auto vars:     Size  Location     Type
@@ -683,31 +683,31 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    677  00194C                     _main:
    678                           	opt stack 25
    679                           
-   680                           ;motore.c: 144: unsigned char period;
-   681                           ;motore.c: 145: configurazione_iniziale();
+   680                           ;motore.c: 145: unsigned char period;
+   681                           ;motore.c: 146: configurazione_iniziale();
    682                           
    683                           ;incstack = 0
    684  00194C  EC01  F012         	call	_configurazione_iniziale	;wreg free
    685                           
-   686                           ;motore.c: 146: OpenTimer2(0b01111111 & 0b11111100 & 0b10000111);
+   686                           ;motore.c: 147: OpenTimer2(0b01111111 & 0b11111100 & 0b10000111);
    687  001950  0E04               	movlw	4
    688  001952  ECD5  F013         	call	_OpenTimer2
    689                           
-   690                           ;motore.c: 147: period = 249;
+   690                           ;motore.c: 148: period = 249;
    691  001956  0EF9               	movlw	249
    692  001958  0100               	movlb	0	; () banked
    693  00195A  6F90               	movwf	main@period& (0+255),b
    694                           
    695                           ; BSR set to: 0
-   696                           ;motore.c: 148: OpenEPWM1(period);
+   696                           ;motore.c: 149: OpenEPWM1(period);
    697  00195C  0100               	movlb	0	; () banked
    698  00195E  5190               	movf	main@period& (0+255),w,b
    699  001960  ECFC  F013         	call	_OpenEPWM1
    700                           
-   701                           ;motore.c: 151: PORTD = 0xFF;
+   701                           ;motore.c: 152: PORTD = 0xFF;
    702  001964  6883               	setf	3971,c	;volatile
    703                           
-   704                           ;motore.c: 152: delay_ms(500);
+   704                           ;motore.c: 153: delay_ms(500);
    705  001966  0E01               	movlw	1
    706  001968  0100               	movlb	0	; () banked
    707  00196A  6F7D               	movwf	(delay_ms@value_ms+1)& (0+255),b
@@ -715,11 +715,11 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    709  00196E  6F7C               	movwf	delay_ms@value_ms& (0+255),b
    710  001970  EC75  F013         	call	_delay_ms	;wreg free
    711                           
-   712                           ;motore.c: 153: PORTD = 0x00;
+   712                           ;motore.c: 154: PORTD = 0x00;
    713  001974  0E00               	movlw	0
    714  001976  6E83               	movwf	3971,c	;volatile
    715                           
-   716                           ;motore.c: 154: delay_ms(500);
+   716                           ;motore.c: 155: delay_ms(500);
    717  001978  0E01               	movlw	1
    718  00197A  0100               	movlb	0	; () banked
    719  00197C  6F7D               	movwf	(delay_ms@value_ms+1)& (0+255),b
@@ -727,10 +727,10 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    721  001980  6F7C               	movwf	delay_ms@value_ms& (0+255),b
    722  001982  EC75  F013         	call	_delay_ms	;wreg free
    723                           
-   724                           ;motore.c: 155: PORTD = 0xFF;
+   724                           ;motore.c: 156: PORTD = 0xFF;
    725  001986  6883               	setf	3971,c	;volatile
    726                           
-   727                           ;motore.c: 156: delay_ms(500);
+   727                           ;motore.c: 157: delay_ms(500);
    728  001988  0E01               	movlw	1
    729  00198A  0100               	movlb	0	; () banked
    730  00198C  6F7D               	movwf	(delay_ms@value_ms+1)& (0+255),b
@@ -738,11 +738,11 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    732  001990  6F7C               	movwf	delay_ms@value_ms& (0+255),b
    733  001992  EC75  F013         	call	_delay_ms	;wreg free
    734                           
-   735                           ;motore.c: 157: PORTD = 0x00;
+   735                           ;motore.c: 158: PORTD = 0x00;
    736  001996  0E00               	movlw	0
    737  001998  6E83               	movwf	3971,c	;volatile
    738                           
-   739                           ;motore.c: 158: delay_ms(500);
+   739                           ;motore.c: 159: delay_ms(500);
    740  00199A  0E01               	movlw	1
    741  00199C  0100               	movlb	0	; () banked
    742  00199E  6F7D               	movwf	(delay_ms@value_ms+1)& (0+255),b
@@ -751,11 +751,11 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    745  0019A4  EC75  F013         	call	_delay_ms	;wreg free
    746  0019A8                     l4916:
    747                           
-   748                           ;motore.c: 162: if (PORTAbits.RA7 == 0) {
+   748                           ;motore.c: 163: if (PORTAbits.RA7 == 0) {
    749  0019A8  BE80               	btfsc	3968,7,c	;volatile
    750  0019AA  D15B               	goto	l4970
    751                           
-   752                           ;motore.c: 163: if (dir == 1) {
+   752                           ;motore.c: 164: if (dir == 1) {
    753  0019AC  0100               	movlb	0	; () banked
    754  0019AE  05A9               	decf	_dir& (0+255),w,b
    755  0019B0  0100               	movlb	0	; () banked
@@ -764,22 +764,22 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    758  0019B6  D008               	goto	l4926
    759                           
    760                           ; BSR set to: 0
-   761                           ;motore.c: 164: SetOutputEPWM1(0b01111111, 0b11111111);
+   761                           ;motore.c: 165: SetOutputEPWM1(0b01111111, 0b11111111);
    762  0019B8  0EFF               	movlw	255
    763  0019BA  0100               	movlb	0	; () banked
    764  0019BC  6F6E               	movwf	SetOutputEPWM1@outputmode& (0+255),b
    765  0019BE  0E7F               	movlw	127
    766  0019C0  EC09  F013         	call	_SetOutputEPWM1
    767                           
-   768                           ;motore.c: 165: PORTCbits.RC0 = 1;
+   768                           ;motore.c: 166: PORTCbits.RC0 = 1;
    769  0019C4  8082               	bsf	3970,0,c	;volatile
    770                           
-   771                           ;motore.c: 166: PORTCbits.RC1 = 0;
+   771                           ;motore.c: 167: PORTCbits.RC1 = 0;
    772  0019C6  9282               	bcf	3970,1,c	;volatile
    773  0019C8                     l4926:
    774                           
-   775                           ;motore.c: 167: }
-   776                           ;motore.c: 168: if (dir == 0) {
+   775                           ;motore.c: 168: }
+   776                           ;motore.c: 169: if (dir == 0) {
    777  0019C8  0100               	movlb	0	; () banked
    778  0019CA  51A9               	movf	_dir& (0+255),w,b
    779  0019CC  0100               	movlb	0	; () banked
@@ -788,22 +788,22 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    782  0019D2  D008               	goto	l4934
    783                           
    784                           ; BSR set to: 0
-   785                           ;motore.c: 169: SetOutputEPWM1(0b11111111, 0b11111111);
+   785                           ;motore.c: 170: SetOutputEPWM1(0b11111111, 0b11111111);
    786  0019D4  0EFF               	movlw	255
    787  0019D6  0100               	movlb	0	; () banked
    788  0019D8  6F6E               	movwf	SetOutputEPWM1@outputmode& (0+255),b
    789  0019DA  0EFF               	movlw	255
    790  0019DC  EC09  F013         	call	_SetOutputEPWM1
    791                           
-   792                           ;motore.c: 170: PORTCbits.RC0 = 0;
+   792                           ;motore.c: 171: PORTCbits.RC0 = 0;
    793  0019E0  9082               	bcf	3970,0,c	;volatile
    794                           
-   795                           ;motore.c: 171: PORTCbits.RC1 = 1;
+   795                           ;motore.c: 172: PORTCbits.RC1 = 1;
    796  0019E2  8282               	bsf	3970,1,c	;volatile
    797  0019E4                     l4934:
    798                           
-   799                           ;motore.c: 172: }
-   800                           ;motore.c: 173: if (duty_set == 0) {
+   799                           ;motore.c: 173: }
+   800                           ;motore.c: 174: if (duty_set == 0) {
    801  0019E4  0100               	movlb	0	; () banked
    802  0019E6  51AF               	movf	_duty_set& (0+255),w,b
    803  0019E8  0100               	movlb	0	; () banked
@@ -811,16 +811,16 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    805  0019EC  D002               	goto	l4938
    806                           
    807                           ; BSR set to: 0
-   808                           ;motore.c: 174: PORTCbits.RC0 = 0;
+   808                           ;motore.c: 175: PORTCbits.RC0 = 0;
    809  0019EE  9082               	bcf	3970,0,c	;volatile
    810                           
-   811                           ;motore.c: 175: PORTCbits.RC1 = 0;
+   811                           ;motore.c: 176: PORTCbits.RC1 = 0;
    812  0019F0  9282               	bcf	3970,1,c	;volatile
    813  0019F2                     l4938:
    814                           
    815                           ; BSR set to: 0
-   816                           ;motore.c: 176: }
-   817                           ;motore.c: 177: if ((timeCounter - previousTimeCounter1 >= 10)) {
+   816                           ;motore.c: 177: }
+   817                           ;motore.c: 178: if ((timeCounter - previousTimeCounter1 >= 10)) {
    818  0019F2  C09D  F088         	movff	_previousTimeCounter1,??_main
    819  0019F6  C09E  F089         	movff	_previousTimeCounter1+1,??_main+1
    820  0019FA  C09F  F08A         	movff	_previousTimeCounter1+2,??_main+2
@@ -870,7 +870,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    864  001A56                     u6410:
    865                           
    866                           ; BSR set to: 0
-   867                           ;motore.c: 178: CANsendMessage(0b00000000000000000000000000110, 0, 0, CAN_CONFIG_STD_MSG
+   867                           ;motore.c: 179: CANsendMessage(0b00000000000000000000000000110, 0, 0, CAN_CONFIG_STD_MSG
       +                           & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
    868  001A56  0E06               	movlw	6
    869  001A58  0100               	movlb	0	; () banked
@@ -895,14 +895,14 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    888  001A7E  6F75               	movwf	CANsendMessage@flags& (0+255),b
    889  001A80  EC5A  F006         	call	_CANsendMessage	;wreg free
    890                           
-   891                           ;motore.c: 179: if (speed_fetched == 1) {
+   891                           ;motore.c: 180: if (speed_fetched == 1) {
    892  001A84  A048               	btfss	_speed_fetched/(0+8),_speed_fetched& (0+7),c
    893  001A86  D0ED               	goto	l4970
    894                           
-   895                           ;motore.c: 180: speed_fetched = 0;
+   895                           ;motore.c: 181: speed_fetched = 0;
    896  001A88  9048               	bcf	_speed_fetched/(0+8),_speed_fetched& (0+7),c
    897                           
-   898                           ;motore.c: 181: currentSpeed = ((left_speed + right_speed) / 2);
+   898                           ;motore.c: 182: currentSpeed = ((left_speed + right_speed) / 2);
    899  001A8A  0100               	movlb	0	; () banked
    900  001A8C  51B0               	movf	_left_speed& (0+255),w,b
    901  001A8E  0100               	movlb	0	; () banked
@@ -925,7 +925,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    918  001AB2  6FBC               	movwf	_currentSpeed& (0+255),b
    919                           
    920                           ; BSR set to: 0
-   921                           ;motore.c: 182: if (currentSpeed - requestSpeed > 0) {
+   921                           ;motore.c: 183: if (currentSpeed - requestSpeed > 0) {
    922  001AB4  0100               	movlb	0	; () banked
    923  001AB6  51B2               	movf	_requestSpeed& (0+255),w,b
    924  001AB8  0100               	movlb	0	; () banked
@@ -962,7 +962,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    955  001AF6                     u6430:
    956                           
    957                           ; BSR set to: 0
-   958                           ;motore.c: 183: errore = abs(currentSpeed - requestSpeed);
+   958                           ;motore.c: 184: errore = abs(currentSpeed - requestSpeed);
    959  001AF6  0100               	movlb	0	; () banked
    960  001AF8  51B2               	movf	_requestSpeed& (0+255),w,b
    961  001AFA  0100               	movlb	0	; () banked
@@ -988,7 +988,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    981  001B24  C06E  F0AB         	movff	?_abs,_errore
    982  001B28  C06F  F0AC         	movff	?_abs+1,_errore+1
    983                           
-   984                           ;motore.c: 184: correzione = ((errore / 17)*(errore / 17))*4;
+   984                           ;motore.c: 185: correzione = ((errore / 17)*(errore / 17))*4;
    985  001B2C  0E00               	movlw	0
    986  001B2E  0100               	movlb	0	; () banked
    987  001B30  6F71               	movwf	(___awdiv@divisor+1)& (0+255),b
@@ -1022,7 +1022,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1015  001B80  C077  F0A8         	movff	?___wmul+1,_correzione+1
   1016                           
   1017                           ; BSR set to: 0
-  1018                           ;motore.c: 185: if (correzione > 1) {
+  1018                           ;motore.c: 186: if (correzione > 1) {
   1019  001B84  0100               	movlb	0	; () banked
   1020  001B86  51A8               	movf	(_correzione+1)& (0+255),w,b
   1021  001B88  E105               	bnz	u6440
@@ -1034,7 +1034,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1027  001B94                     u6440:
   1028                           
   1029                           ; BSR set to: 0
-  1030                           ;motore.c: 186: if ((currentSpeed - requestSpeed) > 0) {
+  1030                           ;motore.c: 187: if ((currentSpeed - requestSpeed) > 0) {
   1031  001B94  0100               	movlb	0	; () banked
   1032  001B96  51B2               	movf	_requestSpeed& (0+255),w,b
   1033  001B98  0100               	movlb	0	; () banked
@@ -1071,7 +1071,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1064  001BD6                     u6450:
   1065                           
   1066                           ; BSR set to: 0
-  1067                           ;motore.c: 187: if (previousPwm > correzione) {
+  1067                           ;motore.c: 188: if (previousPwm > correzione) {
   1068  001BD6  0100               	movlb	0	; () banked
   1069  001BD8  51B1               	movf	_previousPwm& (0+255),w,b
   1070  001BDA  0100               	movlb	0	; () banked
@@ -1082,7 +1082,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1075  001BE4  D007               	goto	l683
   1076                           
   1077                           ; BSR set to: 0
-  1078                           ;motore.c: 188: duty_set = previousPwm - correzione;
+  1078                           ;motore.c: 189: duty_set = previousPwm - correzione;
   1079  001BE6  0100               	movlb	0	; () banked
   1080  001BE8  51A7               	movf	_correzione& (0+255),w,b
   1081  001BEA  0800               	sublw	0
@@ -1093,8 +1093,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1086  001BF4                     l683:
   1087                           
   1088                           ; BSR set to: 0
-  1089                           ;motore.c: 189: }
-  1090                           ;motore.c: 190: if ((currentSpeed - requestSpeed) < 0) {
+  1089                           ;motore.c: 190: }
+  1090                           ;motore.c: 191: if ((currentSpeed - requestSpeed) < 0) {
   1091  001BF4  0100               	movlb	0	; () banked
   1092  001BF6  51B2               	movf	_requestSpeed& (0+255),w,b
   1093  001BF8  0100               	movlb	0	; () banked
@@ -1123,7 +1123,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1116  001C26  D006               	goto	l682
   1117                           
   1118                           ; BSR set to: 0
-  1119                           ;motore.c: 191: duty_set = previousPwm + correzione;
+  1119                           ;motore.c: 192: duty_set = previousPwm + correzione;
   1120  001C28  0100               	movlb	0	; () banked
   1121  001C2A  51B1               	movf	_previousPwm& (0+255),w,b
   1122  001C2C  0100               	movlb	0	; () banked
@@ -1133,9 +1133,9 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1126  001C34                     l682:
   1127                           
   1128                           ; BSR set to: 0
-  1129                           ;motore.c: 192: }
-  1130                           ;motore.c: 193: }
-  1131                           ;motore.c: 194: if (correzione < 1) {
+  1129                           ;motore.c: 193: }
+  1130                           ;motore.c: 194: }
+  1131                           ;motore.c: 195: if (correzione < 1) {
   1132  001C34  0100               	movlb	0	; () banked
   1133  001C36  51A7               	movf	_correzione& (0+255),w,b
   1134  001C38  0100               	movlb	0	; () banked
@@ -1143,48 +1143,48 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1136  001C3C  B4D8               	btfsc	status,2,c
   1137                           
   1138                           ; BSR set to: 0
-  1139                           ;motore.c: 195: duty_set = previousPwm;
+  1139                           ;motore.c: 196: duty_set = previousPwm;
   1140  001C3E  C0B1  F0AF         	movff	_previousPwm,_duty_set
   1141  001C42                     l681:
   1142                           
   1143                           ; BSR set to: 0
-  1144                           ;motore.c: 196: }
-  1145                           ;motore.c: 197: }
-  1146                           ;motore.c: 198: previousPwm = duty_set;
+  1144                           ;motore.c: 197: }
+  1145                           ;motore.c: 198: }
+  1146                           ;motore.c: 199: previousPwm = duty_set;
   1147  001C42  C0AF  F0B1         	movff	_duty_set,_previousPwm
   1148                           
   1149                           ; BSR set to: 0
-  1150                           ;motore.c: 199: SetDCEPWM1(duty_set);
+  1150                           ;motore.c: 200: SetDCEPWM1(duty_set);
   1151  001C46  C0AF  F06E         	movff	_duty_set,SetDCEPWM1@dutycycle
   1152  001C4A  0100               	movlb	0	; () banked
   1153  001C4C  6B6F               	clrf	(SetDCEPWM1@dutycycle+1)& (0+255),b
   1154  001C4E  EC32  F013         	call	_SetDCEPWM1	;wreg free
   1155  001C52                     l4968:
   1156                           
-  1157                           ;motore.c: 200: }
-  1158                           ;motore.c: 201: previousTimeCounter1 = timeCounter;
+  1157                           ;motore.c: 201: }
+  1158                           ;motore.c: 202: previousTimeCounter1 = timeCounter;
   1159  001C52  C015  F09D         	movff	_timeCounter,_previousTimeCounter1
   1160  001C56  C016  F09E         	movff	_timeCounter+1,_previousTimeCounter1+1
   1161  001C5A  C017  F09F         	movff	_timeCounter+2,_previousTimeCounter1+2
   1162  001C5E  C018  F0A0         	movff	_timeCounter+3,_previousTimeCounter1+3
   1163  001C62                     l4970:
   1164                           
-  1165                           ;motore.c: 202: }
-  1166                           ;motore.c: 203: }
-  1167                           ;motore.c: 204: }
-  1168                           ;motore.c: 205: if ((remote_frame == 1) || (can_retry == 1)) {
+  1165                           ;motore.c: 203: }
+  1166                           ;motore.c: 204: }
+  1167                           ;motore.c: 205: }
+  1168                           ;motore.c: 206: if ((remote_frame == 1) || (can_retry == 1)) {
   1169  001C62  AA47               	btfss	_remote_frame/(0+8),_remote_frame& (0+7),c
   1170  001C64  B047               	btfsc	_can_retry/(0+8),_can_retry& (0+7),c
   1171  001C66  D001               	goto	l4974
   1172  001C68  D002               	goto	l4976
   1173  001C6A                     l4974:
   1174                           
-  1175                           ;motore.c: 206: send_data();
+  1175                           ;motore.c: 207: send_data();
   1176  001C6A  EC98  F012         	call	_send_data	;wreg free
   1177  001C6E                     l4976:
   1178                           
-  1179                           ;motore.c: 207: }
-  1180                           ;motore.c: 208: if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
+  1179                           ;motore.c: 208: }
+  1180                           ;motore.c: 209: if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
   1181  001C6E  EC05  F014         	call	_CANisTXwarningON	;wreg free
   1182  001C72  06E8               	decf	wreg,f,c
   1183  001C74  B4D8               	btfsc	status,2,c
@@ -1195,7 +1195,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1188  001C80  D009               	goto	l689
   1189  001C82                     l4980:
   1190                           
-  1191                           ;motore.c: 209: SetDCEPWM1(0);
+  1191                           ;motore.c: 210: SetDCEPWM1(0);
   1192  001C82  0E00               	movlw	0
   1193  001C84  0100               	movlb	0	; () banked
   1194  001C86  6F6F               	movwf	(SetDCEPWM1@dutycycle+1)& (0+255),b
@@ -1203,19 +1203,19 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1196  001C8A  6F6E               	movwf	SetDCEPWM1@dutycycle& (0+255),b
   1197  001C8C  EC32  F013         	call	_SetDCEPWM1	;wreg free
   1198                           
-  1199                           ;motore.c: 210: PORTAbits.RA7 = 1;
+  1199                           ;motore.c: 211: PORTAbits.RA7 = 1;
   1200  001C90  8E80               	bsf	3968,7,c	;volatile
   1201                           
-  1202                           ;motore.c: 211: } else {
+  1202                           ;motore.c: 212: } else {
   1203  001C92  D001               	goto	l4984
   1204  001C94                     l689:
   1205                           
-  1206                           ;motore.c: 212: PORTAbits.RA7 = 0;
+  1206                           ;motore.c: 213: PORTAbits.RA7 = 0;
   1207  001C94  9E80               	bcf	3968,7,c	;volatile
   1208  001C96                     l4984:
   1209                           
-  1210                           ;motore.c: 213: }
-  1211                           ;motore.c: 216: if ((timeCounter - previousTimeCounter) > 100) {
+  1210                           ;motore.c: 214: }
+  1211                           ;motore.c: 217: if ((timeCounter - previousTimeCounter) > 100) {
   1212  001C96  C099  F088         	movff	_previousTimeCounter,??_main
   1213  001C9A  C09A  F089         	movff	_previousTimeCounter+1,??_main+1
   1214  001C9E  C09B  F08A         	movff	_previousTimeCounter+2,??_main+2
@@ -1265,12 +1265,12 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1258  001CFA                     u6530:
   1259                           
   1260                           ; BSR set to: 0
-  1261                           ;motore.c: 217: if (request_sent == 0) {
+  1261                           ;motore.c: 218: if (request_sent == 0) {
   1262  001CFA  BE47               	btfsc	_request_sent/(0+8),_request_sent& (0+7),c
   1263  001CFC  D018               	goto	l4992
   1264                           
   1265                           ; BSR set to: 0
-  1266                           ;motore.c: 218: CANsendMessage(0b00000000000000000000000000010, data_array, 8, CAN_CONFI
+  1266                           ;motore.c: 219: CANsendMessage(0b00000000000000000000000000010, data_array, 8, CAN_CONFI
       +                          G_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
   1267  001CFE  0E02               	movlw	2
   1268  001D00  0100               	movlb	0	; () banked
@@ -1295,16 +1295,16 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1287  001D26  6F75               	movwf	CANsendMessage@flags& (0+255),b
   1288  001D28  EC5A  F006         	call	_CANsendMessage	;wreg free
   1289                           
-  1290                           ;motore.c: 219: request_sent = 1;
+  1290                           ;motore.c: 220: request_sent = 1;
   1291  001D2C  8E47               	bsf	_request_sent/(0+8),_request_sent& (0+7),c
   1292  001D2E                     l4992:
   1293                           
-  1294                           ;motore.c: 220: }
-  1295                           ;motore.c: 221: if (request_sent == 1) {
+  1294                           ;motore.c: 221: }
+  1295                           ;motore.c: 222: if (request_sent == 1) {
   1296  001D2E  AE47               	btfss	_request_sent/(0+8),_request_sent& (0+7),c
   1297  001D30  D012               	goto	l5006
   1298                           
-  1299                           ;motore.c: 223: if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando
+  1299                           ;motore.c: 224: if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando
       +                           == 1)) {
   1300  001D32  B247               	btfsc	_centralina_abs/(0+8),_centralina_abs& (0+7),c
   1301  001D34  A647               	btfss	_centralina_sterzo/(0+8),_centralina_sterzo& (0+7),c
@@ -1312,23 +1312,23 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1303  001D38  A447               	btfss	_centralina_comando/(0+8),_centralina_comando& (0+7),c
   1304  001D3A  D005               	goto	l5002
   1305                           
-  1306                           ;motore.c: 224: centralina_abs = 0;
+  1306                           ;motore.c: 225: centralina_abs = 0;
   1307  001D3C  9247               	bcf	_centralina_abs/(0+8),_centralina_abs& (0+7),c
   1308                           
-  1309                           ;motore.c: 225: centralina_sterzo = 0;
+  1309                           ;motore.c: 226: centralina_sterzo = 0;
   1310  001D3E  9647               	bcf	_centralina_sterzo/(0+8),_centralina_sterzo& (0+7),c
   1311                           
-  1312                           ;motore.c: 226: centralina_comando = 0;
+  1312                           ;motore.c: 227: centralina_comando = 0;
   1313  001D40  9447               	bcf	_centralina_comando/(0+8),_centralina_comando& (0+7),c
   1314                           
-  1315                           ;motore.c: 227: PORTAbits.RA7 = 0;
+  1315                           ;motore.c: 228: PORTAbits.RA7 = 0;
   1316  001D42  9E80               	bcf	3968,7,c	;volatile
   1317                           
-  1318                           ;motore.c: 228: } else {
+  1318                           ;motore.c: 229: } else {
   1319  001D44  D008               	goto	l5006
   1320  001D46                     l5002:
   1321                           
-  1322                           ;motore.c: 229: SetDCEPWM1(0);
+  1322                           ;motore.c: 230: SetDCEPWM1(0);
   1323  001D46  0E00               	movlw	0
   1324  001D48  0100               	movlb	0	; () banked
   1325  001D4A  6F6F               	movwf	(SetDCEPWM1@dutycycle+1)& (0+255),b
@@ -1336,21 +1336,21 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1327  001D4E  6F6E               	movwf	SetDCEPWM1@dutycycle& (0+255),b
   1328  001D50  EC32  F013         	call	_SetDCEPWM1	;wreg free
   1329                           
-  1330                           ;motore.c: 230: PORTAbits.RA7 = 1;
+  1330                           ;motore.c: 231: PORTAbits.RA7 = 1;
   1331  001D54  8E80               	bsf	3968,7,c	;volatile
   1332  001D56                     l5006:
   1333                           
-  1334                           ;motore.c: 231: }
-  1335                           ;motore.c: 232: }
-  1336                           ;motore.c: 233: previousTimeCounter = timeCounter;
+  1334                           ;motore.c: 232: }
+  1335                           ;motore.c: 233: }
+  1336                           ;motore.c: 234: previousTimeCounter = timeCounter;
   1337  001D56  C015  F099         	movff	_timeCounter,_previousTimeCounter
   1338  001D5A  C016  F09A         	movff	_timeCounter+1,_previousTimeCounter+1
   1339  001D5E  C017  F09B         	movff	_timeCounter+2,_previousTimeCounter+2
   1340  001D62  C018  F09C         	movff	_timeCounter+3,_previousTimeCounter+3
   1341  001D66                     l5008:
   1342                           
-  1343                           ;motore.c: 234: }
-  1344                           ;motore.c: 235: if ((timeCounter - previousTimeCounter2 >= 100)) {
+  1343                           ;motore.c: 235: }
+  1344                           ;motore.c: 236: if ((timeCounter - previousTimeCounter2 >= 100)) {
   1345  001D66  C0A1  F088         	movff	_previousTimeCounter2,??_main
   1346  001D6A  C0A2  F089         	movff	_previousTimeCounter2+1,??_main+1
   1347  001D6E  C0A3  F08A         	movff	_previousTimeCounter2+2,??_main+2
@@ -1400,10 +1400,10 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1391  001DCA                     u6590:
   1392                           
   1393                           ; BSR set to: 0
-  1394                           ;motore.c: 237: battery_measure();
+  1394                           ;motore.c: 238: battery_measure();
   1395  001DCA  EC4E  F012         	call	_battery_measure	;wreg free
   1396                           
-  1397                           ;motore.c: 238: previousTimeCounter2 = timeCounter;
+  1397                           ;motore.c: 239: previousTimeCounter2 = timeCounter;
   1398  001DCE  C015  F0A1         	movff	_timeCounter,_previousTimeCounter2
   1399  001DD2  C016  F0A2         	movff	_timeCounter+1,_previousTimeCounter2+1
   1400  001DD6  C017  F0A3         	movff	_timeCounter+2,_previousTimeCounter2+2
@@ -1421,7 +1421,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1412                           
   1413 ;; *************** function _send_data *****************
   1414 ;; Defined at:
-  1415 ;;		line 243 in file "motore.c"
+  1415 ;;		line 244 in file "motore.c"
   1416 ;; Parameters:    Size  Location     Type
   1417 ;;		None
   1418 ;; Auto vars:     Size  Location     Type
@@ -1456,18 +1456,18 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1447  002530                     _send_data:
   1448                           	opt stack 26
   1449                           
-  1450                           ;motore.c: 244: if (CANisTxReady()) {
+  1450                           ;motore.c: 245: if (CANisTxReady()) {
   1451                           
   1452                           ;incstack = 0
   1453  002530  ECC3  F013         	call	_CANisTxReady	;wreg free
   1454  002534  0900               	iorlw	0
   1455  002536  A4D8               	btfss	status,2,c
   1456                           
-  1457                           ;motore.c: 245: if (remote_frame == 1) {
+  1457                           ;motore.c: 246: if (remote_frame == 1) {
   1458  002538  AA47               	btfss	_remote_frame/(0+8),_remote_frame& (0+7),c
   1459  00253A  D017               	goto	l4868
   1460                           
-  1461                           ;motore.c: 246: CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRA
+  1461                           ;motore.c: 247: CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRA
       +                          ME & CAN_TX_PRIORITY_0);
   1462  00253C  C00D  F06E         	movff	_id,CANsendMessage@identifier
   1463  002540  C00E  F06F         	movff	_id+1,CANsendMessage@identifier+1
@@ -1487,13 +1487,13 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1477  002562  6F75               	movwf	CANsendMessage@flags& (0+255),b
   1478  002564  EC5A  F006         	call	_CANsendMessage	;wreg free
   1479                           
-  1480                           ;motore.c: 247: remote_frame = 0;
+  1480                           ;motore.c: 248: remote_frame = 0;
   1481  002568  9A47               	bcf	_remote_frame/(0+8),_remote_frame& (0+7),c
   1482  00256A                     l4868:
   1483                           
-  1484                           ;motore.c: 248: }
-  1485                           ;motore.c: 249: }
-  1486                           ;motore.c: 250: if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
+  1484                           ;motore.c: 249: }
+  1485                           ;motore.c: 250: }
+  1486                           ;motore.c: 251: if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
   1487  00256A  010F               	movlb	15	; () banked
   1488  00256C  BD40               	btfsc	64,6,b	;volatile
   1489  00256E  D003               	goto	l708
@@ -1505,23 +1505,23 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1495  002576                     l708:
   1496                           
   1497                           ; BSR set to: 15
-  1498                           ;motore.c: 251: can_retry = 1;
+  1498                           ;motore.c: 252: can_retry = 1;
   1499  002576  8047               	bsf	_can_retry/(0+8),_can_retry& (0+7),c
   1500                           
-  1501                           ;motore.c: 252: } else {
+  1501                           ;motore.c: 253: } else {
   1502  002578  0012               	return	
   1503  00257A                     l706:
   1504                           
   1505                           ; BSR set to: 15
-  1506                           ;motore.c: 253: can_retry = 0;
+  1506                           ;motore.c: 254: can_retry = 0;
   1507  00257A  9047               	bcf	_can_retry/(0+8),_can_retry& (0+7),c
   1508                           
-  1509                           ;motore.c: 254: if (remote_frame1 != 0) {
+  1509                           ;motore.c: 255: if (remote_frame1 != 0) {
   1510  00257C  AC47               	btfss	_remote_frame1/(0+8),_remote_frame1& (0+7),c
   1511  00257E  D010               	goto	l710
   1512                           
   1513                           ; BSR set to: 15
-  1514                           ;motore.c: 255: remote_frame = remote_frame1;
+  1514                           ;motore.c: 256: remote_frame = remote_frame1;
   1515  002580  AC47               	btfss	_remote_frame1/(0+8),_remote_frame1& (0+7),c
   1516  002582  D002               	goto	u6310
   1517  002584  8A47               	bsf	_remote_frame/(0+8),_remote_frame& (0+7),c
@@ -1530,24 +1530,24 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1520  002588  9A47               	bcf	_remote_frame/(0+8),_remote_frame& (0+7),c
   1521  00258A                     u6325:
   1522                           
-  1523                           ;motore.c: 256: id = id1;
+  1523                           ;motore.c: 257: id = id1;
   1524  00258A  C011  F00D         	movff	_id1,_id
   1525  00258E  C012  F00E         	movff	_id1+1,_id+1
   1526  002592  C013  F00F         	movff	_id1+2,_id+2
   1527  002596  C014  F010         	movff	_id1+3,_id+3
   1528                           
-  1529                           ;motore.c: 257: message_sent = 1;
+  1529                           ;motore.c: 258: message_sent = 1;
   1530  00259A  8847               	bsf	_message_sent/(0+8),_message_sent& (0+7),c
   1531                           
-  1532                           ;motore.c: 258: remote_frame1 = 0;
+  1532                           ;motore.c: 259: remote_frame1 = 0;
   1533  00259C  9C47               	bcf	_remote_frame1/(0+8),_remote_frame1& (0+7),c
   1534                           
-  1535                           ;motore.c: 259: } else {
+  1535                           ;motore.c: 260: } else {
   1536  00259E  0012               	return	
   1537  0025A0                     l710:
   1538                           
   1539                           ; BSR set to: 15
-  1540                           ;motore.c: 261: message_sent = 0;
+  1540                           ;motore.c: 262: message_sent = 0;
   1541  0025A0  9847               	bcf	_message_sent/(0+8),_message_sent& (0+7),c
   1542                           
   1543                           ; BSR set to: 15
@@ -1646,7 +1646,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1636                           
   1637 ;; *************** function _configurazione_iniziale *****************
   1638 ;; Defined at:
-  1639 ;;		line 278 in file "motore.c"
+  1639 ;;		line 279 in file "motore.c"
   1640 ;; Parameters:    Size  Location     Type
   1641 ;;		None
   1642 ;; Auto vars:     Size  Location     Type
@@ -1680,7 +1680,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1670  002402                     _configurazione_iniziale:
   1671                           	opt stack 25
   1672                           
-  1673                           ;motore.c: 281: CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAM
+  1673                           ;motore.c: 282: CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAM
       +                          PLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
   1674                           
   1675                           ; BSR set to: 0
@@ -1703,154 +1703,154 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1692  002420  0E04               	movlw	4
   1693  002422  ECBF  F010         	call	_CANInitialize
   1694                           
-  1695                           ;motore.c: 282: RCONbits.IPEN = 1;
+  1695                           ;motore.c: 283: RCONbits.IPEN = 1;
   1696  002426  8ED0               	bsf	4048,7,c	;volatile
   1697                           
-  1698                           ;motore.c: 283: INTCONbits.INT0IF = 0;
+  1698                           ;motore.c: 284: INTCONbits.INT0IF = 0;
   1699  002428  92F2               	bcf	intcon,1,c	;volatile
   1700                           
-  1701                           ;motore.c: 284: INTCONbits.INT0IE = 1;
+  1701                           ;motore.c: 285: INTCONbits.INT0IE = 1;
   1702  00242A  88F2               	bsf	intcon,4,c	;volatile
   1703                           
-  1704                           ;motore.c: 285: PIR3bits.RXB1IF = 0;
+  1704                           ;motore.c: 286: PIR3bits.RXB1IF = 0;
   1705  00242C  92A4               	bcf	4004,1,c	;volatile
   1706                           
-  1707                           ;motore.c: 286: PIR3bits.RXB0IF = 0;
+  1707                           ;motore.c: 287: PIR3bits.RXB0IF = 0;
   1708  00242E  90A4               	bcf	4004,0,c	;volatile
   1709                           
-  1710                           ;motore.c: 287: PIE3bits.RXB1IE = 1;
+  1710                           ;motore.c: 288: PIE3bits.RXB1IE = 1;
   1711  002430  82A3               	bsf	4003,1,c	;volatile
   1712                           
-  1713                           ;motore.c: 288: PIE3bits.RXB0IE = 1;
+  1713                           ;motore.c: 289: PIE3bits.RXB0IE = 1;
   1714  002432  80A3               	bsf	4003,0,c	;volatile
   1715                           
-  1716                           ;motore.c: 289: IPR3bits.RXB1IP = 0;
+  1716                           ;motore.c: 290: IPR3bits.RXB1IP = 0;
   1717  002434  92A5               	bcf	4005,1,c	;volatile
   1718                           
-  1719                           ;motore.c: 290: IPR3bits.RXB0IP = 0;
+  1719                           ;motore.c: 291: IPR3bits.RXB0IP = 0;
   1720  002436  90A5               	bcf	4005,0,c	;volatile
   1721                           
-  1722                           ;motore.c: 291: INTCONbits.GIEH = 1;
+  1722                           ;motore.c: 292: INTCONbits.GIEH = 1;
   1723  002438  8EF2               	bsf	intcon,7,c	;volatile
   1724                           
-  1725                           ;motore.c: 292: INTCONbits.GIEL = 1;
+  1725                           ;motore.c: 293: INTCONbits.GIEL = 1;
   1726  00243A  8CF2               	bsf	intcon,6,c	;volatile
   1727                           
-  1728                           ;motore.c: 293: INTCON2bits.INTEDG0 = 1;
+  1728                           ;motore.c: 294: INTCON2bits.INTEDG0 = 1;
   1729  00243C  8CF1               	bsf	intcon2,6,c	;volatile
   1730                           
-  1731                           ;motore.c: 296: T3CON = 0x01;
+  1731                           ;motore.c: 297: T3CON = 0x01;
   1732  00243E  0E01               	movlw	1
   1733  002440  6EB1               	movwf	4017,c	;volatile
   1734                           
-  1735                           ;motore.c: 297: PIR2bits.TMR3IF = 0;
+  1735                           ;motore.c: 298: PIR2bits.TMR3IF = 0;
   1736  002442  92A1               	bcf	4001,1,c	;volatile
   1737                           
-  1738                           ;motore.c: 298: IPR2bits.TMR3IP = 0;
+  1738                           ;motore.c: 299: IPR2bits.TMR3IP = 0;
   1739  002444  92A2               	bcf	4002,1,c	;volatile
   1740                           
-  1741                           ;motore.c: 299: TMR3H = 0x63;
+  1741                           ;motore.c: 300: TMR3H = 0x63;
   1742  002446  0E63               	movlw	99
   1743  002448  6EB3               	movwf	4019,c	;volatile
   1744                           
-  1745                           ;motore.c: 300: TMR3L = 0xC0;
+  1745                           ;motore.c: 301: TMR3L = 0xC0;
   1746  00244A  0EC0               	movlw	192
   1747  00244C  6EB2               	movwf	4018,c	;volatile
   1748                           
-  1749                           ;motore.c: 301: PIE2bits.TMR3IE = 1;
+  1749                           ;motore.c: 302: PIE2bits.TMR3IE = 1;
   1750  00244E  82A0               	bsf	4000,1,c	;volatile
   1751                           
-  1752                           ;motore.c: 305: ADCON0bits.ADON = 1;
+  1752                           ;motore.c: 306: ADCON0bits.ADON = 1;
   1753  002450  80C2               	bsf	4034,0,c	;volatile
   1754                           
-  1755                           ;motore.c: 306: ADCON0bits.CHS0 = 0;
+  1755                           ;motore.c: 307: ADCON0bits.CHS0 = 0;
   1756  002452  94C2               	bcf	4034,2,c	;volatile
   1757                           
-  1758                           ;motore.c: 307: ADCON0bits.CHS1 = 0;
+  1758                           ;motore.c: 308: ADCON0bits.CHS1 = 0;
   1759  002454  96C2               	bcf	4034,3,c	;volatile
   1760                           
-  1761                           ;motore.c: 308: ADCON0bits.CHS2 = 0;
+  1761                           ;motore.c: 309: ADCON0bits.CHS2 = 0;
   1762  002456  98C2               	bcf	4034,4,c	;volatile
   1763                           
-  1764                           ;motore.c: 309: ADCON0bits.CHS3 = 0;
+  1764                           ;motore.c: 310: ADCON0bits.CHS3 = 0;
   1765  002458  9AC2               	bcf	4034,5,c	;volatile
   1766                           
-  1767                           ;motore.c: 310: ADCON1bits.PCFG0 = 0;
+  1767                           ;motore.c: 311: ADCON1bits.PCFG0 = 0;
   1768  00245A  90C1               	bcf	4033,0,c	;volatile
   1769                           
-  1770                           ;motore.c: 311: ADCON1bits.PCFG1 = 1;
+  1770                           ;motore.c: 312: ADCON1bits.PCFG1 = 1;
   1771  00245C  82C1               	bsf	4033,1,c	;volatile
   1772                           
-  1773                           ;motore.c: 312: ADCON1bits.PCFG2 = 1;
+  1773                           ;motore.c: 313: ADCON1bits.PCFG2 = 1;
   1774  00245E  84C1               	bsf	4033,2,c	;volatile
   1775                           
-  1776                           ;motore.c: 313: ADCON1bits.PCFG3 = 1;
+  1776                           ;motore.c: 314: ADCON1bits.PCFG3 = 1;
   1777  002460  86C1               	bsf	4033,3,c	;volatile
   1778                           
-  1779                           ;motore.c: 314: ADCON1bits.VCFG0 = 0;
+  1779                           ;motore.c: 315: ADCON1bits.VCFG0 = 0;
   1780  002462  98C1               	bcf	4033,4,c	;volatile
   1781                           
-  1782                           ;motore.c: 315: ADCON1bits.VCFG1 = 0;
+  1782                           ;motore.c: 316: ADCON1bits.VCFG1 = 0;
   1783  002464  9AC1               	bcf	4033,5,c	;volatile
   1784                           
-  1785                           ;motore.c: 316: ADCON2bits.ADCS0 = 1;
+  1785                           ;motore.c: 317: ADCON2bits.ADCS0 = 1;
   1786  002466  80C0               	bsf	4032,0,c	;volatile
   1787                           
-  1788                           ;motore.c: 317: ADCON2bits.ADCS1 = 0;
+  1788                           ;motore.c: 318: ADCON2bits.ADCS1 = 0;
   1789  002468  92C0               	bcf	4032,1,c	;volatile
   1790                           
-  1791                           ;motore.c: 318: ADCON2bits.ADCS2 = 1;
+  1791                           ;motore.c: 319: ADCON2bits.ADCS2 = 1;
   1792  00246A  84C0               	bsf	4032,2,c	;volatile
   1793                           
-  1794                           ;motore.c: 319: ADCON2bits.ACQT0 = 0;
+  1794                           ;motore.c: 320: ADCON2bits.ACQT0 = 0;
   1795  00246C  96C0               	bcf	4032,3,c	;volatile
   1796                           
-  1797                           ;motore.c: 320: ADCON2bits.ACQT1 = 1;
+  1797                           ;motore.c: 321: ADCON2bits.ACQT1 = 1;
   1798  00246E  88C0               	bsf	4032,4,c	;volatile
   1799                           
-  1800                           ;motore.c: 321: ADCON2bits.ACQT2 = 1;
+  1800                           ;motore.c: 322: ADCON2bits.ACQT2 = 1;
   1801  002470  8AC0               	bsf	4032,5,c	;volatile
   1802                           
-  1803                           ;motore.c: 322: ADCON2bits.ADFM = 0;
+  1803                           ;motore.c: 323: ADCON2bits.ADFM = 0;
   1804  002472  9EC0               	bcf	4032,7,c	;volatile
   1805                           
-  1806                           ;motore.c: 326: LATA = 0x00;
+  1806                           ;motore.c: 327: LATA = 0x00;
   1807  002474  0E00               	movlw	0
   1808  002476  6E89               	movwf	3977,c	;volatile
   1809                           
-  1810                           ;motore.c: 327: TRISA = 0b01111111;
+  1810                           ;motore.c: 328: TRISA = 0b01111111;
   1811  002478  0E7F               	movlw	127
   1812  00247A  6E92               	movwf	3986,c	;volatile
   1813                           
-  1814                           ;motore.c: 329: LATB = 0x00;
+  1814                           ;motore.c: 330: LATB = 0x00;
   1815  00247C  0E00               	movlw	0
   1816  00247E  6E8A               	movwf	3978,c	;volatile
   1817                           
-  1818                           ;motore.c: 330: TRISB = 0b11111011;
+  1818                           ;motore.c: 331: TRISB = 0b11111011;
   1819  002480  0EFB               	movlw	251
   1820  002482  6E93               	movwf	3987,c	;volatile
   1821                           
-  1822                           ;motore.c: 332: LATC = 0x00;
+  1822                           ;motore.c: 333: LATC = 0x00;
   1823  002484  0E00               	movlw	0
   1824  002486  6E8B               	movwf	3979,c	;volatile
   1825                           
-  1826                           ;motore.c: 333: TRISC = 0x00;
+  1826                           ;motore.c: 334: TRISC = 0x00;
   1827  002488  0E00               	movlw	0
   1828  00248A  6E94               	movwf	3988,c	;volatile
   1829                           
-  1830                           ;motore.c: 335: LATD = 0x00;
+  1830                           ;motore.c: 336: LATD = 0x00;
   1831  00248C  0E00               	movlw	0
   1832  00248E  6E8C               	movwf	3980,c	;volatile
   1833                           
-  1834                           ;motore.c: 336: TRISD = 0x00;
+  1834                           ;motore.c: 337: TRISD = 0x00;
   1835  002490  0E00               	movlw	0
   1836  002492  6E95               	movwf	3989,c	;volatile
   1837                           
-  1838                           ;motore.c: 338: LATE = 0x00;
+  1838                           ;motore.c: 339: LATE = 0x00;
   1839  002494  0E00               	movlw	0
   1840  002496  6E8D               	movwf	3981,c	;volatile
   1841                           
-  1842                           ;motore.c: 339: TRISE = 0xFF;
+  1842                           ;motore.c: 340: TRISE = 0xFF;
   1843  002498  6896               	setf	3990,c	;volatile
   1844  00249A  0012               	return		;funcret
   1845  00249C                     __end_of_configurazione_iniziale:
@@ -5004,7 +5004,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   4992                           
   4993 ;; *************** function _battery_measure *****************
   4994 ;; Defined at:
-  4995 ;;		line 266 in file "motore.c"
+  4995 ;;		line 267 in file "motore.c"
   4996 ;; Parameters:    Size  Location     Type
   4997 ;;		None
   4998 ;; Auto vars:     Size  Location     Type
@@ -5041,7 +5041,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   5029  00249C                     _battery_measure:
   5030                           	opt stack 26
   5031                           
-  5032                           ;motore.c: 267: ADCON0bits.GO = 1;
+  5032                           ;motore.c: 268: ADCON0bits.GO = 1;
   5033                           
   5034                           ; BSR set to: 0
   5035                           ;incstack = 0
@@ -5050,13 +5050,13 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   5038  00249E  B2C2               	btfsc	4034,1,c	;volatile
   5039  0024A0  D7FE               	goto	l715
   5040                           
-  5041                           ;motore.c: 269: vBatt = ADRESH;
+  5041                           ;motore.c: 270: vBatt = ADRESH;
   5042  0024A2  CFC4 F0AD          	movff	4036,_vBatt	;volatile
   5043  0024A6  0100               	movlb	0	; () banked
   5044  0024A8  6BAE               	clrf	(_vBatt+1)& (0+255),b
   5045                           
   5046                           ; BSR set to: 0
-  5047                           ;motore.c: 270: vBatt = (vBatt * 14) / 235;
+  5047                           ;motore.c: 271: vBatt = (vBatt * 14) / 235;
   5048  0024AA  C0AD  F076         	movff	_vBatt,___wmul@multiplier
   5049  0024AE  C0AE  F077         	movff	_vBatt+1,___wmul@multiplier+1
   5050  0024B2  0E00               	movlw	0
@@ -5076,7 +5076,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   5064  0024D6  C06E  F0AD         	movff	?___awdiv,_vBatt
   5065  0024DA  C06F  F0AE         	movff	?___awdiv+1,_vBatt+1
   5066                           
-  5067                           ;motore.c: 271: if (vBatt < 10) {
+  5067                           ;motore.c: 272: if (vBatt < 10) {
   5068  0024DE  0100               	movlb	0	; () banked
   5069  0024E0  BFAE               	btfsc	(_vBatt+1)& (0+255),7,b
   5070  0024E2  D008               	goto	l4882
@@ -5094,7 +5094,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   5082  0024FA  B4D8               	btfsc	status,2,c
   5083  0024FC  D7FB               	goto	l4882
   5084                           
-  5085                           ;motore.c: 274: CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFI
+  5085                           ;motore.c: 275: CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFI
       +                          G_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
   5086  0024FE  0E09               	movlw	9
   5087  002500  0100               	movlb	0	; () banked
@@ -7450,7 +7450,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7436                           
   7437 ;; *************** function _ISR_bassa *****************
   7438 ;; Defined at:
-  7439 ;;		line 93 in file "motore.c"
+  7439 ;;		line 94 in file "motore.c"
   7440 ;; Parameters:    Size  Location     Type
   7441 ;;		None
   7442 ;; Auto vars:     Size  Location     Type
@@ -7505,42 +7505,42 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7491  000056  CFF8 F045          	movff	tblptru,??_ISR_bassa+15
   7492  00005A  CFF5 F046          	movff	tablat,??_ISR_bassa+16
   7493                           
-  7494                           ;motore.c: 94: if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
+  7494                           ;motore.c: 95: if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
   7495  00005E  A0A4               	btfss	4004,0,c	;volatile
   7496  000060  B2A4               	btfsc	4004,1,c	;volatile
   7497  000062  D001               	goto	i1l3768
   7498  000064  D07E               	goto	i1l670
   7499  000066                     i1l3768:
   7500                           
-  7501                           ;motore.c: 95: if (CANisRxReady()) {
+  7501                           ;motore.c: 96: if (CANisRxReady()) {
   7502  000066  ECF1  F013         	call	_CANisRxReady	;wreg free
   7503  00006A  0900               	iorlw	0
   7504  00006C  B4D8               	btfsc	status,2,c
   7505  00006E  D06C               	goto	i1l656
   7506                           
-  7507                           ;motore.c: 96: CANreceiveMessage(&msg);
+  7507                           ;motore.c: 97: CANreceiveMessage(&msg);
   7508  000070  0E1B               	movlw	low _msg
   7509  000072  6E2A               	movwf	CANreceiveMessage@msg,c
   7510  000074  0E00               	movlw	high _msg
   7511  000076  6E2B               	movwf	CANreceiveMessage@msg+1,c
   7512  000078  EC20  F00A         	call	_CANreceiveMessage	;wreg free
   7513                           
-  7514                           ;motore.c: 97: if (msg.RTR == 1) {
+  7514                           ;motore.c: 98: if (msg.RTR == 1) {
   7515  00007C  0429               	decf	_msg+14,w,c
   7516  00007E  A4D8               	btfss	status,2,c
   7517  000080  D01E               	goto	i1l3778
   7518                           
-  7519                           ;motore.c: 98: if (message_sent == 0) {
+  7519                           ;motore.c: 99: if (message_sent == 0) {
   7520  000082  B847               	btfsc	_message_sent/(0+8),_message_sent& (0+7),c
   7521  000084  D00F               	goto	i1l658
   7522                           
-  7523                           ;motore.c: 99: id = msg.identifier;
+  7523                           ;motore.c: 100: id = msg.identifier;
   7524  000086  C01B  F00D         	movff	_msg,_id
   7525  00008A  C01C  F00E         	movff	_msg+1,_id+1
   7526  00008E  C01D  F00F         	movff	_msg+2,_id+2
   7527  000092  C01E  F010         	movff	_msg+3,_id+3
   7528                           
-  7529                           ;motore.c: 100: remote_frame = msg.RTR;
+  7529                           ;motore.c: 101: remote_frame = msg.RTR;
   7530  000096  A029               	btfss	_msg+14,0,c
   7531  000098  D002               	goto	i1u435_20
   7532  00009A  8A47               	bsf	_remote_frame/(0+8),_remote_frame& (0+7),c
@@ -7549,20 +7549,20 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7535  00009E  9A47               	bcf	_remote_frame/(0+8),_remote_frame& (0+7),c
   7536  0000A0                     i1u436_25:
   7537                           
-  7538                           ;motore.c: 101: message_sent = 1;
+  7538                           ;motore.c: 102: message_sent = 1;
   7539  0000A0  8847               	bsf	_message_sent/(0+8),_message_sent& (0+7),c
   7540                           
-  7541                           ;motore.c: 102: } else {
+  7541                           ;motore.c: 103: } else {
   7542  0000A2  D00D               	goto	i1l3778
   7543  0000A4                     i1l658:
   7544                           
-  7545                           ;motore.c: 103: id1 = msg.identifier;
+  7545                           ;motore.c: 104: id1 = msg.identifier;
   7546  0000A4  C01B  F011         	movff	_msg,_id1
   7547  0000A8  C01C  F012         	movff	_msg+1,_id1+1
   7548  0000AC  C01D  F013         	movff	_msg+2,_id1+2
   7549  0000B0  C01E  F014         	movff	_msg+3,_id1+3
   7550                           
-  7551                           ;motore.c: 104: remote_frame1 = msg.RTR;
+  7551                           ;motore.c: 105: remote_frame1 = msg.RTR;
   7552  0000B4  A029               	btfss	_msg+14,0,c
   7553  0000B6  D002               	goto	i1u437_20
   7554  0000B8  8C47               	bsf	_remote_frame1/(0+8),_remote_frame1& (0+7),c
@@ -7571,9 +7571,9 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7557  0000BC  9C47               	bcf	_remote_frame1/(0+8),_remote_frame1& (0+7),c
   7558  0000BE                     i1l3778:
   7559                           
-  7560                           ;motore.c: 105: }
-  7561                           ;motore.c: 106: }
-  7562                           ;motore.c: 107: if (msg.identifier == 0b00000000000000000000000000011) {
+  7560                           ;motore.c: 106: }
+  7561                           ;motore.c: 107: }
+  7562                           ;motore.c: 108: if (msg.identifier == 0b00000000000000000000000000011) {
   7563  0000BE  0E03               	movlw	3
   7564  0000C0  181B               	xorwf	_msg,w,c
   7565  0000C2  101C               	iorwf	_msg+1,w,c
@@ -7582,23 +7582,23 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7568  0000C8  A4D8               	btfss	status,2,c
   7569  0000CA  D00E               	goto	i1l3782
   7570                           
-  7571                           ;motore.c: 108: currentSpeed = msg.data[0];
+  7571                           ;motore.c: 109: currentSpeed = msg.data[0];
   7572  0000CC  C01F  F0BC         	movff	_msg+4,_currentSpeed
   7573                           
-  7574                           ;motore.c: 109: dir = msg.data[1];
+  7574                           ;motore.c: 110: dir = msg.data[1];
   7575  0000D0  C020  F0A9         	movff	_msg+5,_dir
   7576  0000D4  0100               	movlb	0	; () banked
   7577  0000D6  6BAA               	clrf	(_dir+1)& (0+255),b
   7578                           
-  7579                           ;motore.c: 110: previousTimeCounter = timeCounter;
+  7579                           ;motore.c: 111: previousTimeCounter = timeCounter;
   7580  0000D8  C015  F099         	movff	_timeCounter,_previousTimeCounter
   7581  0000DC  C016  F09A         	movff	_timeCounter+1,_previousTimeCounter+1
   7582  0000E0  C017  F09B         	movff	_timeCounter+2,_previousTimeCounter+2
   7583  0000E4  C018  F09C         	movff	_timeCounter+3,_previousTimeCounter+3
   7584  0000E8                     i1l3782:
   7585                           
-  7586                           ;motore.c: 111: }
-  7587                           ;motore.c: 112: if (msg.identifier == 0b00000000000000000000000000001) {
+  7586                           ;motore.c: 112: }
+  7587                           ;motore.c: 113: if (msg.identifier == 0b00000000000000000000000000001) {
   7588  0000E8  041B               	decf	_msg,w,c
   7589  0000EA  101C               	iorwf	_msg+1,w,c
   7590  0000EC  101D               	iorwf	_msg+2,w,c
@@ -7606,18 +7606,18 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7592  0000F0  A4D8               	btfss	status,2,c
   7593  0000F2  D004               	goto	i1l3788
   7594                           
-  7595                           ;motore.c: 113: currentSpeed = 0;
+  7595                           ;motore.c: 114: currentSpeed = 0;
   7596  0000F4  0E00               	movlw	0
   7597  0000F6  0100               	movlb	0	; () banked
   7598  0000F8  6FBC               	movwf	_currentSpeed& (0+255),b
   7599                           
   7600                           ; BSR set to: 0
-  7601                           ;motore.c: 114: PORTAbits.RA1 = 1;
+  7601                           ;motore.c: 115: PORTAbits.RA1 = 1;
   7602  0000FA  8280               	bsf	3968,1,c	;volatile
   7603  0000FC                     i1l3788:
   7604                           
-  7605                           ;motore.c: 115: }
-  7606                           ;motore.c: 116: if (msg.identifier == 0b00000000000000000000000000110) {
+  7605                           ;motore.c: 116: }
+  7606                           ;motore.c: 117: if (msg.identifier == 0b00000000000000000000000000110) {
   7607  0000FC  0E06               	movlw	6
   7608  0000FE  181B               	xorwf	_msg,w,c
   7609  000100  101C               	iorwf	_msg+1,w,c
@@ -7626,18 +7626,18 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7612  000106  A4D8               	btfss	status,2,c
   7613  000108  D005               	goto	i1l3792
   7614                           
-  7615                           ;motore.c: 117: left_speed = msg.data[0];
+  7615                           ;motore.c: 118: left_speed = msg.data[0];
   7616  00010A  C01F  F0B0         	movff	_msg+4,_left_speed
   7617                           
-  7618                           ;motore.c: 118: right_speed = msg.data[1];
+  7618                           ;motore.c: 119: right_speed = msg.data[1];
   7619  00010E  C020  F0B3         	movff	_msg+5,_right_speed
   7620                           
-  7621                           ;motore.c: 119: speed_fetched = 1;
+  7621                           ;motore.c: 120: speed_fetched = 1;
   7622  000112  8048               	bsf	_speed_fetched/(0+8),_speed_fetched& (0+7),c
   7623  000114                     i1l3792:
   7624                           
-  7625                           ;motore.c: 120: }
-  7626                           ;motore.c: 121: if (msg.identifier == 0b00000000000000000000000000010) {
+  7625                           ;motore.c: 121: }
+  7626                           ;motore.c: 122: if (msg.identifier == 0b00000000000000000000000000010) {
   7627  000114  0E02               	movlw	2
   7628  000116  181B               	xorwf	_msg,w,c
   7629  000118  101C               	iorwf	_msg+1,w,c
@@ -7649,19 +7649,19 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7635  000124                     i1l665:
   7636  000124  8247               	bsf	_centralina_abs/(0+8),_centralina_abs& (0+7),c
   7637                           
-  7638                           ;motore.c: 124: break;
+  7638                           ;motore.c: 125: break;
   7639  000126  D00E               	goto	i1l666
   7640  000128                     i1l667:
   7641  000128  8647               	bsf	_centralina_sterzo/(0+8),_centralina_sterzo& (0+7),c
   7642                           
-  7643                           ;motore.c: 126: break;
+  7643                           ;motore.c: 127: break;
   7644  00012A  D00C               	goto	i1l666
   7645  00012C                     i1l668:
   7646  00012C  8447               	bsf	_centralina_comando/(0+8),_centralina_comando& (0+7),c
   7647                           
-  7648                           ;motore.c: 129: }
+  7648                           ;motore.c: 130: }
   7649                           
-  7650                           ;motore.c: 128: break;
+  7650                           ;motore.c: 129: break;
   7651  00012E  D00A               	goto	i1l666
   7652  000130                     i1l3798:
   7653  000130  501F               	movf	_msg+4,w,c
@@ -7683,20 +7683,20 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7669  000142  D7F4               	goto	i1l668
   7670  000144                     i1l666:
   7671                           
-  7672                           ;motore.c: 130: PIR3bits.RXB0IF = 0;
+  7672                           ;motore.c: 131: PIR3bits.RXB0IF = 0;
   7673  000144  90A4               	bcf	4004,0,c	;volatile
   7674                           
-  7675                           ;motore.c: 131: PIR3bits.RXB1IF = 0;
+  7675                           ;motore.c: 132: PIR3bits.RXB1IF = 0;
   7676  000146  92A4               	bcf	4004,1,c	;volatile
   7677  000148                     i1l656:
   7678                           
-  7679                           ;motore.c: 132: }
-  7680                           ;motore.c: 133: }
-  7681                           ;motore.c: 134: if (PIR2bits.TMR3IF) {
+  7679                           ;motore.c: 133: }
+  7680                           ;motore.c: 134: }
+  7681                           ;motore.c: 135: if (PIR2bits.TMR3IF) {
   7682  000148  A2A1               	btfss	4001,1,c	;volatile
   7683  00014A  D00B               	goto	i1l670
   7684                           
-  7685                           ;motore.c: 135: timeCounter++;
+  7685                           ;motore.c: 136: timeCounter++;
   7686  00014C  0E01               	movlw	1
   7687  00014E  2615               	addwf	_timeCounter,f,c
   7688  000150  0E00               	movlw	0
@@ -7704,15 +7704,15 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   7690  000154  2217               	addwfc	_timeCounter+2,f,c
   7691  000156  2218               	addwfc	_timeCounter+3,f,c
   7692                           
-  7693                           ;motore.c: 136: TMR3H = 0x63;
+  7693                           ;motore.c: 137: TMR3H = 0x63;
   7694  000158  0E63               	movlw	99
   7695  00015A  6EB3               	movwf	4019,c	;volatile
   7696                           
-  7697                           ;motore.c: 137: TMR3L = 0xC0;
+  7697                           ;motore.c: 138: TMR3L = 0xC0;
   7698  00015C  0EC0               	movlw	192
   7699  00015E  6EB2               	movwf	4018,c	;volatile
   7700                           
-  7701                           ;motore.c: 138: PIR2bits.TMR3IF = 0;
+  7701                           ;motore.c: 139: PIR2bits.TMR3IF = 0;
   7702  000160  92A1               	bcf	4001,1,c	;volatile
   7703  000162                     i1l670:
   7704  000162  C046  FFF5         	movff	??_ISR_bassa+16,tablat
@@ -8665,7 +8665,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   8651                           
   8652 ;; *************** function _ISR_alta *****************
   8653 ;; Defined at:
-  8654 ;;		line 85 in file "motore.c"
+  8654 ;;		line 86 in file "motore.c"
   8655 ;; Parameters:    Size  Location     Type
   8656 ;;		None
   8657 ;; Auto vars:     Size  Location     Type
@@ -9120,7 +9120,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Sun Jan 24 15:59:08 2016
+Symbol Table                                                                                   Sun Jan 24 16:02:46 2016
 
               ??_CANisTXwarningON 006E              __end_of_CANSetFilter 0CB4  
                     ___awdiv@sign 0073                                _id 000D  
