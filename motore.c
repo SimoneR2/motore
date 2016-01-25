@@ -78,7 +78,7 @@ unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
-
+BYTE data_array1 [8] = 0;
 //*************************************
 //ISR Alta priorità (gestione encoder)
 //*************************************
@@ -96,14 +96,8 @@ __interrupt(low_priority) void ISR_bassa(void) {
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
             if (msg.RTR == 1) { //Se il messaggio arrivato è un remote frame
-                if (message_sent == 0) {
                     id = msg.identifier;
-                    remote_frame = msg.RTR;
-                    message_sent = 1;
-                } else {
-                    id1 = msg.identifier;
-                    remote_frame1 = msg.RTR;
-                }
+                    remote_frame = msg.RTR;    
             }
             if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
                 currentSpeed = msg.data[0]; //velocità richiesta
@@ -247,9 +241,17 @@ void send_data(void) {
             CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
             remote_frame = 0; //azzero flag risposta remote frame
         }
+        if (can_retry ==1){
+            CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
+        }
     }
     if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) { //se l'invio è stato abortito
         can_retry = 1;
+        id1 = id;
+        remote_frame1 = remote_frame;
+        for (char i=0;i<8;i++){
+        data_array1[i]= data_array[i];
+        }
     } else {
         can_retry = 0;
         if (remote_frame1 != 0) {
@@ -262,6 +264,7 @@ void send_data(void) {
             message_sent = 0;
         }
     }
+    remote_frame = 0; //azzero flag risposta remote frame
 }
 
 void battery_measure(void) {
