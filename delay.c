@@ -46,7 +46,7 @@ CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
 
 #include "delay.h"
 
-volatile unsigned char delay_quartz_frequency_value = 8;
+volatile unsigned char delay_quartz_frequency_value = 16;
 volatile unsigned int clock_counter_reference = 0;
 
 #ifdef DELAY_INTERRUPT_BLOCKING

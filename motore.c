@@ -33,7 +33,7 @@
 
  */
 #include <xc.h>
-#include "motore.h"
+#include "PIC18F4480_config.h"
 #include "CANlib.h"
 #include "delay.h"
 #include "delay.c"
@@ -44,9 +44,11 @@
 #include "timers.h"
 #define _XTAL_FREQ 16000000
 #define attesaRampa 10
+
 void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
+
 CANmessage msg;
 bit remote_frame = 0;
 bit remote_frame1 = 0;
@@ -79,13 +81,6 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
-//*************************************
-//ISR Alta priorità (gestione encoder)
-//*************************************
-
-__interrupt(high_priority) void ISR_alta(void) {
-
-}
 
 //*************************************
 //ISR Bassa priorità (gestione can bus)
@@ -96,8 +91,8 @@ __interrupt(low_priority) void ISR_bassa(void) {
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
             if (msg.RTR == 1) { //Se il messaggio arrivato è un remote frame
-                    id = msg.identifier;
-                    remote_frame = msg.RTR;    
+                id = msg.identifier;
+                remote_frame = msg.RTR;
             }
             if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
                 currentSpeed = msg.data[0]; //velocità richiesta
@@ -138,21 +133,17 @@ __interrupt(low_priority) void ISR_bassa(void) {
 int main(void) {
     unsigned char period;
     configurazione_iniziale();
+    PORTAbits.RA1 = 1;
+    PORTCbits.RC0 = 1;
+    PORTCbits.RC1 = 1;
+    delay_ms(500);
+    PORTAbits.RA1 = 0;
+    PORTCbits.RC0 = 0;
+    PORTCbits.RC1 = 0;
     OpenTimer2(TIMER_INT_OFF & T2_PS_1_1 & T2_POST_1_1);
     period = 249;
     OpenEPWM1(period);
-
-    //DEBUG SEQUENCE---------
-    PORTD = 0xFF;
-    delay_ms(500);
-    PORTD = 0x00;
-    delay_ms(500);
-    PORTD = 0xFF;
-    delay_ms(500);
-    PORTD = 0x00;
-    delay_ms(500);
-    //-----------------------
-
+ 
     while (1) {
         if (PORTAbits.RA7 == 0) {
             if (dir == 1) { //direzione avanti
@@ -241,7 +232,7 @@ void send_data(void) {
             CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
             remote_frame = 0; //azzero flag risposta remote frame
         }
-        if (can_retry ==1){
+        if (can_retry == 1) {
             CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
         }
     }
@@ -249,8 +240,8 @@ void send_data(void) {
         can_retry = 1;
         id1 = id;
         remote_frame1 = remote_frame;
-        for (char i=0;i<8;i++){
-        data_array1[i]= data_array[i];
+        for (char i = 0; i < 8; i++) {
+            data_array1[i] = data_array[i];
         }
     } else {
         can_retry = 0;
@@ -285,14 +276,12 @@ void configurazione_iniziale(void) {
     CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAMPLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
     RCONbits.IPEN = 1; //abilita priorità interrupt
     INTCONbits.INT0IF = 0; //azzera flag interrupt RB0
-    INTCONbits.INT0IE = 1; //abilita interrupt RB0
     PIR3bits.RXB1IF = 0; //azzera flag interrupt can bus buffer1
     PIR3bits.RXB0IF = 0; //azzera flag interrupt can bus buffer0
-    PIE3bits.RXB1IE = 1; //abilita interrupt ricezione can bus buffer1
-    PIE3bits.RXB0IE = 1; //abilita interrupt ricezione can bus buffer0
+    
     IPR3bits.RXB1IP = 0; //interrupt bassa priorità per can
     IPR3bits.RXB0IP = 0; //interrupt bassa priorità per can
-    INTCONbits.GIEH = 1; //abilita interrupt alta priorità
+    INTCONbits.GIEH = 0; //abilita interrupt alta priorità
     INTCONbits.GIEL = 1; //abilita interrupt bassa priorità periferiche
     INTCON2bits.INTEDG0 = 1; //interrupt su fronte di salita
 
@@ -302,7 +291,7 @@ void configurazione_iniziale(void) {
     IPR2bits.TMR3IP = 0; //interrupt bassa priorità timer 3
     TMR3H = 0x63;
     TMR3L = 0xC0;
-    PIE2bits.TMR3IE = 1; //abilita interrupt timer 3 
+    
     //==========================================
 
     //impostazione ADC ==================================
@@ -326,9 +315,13 @@ void configurazione_iniziale(void) {
     ADCON2bits.ADFM = 0; //Left Justified
     //=======================================================
 
+    INTCONbits.INT0IE = 1; //abilita interrupt RB0
+    PIE3bits.RXB1IE = 1; //abilita interrupt ricezione can bus buffer1
+    PIE3bits.RXB0IE = 1; //abilita interrupt ricezione can bus buffer0
+    PIE2bits.TMR3IE = 1; //abilita interrupt timer 3 
     //impostazione porte
     LATA = 0x00;
-    TRISA = 0b01111111;
+    TRISA = 0b01111101;
 
     LATB = 0x00;
     TRISB = 0b11111011;
@@ -341,5 +334,5 @@ void configurazione_iniziale(void) {
 
     LATE = 0x00;
     TRISE = 0xFF;
-
+    delay_ms(2);
 }
