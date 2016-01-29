@@ -1,4 +1,4 @@
-#define USE_AND_MASKS
+#define USE_OR_MASKS
 /*==============================================================================
  *PROGRAM: MOTORE
  *WRITTEN BY: Simone Righetti
