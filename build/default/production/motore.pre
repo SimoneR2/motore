@@ -20667,7 +20667,7 @@ PORTCbits.RC1 = 0;
 if (dir == 0) {
 SetOutputEPWM1(0b11111111, 0b11111111);
 PORTCbits.RC0 = 0;
-
+PORTCbits.RC1 = 1;
 }
 if (duty_set == 0) {
 PORTCbits.RC0 = 0;

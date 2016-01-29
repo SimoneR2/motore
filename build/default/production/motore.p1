@@ -19631,6 +19631,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motore.c: 156: PORTCbits.RC0 = 0;
 "156
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
+[; ;motore.c: 157: PORTCbits.RC1 = 1;
+"157
+[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
 "158
 }
 [e :U 2374 ]
