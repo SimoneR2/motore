@@ -140,7 +140,7 @@ int main(void) {
     PORTAbits.RA1 = 0;
     PORTCbits.RC0 = 0;
     PORTCbits.RC1 = 0;
-    OpenTimer2(TIMER_INT_OFF & T2_PS_1_1 & T2_POST_1_1);
+    OpenTimer2(TIMER_INT_OFF & T2_PS_1_16 & T2_POST_1_1);
     period = 249;
     OpenEPWM1(period);
 
