@@ -82,11 +82,11 @@ BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 
-//*************************************
-//ISR Bassa priorità (gestione can bus)
-//*************************************
+//****************************************************************
+//ISR Gestione messaggi can e funzione di conteggio temporale
+//****************************************************************
 
-__interrupt(low_priority) void ISR_bassa(void) {
+__interrupt(high_priority) void ISR_alta(void) {
     if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
@@ -143,9 +143,9 @@ int main(void) {
     OpenTimer2(TIMER_INT_OFF & T2_PS_1_1 & T2_POST_1_1);
     period = 249;
     OpenEPWM1(period);
- 
+
     while (1) {
-        if (PORTAbits.RA7 == 0) {
+        if (PORTAbits.RA1 == 0) {
             if (dir == 1) { //direzione avanti
                 SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_4);
                 PORTCbits.RC0 = 1;
@@ -193,9 +193,9 @@ int main(void) {
         }
         if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
             SetDCEPWM1(0); //ferma il mezzo
-            PORTAbits.RA7 = 1; //accendi led errore
+            PORTAbits.RA1 = 1; //accendi led errore
         } else {
-            PORTAbits.RA7 = 0;
+            PORTAbits.RA1 = 0;
         }
 
         //FUNZIONE DI SICUREZZA
@@ -210,10 +210,10 @@ int main(void) {
                     centralina_abs = 0;
                     centralina_sterzo = 0;
                     centralina_comando = 0;
-                    PORTAbits.RA7 = 0;
+                    PORTAbits.RA1 = 0;
                 } else {
                     SetDCEPWM1(0);
-                    PORTAbits.RA7 = 1;
+                    PORTAbits.RA1 = 1;
                 }
             }
             previousTimeCounter = timeCounter;
@@ -274,24 +274,24 @@ void configurazione_iniziale(void) {
 
     //impostazione periferica can bus e azzeramento flag interrupt
     CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAMPLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
-    RCONbits.IPEN = 1; //abilita priorità interrupt
+    RCONbits.IPEN = 0; //disabilita priorità interrupt
     INTCONbits.INT0IF = 0; //azzera flag interrupt RB0
     PIR3bits.RXB1IF = 0; //azzera flag interrupt can bus buffer1
     PIR3bits.RXB0IF = 0; //azzera flag interrupt can bus buffer0
-    
-    IPR3bits.RXB1IP = 0; //interrupt bassa priorità per can
-    IPR3bits.RXB0IP = 0; //interrupt bassa priorità per can
-    INTCONbits.GIEH = 0; //abilita interrupt alta priorità
-    INTCONbits.GIEL = 1; //abilita interrupt bassa priorità periferiche
+
+    // IPR3bits.RXB1IP = 0; //interrupt bassa priorità per can
+    // IPR3bits.RXB0IP = 0; //interrupt bassa priorità per can
+    INTCONbits.GIE = 1; //abilita interrupt 
+    INTCONbits.PEIE = 1; //abilita interrupt periferiche
     INTCON2bits.INTEDG0 = 1; //interrupt su fronte di salita
 
     //impostazione timer3 per contatore========
     T3CON = 0x01; //abilita timer
     PIR2bits.TMR3IF = 0; //resetta flag interrupt timer 3
-    IPR2bits.TMR3IP = 0; //interrupt bassa priorità timer 3
+    // IPR2bits.TMR3IP = 0; //interrupt bassa priorità timer 3
     TMR3H = 0x63;
     TMR3L = 0xC0;
-    
+
     //==========================================
 
     //impostazione ADC ==================================
@@ -315,7 +315,7 @@ void configurazione_iniziale(void) {
     ADCON2bits.ADFM = 0; //Left Justified
     //=======================================================
 
-    INTCONbits.INT0IE = 1; //abilita interrupt RB0
+    //INTCONbits.INT0IE = 1; //abilita interrupt RB0
     PIE3bits.RXB1IE = 1; //abilita interrupt ricezione can bus buffer1
     PIE3bits.RXB0IE = 1; //abilita interrupt ricezione can bus buffer0
     PIE2bits.TMR3IE = 1; //abilita interrupt timer 3 
