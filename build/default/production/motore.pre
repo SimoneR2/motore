@@ -20575,9 +20575,9 @@ bit request_sent = 0;
 bit centralina_sterzo = 0;
 bit centralina_abs = 0;
 bit centralina_comando = 0;
-unsigned int dir = 0;
-unsigned char currentSpeed = 1;
-unsigned char requestSpeed = 0;
+volatile unsigned int dir = 1;
+volatile unsigned char currentSpeed = 1;
+volatile unsigned char requestSpeed = 0;
 unsigned long counter = 0;
 unsigned long id = 0;
 unsigned long id1 = 0;
@@ -20585,10 +20585,10 @@ unsigned long timeCounter = 0;
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
-char previousPwm = 0;
+int previousPwm = 200;
 char left_speed = 0;
 char right_speed = 0;
-unsigned char duty_set = 0;
+int duty_set = 200;
 int duty_cycle = 0;
 int errore = 0;
 int vBatt = 0;
@@ -20597,42 +20597,61 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
+BYTE data_array_debug [8] = 0;
 
-# 89
+# 90
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
+
+
+
+
 if (CANisRxReady()) {
 CANreceiveMessage(&msg);
-if (msg.RTR == 1) {
-id = msg.identifier;
-remote_frame = msg.RTR;
-}
+
+
+
+
 if (msg.identifier == 0b00000000000000000000000000011) {
-currentSpeed = msg.data[0];
+
+requestSpeed = msg.data[0];
 dir = msg.data[1];
-previousTimeCounter = timeCounter;
+if (dir == 1) {
+SetOutputEPWM1(0b01111111, 0b11111100);
+}
+if (dir == 0) {
+SetOutputEPWM1(0b11111111, 0b11111100);
+}
+
+
+
 }
 if (msg.identifier == 0b00000000000000000000000000001) {
-currentSpeed = 0;
+requestSpeed = 0;
 PORTAbits.RA1 = 1;
 }
 if (msg.identifier == 0b00000000000000000000000000110) {
+
 left_speed = msg.data[0];
 right_speed = msg.data[1];
 speed_fetched = 1;
+
 }
 if (msg.identifier == 0b00000000000000000000000000010) {
 switch (msg.data[0]) {
 case 1: centralina_abs = 1;
 break;
 case 2: centralina_sterzo = 1;
+centralina_comando = 1;
 break;
 case 3: centralina_comando = 1;
 break;
 }
+
+}
+}
 PIR3bits.RXB0IF = 0;
 PIR3bits.RXB1IF = 0;
-}
 }
 if (PIR2bits.TMR3IF) {
 timeCounter++;
@@ -20641,78 +20660,81 @@ TMR3L = 0xC0;
 PIR2bits.TMR3IF = 0;
 }
 }
-}
 
 int main(void) {
 unsigned char period;
 configurazione_iniziale();
 PORTAbits.RA1 = 1;
-PORTCbits.RC0 = 1;
 PORTCbits.RC1 = 1;
 delay_ms(500);
 PORTAbits.RA1 = 0;
-PORTCbits.RC0 = 0;
 PORTCbits.RC1 = 0;
-OpenTimer2(0b01111111 & 0b11111100 & 0b10000111);
-period = 249;
+OpenTimer2(0b01111111 & 0b11111110 & 0b10000111);
+period = 0xFE;
 OpenEPWM1(period);
+speed_fetched = 1;
+SetOutputEPWM1(0b01111111, 0b11111100);
+SetDCEPWM1 (300);
+delay_ms(500);
 
 while (1) {
-if (PORTAbits.RA7 == 0) {
-if (dir == 1) {
-SetOutputEPWM1(0b01111111, 0b11111111);
-PORTCbits.RC0 = 1;
-PORTCbits.RC1 = 0;
-}
-if (dir == 0) {
-SetOutputEPWM1(0b11111111, 0b11111111);
-PORTCbits.RC0 = 0;
-PORTCbits.RC1 = 1;
-}
-if (duty_set == 0) {
-PORTCbits.RC0 = 0;
-PORTCbits.RC1 = 0;
-}
-if ((timeCounter - previousTimeCounter1 >= 10)) {
-CANsendMessage(0b00000000000000000000000000110, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+
+# 173
+if ((timeCounter - previousTimeCounter1 >= 15)) {
+
+CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 if (speed_fetched == 1) {
+PORTCbits.RC1 = ~PORTCbits.RC1;
 speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
-if (currentSpeed - requestSpeed > 0) {
-errore = abs(currentSpeed - requestSpeed);
-correzione = ((errore / 17)*(errore / 17))*4;
-if (correzione > 1) {
+
+requestSpeed = 25;
+
+errore = abs((currentSpeed - requestSpeed)*10);
+correzione = ((errore / 17)*(errore / 17))*2;
+if (correzione > 3) {
+
 if ((currentSpeed - requestSpeed) > 0) {
-if (previousPwm > correzione) {
 duty_set = previousPwm - correzione;
+if (duty_set < 0) {
+duty_set = 0;
 }
-if ((currentSpeed - requestSpeed) < 0) {
+}
+else {
 duty_set = previousPwm + correzione;
+if (duty_set > 1024){
+duty_set = 1023;
 }
 }
-if (correzione < 1) {
+
+}
+else {
 duty_set = previousPwm;
 }
-}
 previousPwm = duty_set;
-SetDCEPWM1(duty_set);
 }
 previousTimeCounter1 = timeCounter;
+SetDCEPWM1(duty_set);
 }
-}
-}
+
 if ((remote_frame == 1) || (can_retry == 1)) {
 send_data();
 }
 if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
-SetDCEPWM1(0);
-PORTAbits.RA7 = 1;
+
+PORTAbits.RA1 = 1;
+delay_ms(200);
+PORTAbits.RA1 = 0;
+delay_ms(200);
+PORTAbits.RA1 = 1;
+COMSTATbits.TXWARN = 0;
+COMSTATbits.RXWARN = 0;
 } else {
-PORTAbits.RA7 = 0;
+PORTAbits.RA1 = 0;
 }
 
 
-if ((timeCounter - previousTimeCounter) > 100) {
+if ((timeCounter - previousTimeCounter) > 500) {
 if (request_sent == 0) {
 CANsendMessage(0b00000000000000000000000000010, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 request_sent = 1;
@@ -20723,10 +20745,11 @@ if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) 
 centralina_abs = 0;
 centralina_sterzo = 0;
 centralina_comando = 0;
-PORTAbits.RA7 = 0;
+PORTAbits.RA1 = 0;
 } else {
-SetDCEPWM1(0);
-PORTAbits.RA7 = 1;
+
+PORTAbits.RA1 = 1;
+delay_ms(200);
 }
 }
 previousTimeCounter = timeCounter;
@@ -20738,7 +20761,6 @@ previousTimeCounter2 = timeCounter;
 }
 }
 }
-
 void send_data(void) {
 if (CANisTxReady()) {
 if (remote_frame == 1) {
@@ -20755,6 +20777,8 @@ id1 = id;
 remote_frame1 = remote_frame;
 for (char i = 0; i < 8; i++) {
 data_array1[i] = data_array[i];
+TXB0CONbits.TXABT = 0;
+TXB1CONbits.TXABT = 0;
 }
 } else {
 can_retry = 0;
@@ -20775,11 +20799,18 @@ void battery_measure(void) {
 ADCON0bits.GO = 1;
 while (ADCON0bits.GO);
 vBatt = ADRESH;
-vBatt = (vBatt * 14) / 235;
-if (vBatt < 10) {
+vBatt = (vBatt * 14) / 255;
+if (vBatt < 8) {
+
+
+
 
 while (!CANisTxReady());
 CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+PORTCbits.RC1 = 1;
+} else {
+PORTCbits.RC1 = 0;
+
 }
 }
 
@@ -20794,9 +20825,8 @@ PIR3bits.RXB0IF = 0;
 
 IPR3bits.RXB1IP = 0;
 IPR3bits.RXB0IP = 0;
-INTCONbits.GIEH = 0;
+INTCONbits.GIEH = 1;
 INTCONbits.GIEL = 1;
-INTCON2bits.INTEDG0 = 1;
 
 
 T3CON = 0x01;
@@ -20828,7 +20858,6 @@ ADCON2bits.ACQT2 = 1;
 ADCON2bits.ADFM = 0;
 
 
-INTCONbits.INT0IE = 1;
 PIE3bits.RXB1IE = 1;
 PIE3bits.RXB0IE = 1;
 PIE2bits.TMR3IE = 1;
@@ -20848,4 +20877,6 @@ TRISD = 0x00;
 LATE = 0x00;
 TRISE = 0xFF;
 delay_ms(2);
+SetOutputEPWM1(0b01111111, 0b11111100);
+
 }

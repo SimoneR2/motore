@@ -1000,7 +1000,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1914 . . . . . ]
 "31277
 [v _PIR3bits `VS1914 ~T0 @X0 0 e@4004 ]
-"28009
+"577 C:\Program Files (x86)\Microchip\xc8\v1.35\include\plib\pwm.h
+[v _SetOutputEPWM1 `(v ~T0 @X0 0 ef2`uc`uc ]
+"28009 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4480.h
 [s S1752 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1752 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
 "28019
@@ -1077,12 +1079,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _OpenTimer2 `(v ~T0 @X0 0 ef1`uc ]
 "575 C:\Program Files (x86)\Microchip\xc8\v1.35\include\plib\pwm.h
 [v _OpenEPWM1 `(v ~T0 @X0 0 ef1`uc ]
-"577
-[v _SetOutputEPWM1 `(v ~T0 @X0 0 ef2`uc`uc ]
+"576
+[v _SetDCEPWM1 `(v ~T0 @X0 0 ef1`ui ]
 "92 C:\Program Files (x86)\Microchip\xc8\v1.35\include\stdlib.h
 [v _abs `(i ~T0 @X0 0 ef1`i ]
-"576 C:\Program Files (x86)\Microchip\xc8\v1.35\include\plib\pwm.h
-[v _SetDCEPWM1 `(v ~T0 @X0 0 ef1`ui ]
 "49 motore.c
 [v _send_data `(v ~T0 @X0 0 ef ]
 "50
@@ -1184,20 +1184,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1919 . . . . . ]
 "31377
 [v _IPR3bits `VS1919 ~T0 @X0 0 e@4005 ]
-"34846
-[s S2108 :7 `uc 1 :1 `uc 1 ]
-[n S2108 . . NOT_RBPU ]
-"34850
-[s S2109 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S2109 . RBIP . TMR0IP . INTEDG2 INTEDG1 INTEDG0 nRBPU ]
-"34860
-[s S2110 :2 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 ]
-[n S2110 . . T0IP . RBPU ]
-"34845
-[u S2107 `S2108 1 `S2109 1 `S2110 1 ]
-[n S2107 . . . . ]
-"34867
-[v _INTCON2bits `VS2107 ~T0 @X0 0 e@4081 ]
 "32074
 [v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
 "31079
@@ -19252,23 +19238,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;motore.c: 61: bit centralina_comando = 0;
 "62
-[v _dir `ui ~T0 @X0 1 e ]
+[v _dir `Vui ~T0 @X0 1 e ]
 [i _dir
--> -> 0 `i `ui
+-> -> 1 `i `ui
 ]
-[; ;motore.c: 62: unsigned int dir = 0;
+[; ;motore.c: 62: volatile unsigned int dir = 1;
 "63
-[v _currentSpeed `uc ~T0 @X0 1 e ]
+[v _currentSpeed `Vuc ~T0 @X0 1 e ]
 [i _currentSpeed
 -> -> 1 `i `uc
 ]
-[; ;motore.c: 63: unsigned char currentSpeed = 1;
+[; ;motore.c: 63: volatile unsigned char currentSpeed = 1;
 "64
-[v _requestSpeed `uc ~T0 @X0 1 e ]
+[v _requestSpeed `Vuc ~T0 @X0 1 e ]
 [i _requestSpeed
 -> -> 0 `i `uc
 ]
-[; ;motore.c: 64: unsigned char requestSpeed = 0;
+[; ;motore.c: 64: volatile unsigned char requestSpeed = 0;
 "65
 [v _counter `ul ~T0 @X0 1 e ]
 [i _counter
@@ -19312,11 +19298,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;motore.c: 71: unsigned long previousTimeCounter2 = 0;
 "72
-[v _previousPwm `uc ~T0 @X0 1 e ]
+[v _previousPwm `i ~T0 @X0 1 e ]
 [i _previousPwm
--> -> 0 `i `uc
+-> 200 `i
 ]
-[; ;motore.c: 72: char previousPwm = 0;
+[; ;motore.c: 72: int previousPwm = 200;
 "73
 [v _left_speed `uc ~T0 @X0 1 e ]
 [i _left_speed
@@ -19330,11 +19316,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;motore.c: 74: char right_speed = 0;
 "75
-[v _duty_set `uc ~T0 @X0 1 e ]
+[v _duty_set `i ~T0 @X0 1 e ]
 [i _duty_set
--> -> 0 `i `uc
+-> 200 `i
 ]
-[; ;motore.c: 75: unsigned char duty_set = 0;
+[; ;motore.c: 75: int duty_set = 200;
 "76
 [v _duty_cycle `i ~T0 @X0 1 e ]
 [i _duty_cycle
@@ -19391,809 +19377,817 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;motore.c: 83: BYTE data_array1 [8] = 0;
-[v F17263 `(v ~T0 @X0 1 tf ]
-"89
-[v _ISR_bassa `IF17263 ~T51 @X0 1 e ]
+"84
+[v _data_array_debug `uc ~T0 @X0 -> 8 `i e ]
+[i _data_array_debug
+:U ..
+-> -> 0 `i `uc
+..
+]
+[; ;motore.c: 84: BYTE data_array_debug [8] = 0;
+[v F17264 `(v ~T0 @X0 1 tf ]
+"90
+[v _ISR_bassa `IF17264 ~T51 @X0 1 e ]
 {
-[; ;motore.c: 89: __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
+[; ;motore.c: 90: __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 [e :U _ISR_bassa ]
 [f ]
-[; ;motore.c: 90: if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-"90
+[; ;motore.c: 91: if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
+"91
 [e $ ! || == -> . . _PIR3bits 0 0 `i -> 1 `i == -> . . _PIR3bits 0 1 `i -> 1 `i 2355  ]
 {
-[; ;motore.c: 91: if (CANisRxReady()) {
-"91
+[; ;motore.c: 96: if (CANisRxReady()) {
+"96
 [e $ ! != -> ( _CANisRxReady ..  `i -> -> -> 0 `i `uc `i 2356  ]
 {
-[; ;motore.c: 92: CANreceiveMessage(&msg);
-"92
-[e ( _CANreceiveMessage (1 &U _msg ]
-[; ;motore.c: 93: if (msg.RTR == 1) {
-"93
-[e $ ! == -> . _msg 4 `i -> 1 `i 2357  ]
-{
-[; ;motore.c: 94: id = msg.identifier;
-"94
-[e = _id . _msg 0 ]
-[; ;motore.c: 95: remote_frame = msg.RTR;
-"95
-[e = _remote_frame -> . _msg 4 `b ]
-"96
-}
-[e :U 2357 ]
-[; ;motore.c: 96: }
-[; ;motore.c: 97: if (msg.identifier == 0b00000000000000000000000000011) {
+[; ;motore.c: 97: CANreceiveMessage(&msg);
 "97
-[e $ ! == . _msg 0 -> -> -> 3 `i `l `ul 2358  ]
+[e ( _CANreceiveMessage (1 &U _msg ]
+[; ;motore.c: 102: if (msg.identifier == 0b00000000000000000000000000011) {
+"102
+[e $ ! == . _msg 0 -> -> -> 3 `i `l `ul 2357  ]
 {
-[; ;motore.c: 98: currentSpeed = msg.data[0];
-"98
-[e = _currentSpeed *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
-[; ;motore.c: 99: dir = msg.data[1];
-"99
+[; ;motore.c: 104: requestSpeed = msg.data[0];
+"104
+[e = _requestSpeed *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
+[; ;motore.c: 105: dir = msg.data[1];
+"105
 [e = _dir -> *U + &U . _msg 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux `ui ]
-[; ;motore.c: 100: previousTimeCounter = timeCounter;
-"100
-[e = _previousTimeCounter _timeCounter ]
-"101
+[; ;motore.c: 106: if (dir == 1) {
+"106
+[e $ ! == _dir -> -> 1 `i `ui 2358  ]
+{
+[; ;motore.c: 107: SetOutputEPWM1(0b01111111, 0b11111100);
+"107
+[e ( _SetOutputEPWM1 (2 , -> -> 127 `i `uc -> -> 252 `i `uc ]
+"108
 }
 [e :U 2358 ]
-[; ;motore.c: 101: }
-[; ;motore.c: 102: if (msg.identifier == 0b00000000000000000000000000001) {
-"102
-[e $ ! == . _msg 0 -> -> -> 1 `i `l `ul 2359  ]
+[; ;motore.c: 108: }
+[; ;motore.c: 109: if (dir == 0) {
+"109
+[e $ ! == _dir -> -> 0 `i `ui 2359  ]
 {
-[; ;motore.c: 103: currentSpeed = 0;
-"103
-[e = _currentSpeed -> -> 0 `i `uc ]
-[; ;motore.c: 104: PORTAbits.RA1 = 1;
-"104
-[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
-"105
+[; ;motore.c: 110: SetOutputEPWM1(0b11111111, 0b11111100);
+"110
+[e ( _SetOutputEPWM1 (2 , -> -> 255 `i `uc -> -> 252 `i `uc ]
+"111
 }
 [e :U 2359 ]
-[; ;motore.c: 105: }
-[; ;motore.c: 106: if (msg.identifier == 0b00000000000000000000000000110) {
-"106
-[e $ ! == . _msg 0 -> -> -> 6 `i `l `ul 2360  ]
+"115
+}
+[e :U 2357 ]
+[; ;motore.c: 111: }
+[; ;motore.c: 115: }
+[; ;motore.c: 116: if (msg.identifier == 0b00000000000000000000000000001) {
+"116
+[e $ ! == . _msg 0 -> -> -> 1 `i `l `ul 2360  ]
 {
-[; ;motore.c: 107: left_speed = msg.data[0];
-"107
-[e = _left_speed *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
-[; ;motore.c: 108: right_speed = msg.data[1];
-"108
-[e = _right_speed *U + &U . _msg 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
-[; ;motore.c: 109: speed_fetched = 1;
-"109
-[e = _speed_fetched -> -> 1 `i `b ]
-"110
+[; ;motore.c: 117: requestSpeed = 0;
+"117
+[e = _requestSpeed -> -> 0 `i `uc ]
+[; ;motore.c: 118: PORTAbits.RA1 = 1;
+"118
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+"119
 }
 [e :U 2360 ]
-[; ;motore.c: 110: }
-[; ;motore.c: 111: if (msg.identifier == 0b00000000000000000000000000010) {
-"111
-[e $ ! == . _msg 0 -> -> -> 2 `i `l `ul 2361  ]
-{
-[; ;motore.c: 112: switch (msg.data[0]) {
-"112
-[e $U 2363  ]
-{
-[; ;motore.c: 113: case 1: centralina_abs = 1;
-"113
-[e :U 2364 ]
-[e = _centralina_abs -> -> 1 `i `b ]
-[; ;motore.c: 114: break;
-"114
-[e $U 2362  ]
-[; ;motore.c: 115: case 2: centralina_sterzo = 1;
-"115
-[e :U 2365 ]
-[e = _centralina_sterzo -> -> 1 `i `b ]
-[; ;motore.c: 116: break;
-"116
-[e $U 2362  ]
-[; ;motore.c: 117: case 3: centralina_comando = 1;
-"117
-[e :U 2366 ]
-[e = _centralina_comando -> -> 1 `i `b ]
-[; ;motore.c: 118: break;
-"118
-[e $U 2362  ]
-"119
-}
 [; ;motore.c: 119: }
-[e $U 2362  ]
-"112
-[e :U 2363 ]
-[e [\ *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux , $ -> -> 1 `i `uc 2364
- , $ -> -> 2 `i `uc 2365
- , $ -> -> 3 `i `uc 2366
- 2362 ]
-"119
-[e :U 2362 ]
-[; ;motore.c: 120: PIR3bits.RXB0IF = 0;
+[; ;motore.c: 120: if (msg.identifier == 0b00000000000000000000000000110) {
 "120
-[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 121: PIR3bits.RXB1IF = 0;
-"121
-[e = . . _PIR3bits 0 1 -> -> 0 `i `uc ]
+[e $ ! == . _msg 0 -> -> -> 6 `i `l `ul 2361  ]
+{
+[; ;motore.c: 122: left_speed = msg.data[0];
 "122
+[e = _left_speed *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
+[; ;motore.c: 123: right_speed = msg.data[1];
+"123
+[e = _right_speed *U + &U . _msg 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux ]
+[; ;motore.c: 124: speed_fetched = 1;
+"124
+[e = _speed_fetched -> -> 1 `i `b ]
+"126
 }
 [e :U 2361 ]
-"123
+[; ;motore.c: 126: }
+[; ;motore.c: 127: if (msg.identifier == 0b00000000000000000000000000010) {
+"127
+[e $ ! == . _msg 0 -> -> -> 2 `i `l `ul 2362  ]
+{
+[; ;motore.c: 128: switch (msg.data[0]) {
+"128
+[e $U 2364  ]
+{
+[; ;motore.c: 129: case 1: centralina_abs = 1;
+"129
+[e :U 2365 ]
+[e = _centralina_abs -> -> 1 `i `b ]
+[; ;motore.c: 130: break;
+"130
+[e $U 2363  ]
+[; ;motore.c: 131: case 2: centralina_sterzo = 1;
+"131
+[e :U 2366 ]
+[e = _centralina_sterzo -> -> 1 `i `b ]
+[; ;motore.c: 132: centralina_comando = 1;
+"132
+[e = _centralina_comando -> -> 1 `i `b ]
+[; ;motore.c: 133: break;
+"133
+[e $U 2363  ]
+[; ;motore.c: 134: case 3: centralina_comando = 1;
+"134
+[e :U 2367 ]
+[e = _centralina_comando -> -> 1 `i `b ]
+[; ;motore.c: 135: break;
+"135
+[e $U 2363  ]
+"136
+}
+[; ;motore.c: 136: }
+[e $U 2363  ]
+"128
+[e :U 2364 ]
+[e [\ *U + &U . _msg 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _msg 1 `ui `ux , $ -> -> 1 `i `uc 2365
+ , $ -> -> 2 `i `uc 2366
+ , $ -> -> 3 `i `uc 2367
+ 2363 ]
+"136
+[e :U 2363 ]
+"138
+}
+[e :U 2362 ]
+"139
 }
 [e :U 2356 ]
-[; ;motore.c: 122: }
-[; ;motore.c: 123: }
-[; ;motore.c: 124: if (PIR2bits.TMR3IF) {
-"124
-[e $ ! != -> . . _PIR2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2367  ]
-{
-[; ;motore.c: 125: timeCounter++;
-"125
-[e ++ _timeCounter -> -> -> 1 `i `l `ul ]
-[; ;motore.c: 126: TMR3H = 0x63;
-"126
-[e = _TMR3H -> -> 99 `i `uc ]
-[; ;motore.c: 127: TMR3L = 0xC0;
-"127
-[e = _TMR3L -> -> 192 `i `uc ]
-[; ;motore.c: 128: PIR2bits.TMR3IF = 0;
-"128
-[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-"129
-}
-[e :U 2367 ]
-"130
+[; ;motore.c: 138: }
+[; ;motore.c: 139: }
+[; ;motore.c: 140: PIR3bits.RXB0IF = 0;
+"140
+[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
+[; ;motore.c: 141: PIR3bits.RXB1IF = 0;
+"141
+[e = . . _PIR3bits 0 1 -> -> 0 `i `uc ]
+"142
 }
 [e :U 2355 ]
-[; ;motore.c: 129: }
-[; ;motore.c: 130: }
-[; ;motore.c: 131: }
-"131
+[; ;motore.c: 142: }
+[; ;motore.c: 143: if (PIR2bits.TMR3IF) {
+"143
+[e $ ! != -> . . _PIR2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2368  ]
+{
+[; ;motore.c: 144: timeCounter++;
+"144
+[e ++ _timeCounter -> -> -> 1 `i `l `ul ]
+[; ;motore.c: 145: TMR3H = 0x63;
+"145
+[e = _TMR3H -> -> 99 `i `uc ]
+[; ;motore.c: 146: TMR3L = 0xC0;
+"146
+[e = _TMR3L -> -> 192 `i `uc ]
+[; ;motore.c: 147: PIR2bits.TMR3IF = 0;
+"147
+[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
+"148
+}
+[e :U 2368 ]
+[; ;motore.c: 148: }
+[; ;motore.c: 149: }
+"149
 [e :UE 2354 ]
 }
-"133
+"151
 [v _main `(i ~T0 @X0 1 ef ]
 {
-[; ;motore.c: 133: int main(void) {
+[; ;motore.c: 151: int main(void) {
 [e :U _main ]
 [f ]
-"134
-[v _period `uc ~T0 @X0 1 a ]
-[; ;motore.c: 134: unsigned char period;
-[; ;motore.c: 135: configurazione_iniziale();
-"135
-[e ( _configurazione_iniziale ..  ]
-[; ;motore.c: 136: PORTAbits.RA1 = 1;
-"136
-[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
-[; ;motore.c: 137: PORTCbits.RC0 = 1;
-"137
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;motore.c: 138: PORTCbits.RC1 = 1;
-"138
-[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
-[; ;motore.c: 139: delay_ms(500);
-"139
-[e ( _delay_ms (1 -> -> 500 `i `ui ]
-[; ;motore.c: 140: PORTAbits.RA1 = 0;
-"140
-[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 141: PORTCbits.RC0 = 0;
-"141
-[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 142: PORTCbits.RC1 = 0;
-"142
-[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 143: OpenTimer2(0b01111111 & 0b11111100 & 0b10000111);
-"143
-[e ( _OpenTimer2 (1 -> & & -> 127 `i -> 252 `i -> 135 `i `uc ]
-[; ;motore.c: 144: period = 249;
-"144
-[e = _period -> -> 249 `i `uc ]
-[; ;motore.c: 145: OpenEPWM1(period);
-"145
-[e ( _OpenEPWM1 (1 _period ]
-[; ;motore.c: 147: while (1) {
-"147
-[e :U 2370 ]
-{
-[; ;motore.c: 148: if (PORTAbits.RA7 == 0) {
-"148
-[e $ ! == -> . . _PORTAbits 0 7 `i -> 0 `i 2372  ]
-{
-[; ;motore.c: 149: if (dir == 1) {
-"149
-[e $ ! == _dir -> -> 1 `i `ui 2373  ]
-{
-[; ;motore.c: 150: SetOutputEPWM1(0b01111111, 0b11111111);
-"150
-[e ( _SetOutputEPWM1 (2 , -> -> 127 `i `uc -> -> 255 `i `uc ]
-[; ;motore.c: 151: PORTCbits.RC0 = 1;
-"151
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;motore.c: 152: PORTCbits.RC1 = 0;
 "152
-[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+[v _period `uc ~T0 @X0 1 a ]
+[; ;motore.c: 152: unsigned char period;
+[; ;motore.c: 153: configurazione_iniziale();
 "153
-}
-[e :U 2373 ]
-[; ;motore.c: 153: }
-[; ;motore.c: 154: if (dir == 0) {
+[e ( _configurazione_iniziale ..  ]
+[; ;motore.c: 154: PORTAbits.RA1 = 1;
 "154
-[e $ ! == _dir -> -> 0 `i `ui 2374  ]
-{
-[; ;motore.c: 155: SetOutputEPWM1(0b11111111, 0b11111111);
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 155: PORTCbits.RC1 = 1;
 "155
-[e ( _SetOutputEPWM1 (2 , -> -> 255 `i `uc -> -> 255 `i `uc ]
-[; ;motore.c: 156: PORTCbits.RC0 = 0;
-"156
-[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 157: PORTCbits.RC1 = 1;
-"157
 [e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 156: delay_ms(500);
+"156
+[e ( _delay_ms (1 -> -> 500 `i `ui ]
+[; ;motore.c: 157: PORTAbits.RA1 = 0;
+"157
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 158: PORTCbits.RC1 = 0;
 "158
-}
-[e :U 2374 ]
-[; ;motore.c: 158: }
-[; ;motore.c: 159: if (duty_set == 0) {
-"159
-[e $ ! == -> _duty_set `i -> 0 `i 2375  ]
-{
-[; ;motore.c: 160: PORTCbits.RC0 = 0;
-"160
-[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 161: PORTCbits.RC1 = 0;
-"161
 [e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 159: OpenTimer2(0b01111111 & 0b11111110 & 0b10000111);
+"159
+[e ( _OpenTimer2 (1 -> & & -> 127 `i -> 254 `i -> 135 `i `uc ]
+[; ;motore.c: 160: period = 0xFE;
+"160
+[e = _period -> -> 254 `i `uc ]
+[; ;motore.c: 161: OpenEPWM1(period);
+"161
+[e ( _OpenEPWM1 (1 _period ]
+[; ;motore.c: 162: speed_fetched = 1;
 "162
-}
-[e :U 2375 ]
-[; ;motore.c: 162: }
-[; ;motore.c: 163: if ((timeCounter - previousTimeCounter1 >= 10)) {
+[e = _speed_fetched -> -> 1 `i `b ]
+[; ;motore.c: 163: SetOutputEPWM1(0b01111111, 0b11111100);
 "163
-[e $ ! >= - _timeCounter _previousTimeCounter1 -> -> -> 10 `i `l `ul 2376  ]
-{
-[; ;motore.c: 164: CANsendMessage(0b00000000000000000000000000110, 0, 0, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+[e ( _SetOutputEPWM1 (2 , -> -> 127 `i `uc -> -> 252 `i `uc ]
+[; ;motore.c: 164: SetDCEPWM1 (300);
 "164
-[e ( _CANsendMessage (4 , , , -> -> -> 6 `i `l `ul -> -> 0 `i `*uc -> -> 0 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
-[; ;motore.c: 165: if (speed_fetched == 1) {
+[e ( _SetDCEPWM1 (1 -> -> 300 `i `ui ]
+[; ;motore.c: 165: delay_ms(500);
 "165
-[e $ ! == -> _speed_fetched `i -> 1 `i 2377  ]
-{
-[; ;motore.c: 166: speed_fetched = 0;
-"166
-[e = _speed_fetched -> -> 0 `i `b ]
-[; ;motore.c: 167: currentSpeed = ((left_speed + right_speed) / 2);
+[e ( _delay_ms (1 -> -> 500 `i `ui ]
+[; ;motore.c: 167: while (1) {
 "167
-[e = _currentSpeed -> / + -> _left_speed `i -> _right_speed `i -> 2 `i `uc ]
-[; ;motore.c: 168: if (currentSpeed - requestSpeed > 0) {
-"168
-[e $ ! > - -> _currentSpeed `i -> _requestSpeed `i -> 0 `i 2378  ]
+[e :U 2371 ]
 {
-[; ;motore.c: 169: errore = abs(currentSpeed - requestSpeed);
-"169
-[e = _errore ( _abs (1 - -> _currentSpeed `i -> _requestSpeed `i ]
-[; ;motore.c: 170: correzione = ((errore / 17)*(errore / 17))*4;
-"170
-[e = _correzione -> * * / _errore -> 17 `i / _errore -> 17 `i -> 4 `i `ui ]
-[; ;motore.c: 171: if (correzione > 1) {
-"171
-[e $ ! > _correzione -> -> 1 `i `ui 2379  ]
-{
-[; ;motore.c: 172: if ((currentSpeed - requestSpeed) > 0) {
-"172
-[e $ ! > - -> _currentSpeed `i -> _requestSpeed `i -> 0 `i 2380  ]
-{
-[; ;motore.c: 173: if (previousPwm > correzione) {
+[; ;motore.c: 173: if ((timeCounter - previousTimeCounter1 >= 15)) {
 "173
-[e $ ! > -> _previousPwm `ui _correzione 2381  ]
+[e $ ! >= - _timeCounter _previousTimeCounter1 -> -> -> 15 `i `l `ul 2373  ]
 {
-[; ;motore.c: 174: duty_set = previousPwm - correzione;
-"174
-[e = _duty_set -> - -> _previousPwm `ui _correzione `uc ]
+[; ;motore.c: 175: CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 "175
-}
-[e :U 2381 ]
-[; ;motore.c: 175: }
-[; ;motore.c: 176: if ((currentSpeed - requestSpeed) < 0) {
+[e ( _CANsendMessage (4 , , , -> -> -> 6 `i `l `ul &U _data_array_debug -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
+[; ;motore.c: 176: if (speed_fetched == 1) {
 "176
-[e $ ! < - -> _currentSpeed `i -> _requestSpeed `i -> 0 `i 2382  ]
+[e $ ! == -> _speed_fetched `i -> 1 `i 2374  ]
 {
-[; ;motore.c: 177: duty_set = previousPwm + correzione;
+[; ;motore.c: 177: PORTCbits.RC1 = ~PORTCbits.RC1;
 "177
-[e = _duty_set -> + -> _previousPwm `ui _correzione `uc ]
+[e = . . _PORTCbits 0 1 -> ~ -> . . _PORTCbits 0 1 `i `uc ]
+[; ;motore.c: 178: speed_fetched = 0;
 "178
-}
-[e :U 2382 ]
+[e = _speed_fetched -> -> 0 `i `b ]
+[; ;motore.c: 179: currentSpeed = ((left_speed + right_speed) / 2);
 "179
-}
-[e :U 2380 ]
-[; ;motore.c: 178: }
-[; ;motore.c: 179: }
-[; ;motore.c: 180: if (correzione < 1) {
-"180
-[e $ ! < _correzione -> -> 1 `i `ui 2383  ]
-{
-[; ;motore.c: 181: duty_set = previousPwm;
+[e = _currentSpeed -> / + -> _left_speed `i -> _right_speed `i -> 2 `i `uc ]
+[; ;motore.c: 181: requestSpeed = 25;
 "181
-[e = _duty_set _previousPwm ]
-"182
-}
-[e :U 2383 ]
+[e = _requestSpeed -> -> 25 `i `uc ]
+[; ;motore.c: 183: errore = abs((currentSpeed - requestSpeed)*10);
 "183
-}
-[e :U 2379 ]
-[; ;motore.c: 182: }
-[; ;motore.c: 183: }
-[; ;motore.c: 184: previousPwm = duty_set;
+[e = _errore ( _abs (1 * - -> _currentSpeed `i -> _requestSpeed `i -> 10 `i ]
+[; ;motore.c: 184: correzione = ((errore / 17)*(errore / 17))*2;
 "184
-[e = _previousPwm _duty_set ]
-[; ;motore.c: 185: SetDCEPWM1(duty_set);
+[e = _correzione -> * * / _errore -> 17 `i / _errore -> 17 `i -> 2 `i `ui ]
+[; ;motore.c: 185: if (correzione > 3) {
 "185
-[e ( _SetDCEPWM1 (1 -> _duty_set `ui ]
-"186
-}
-[e :U 2378 ]
-[; ;motore.c: 186: }
-[; ;motore.c: 187: previousTimeCounter1 = timeCounter;
+[e $ ! > _correzione -> -> 3 `i `ui 2375  ]
+{
+[; ;motore.c: 187: if ((currentSpeed - requestSpeed) > 0) {
 "187
-[e = _previousTimeCounter1 _timeCounter ]
+[e $ ! > - -> _currentSpeed `i -> _requestSpeed `i -> 0 `i 2376  ]
+{
+[; ;motore.c: 188: duty_set = previousPwm - correzione;
 "188
+[e = _duty_set -> - -> _previousPwm `ui _correzione `i ]
+[; ;motore.c: 189: if (duty_set < 0) {
+"189
+[e $ ! < _duty_set -> 0 `i 2377  ]
+{
+[; ;motore.c: 190: duty_set = 0;
+"190
+[e = _duty_set -> 0 `i ]
+"191
 }
 [e :U 2377 ]
-"189
-}
-[e :U 2376 ]
-"190
-}
-[e :U 2372 ]
-[; ;motore.c: 188: }
-[; ;motore.c: 189: }
-[; ;motore.c: 190: }
-[; ;motore.c: 191: if ((remote_frame == 1) || (can_retry == 1)) {
-"191
-[e $ ! || == -> _remote_frame `i -> 1 `i == -> _can_retry `i -> 1 `i 2384  ]
-{
-[; ;motore.c: 192: send_data();
 "192
-[e ( _send_data ..  ]
-"193
 }
-[e :U 2384 ]
-[; ;motore.c: 193: }
-[; ;motore.c: 194: if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
-"194
-[e $ ! || == -> ( _CANisTXwarningON ..  `i -> 1 `i == -> ( _CANisRXwarningON ..  `i -> 1 `i 2385  ]
+[; ;motore.c: 191: }
+[; ;motore.c: 192: }
+[e $U 2378  ]
+"193
+[e :U 2376 ]
+[; ;motore.c: 193: else {
 {
-[; ;motore.c: 195: SetDCEPWM1(0);
+[; ;motore.c: 194: duty_set = previousPwm + correzione;
+"194
+[e = _duty_set -> + -> _previousPwm `ui _correzione `i ]
+[; ;motore.c: 195: if (duty_set > 1024){
 "195
-[e ( _SetDCEPWM1 (1 -> -> 0 `i `ui ]
-[; ;motore.c: 196: PORTAbits.RA7 = 1;
+[e $ ! > _duty_set -> 1024 `i 2379  ]
+{
+[; ;motore.c: 196: duty_set = 1023;
 "196
-[e = . . _PORTAbits 0 7 -> -> 1 `i `uc ]
+[e = _duty_set -> 1023 `i ]
 "197
 }
-[; ;motore.c: 197: } else {
-[e $U 2386  ]
-[e :U 2385 ]
-{
-[; ;motore.c: 198: PORTAbits.RA7 = 0;
+[e :U 2379 ]
 "198
-[e = . . _PORTAbits 0 7 -> -> 0 `i `uc ]
-"199
 }
-[e :U 2386 ]
-[; ;motore.c: 199: }
-[; ;motore.c: 202: if ((timeCounter - previousTimeCounter) > 100) {
+[e :U 2378 ]
+"200
+}
+[; ;motore.c: 197: }
+[; ;motore.c: 198: }
+[; ;motore.c: 200: }
+[e $U 2380  ]
+"201
+[e :U 2375 ]
+[; ;motore.c: 201: else {
+{
+[; ;motore.c: 202: duty_set = previousPwm;
 "202
-[e $ ! > - _timeCounter _previousTimeCounter -> -> -> 100 `i `l `ul 2387  ]
-{
-[; ;motore.c: 203: if (request_sent == 0) {
+[e = _duty_set _previousPwm ]
 "203
-[e $ ! == -> _request_sent `i -> 0 `i 2388  ]
-{
-[; ;motore.c: 204: CANsendMessage(0b00000000000000000000000000010, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+}
+[e :U 2380 ]
+[; ;motore.c: 203: }
+[; ;motore.c: 204: previousPwm = duty_set;
 "204
-[e ( _CANsendMessage (4 , , , -> -> -> 2 `i `l `ul &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
-[; ;motore.c: 205: request_sent = 1;
+[e = _previousPwm _duty_set ]
 "205
-[e = _request_sent -> -> 1 `i `b ]
+}
+[e :U 2374 ]
+[; ;motore.c: 205: }
+[; ;motore.c: 206: previousTimeCounter1 = timeCounter;
 "206
+[e = _previousTimeCounter1 _timeCounter ]
+[; ;motore.c: 207: SetDCEPWM1(duty_set);
+"207
+[e ( _SetDCEPWM1 (1 -> _duty_set `ui ]
+"208
+}
+[e :U 2373 ]
+[; ;motore.c: 208: }
+[; ;motore.c: 210: if ((remote_frame == 1) || (can_retry == 1)) {
+"210
+[e $ ! || == -> _remote_frame `i -> 1 `i == -> _can_retry `i -> 1 `i 2381  ]
+{
+[; ;motore.c: 211: send_data();
+"211
+[e ( _send_data ..  ]
+"212
+}
+[e :U 2381 ]
+[; ;motore.c: 212: }
+[; ;motore.c: 213: if ((CANisTXwarningON() == 1) || (CANisRXwarningON() == 1)) {
+"213
+[e $ ! || == -> ( _CANisTXwarningON ..  `i -> 1 `i == -> ( _CANisRXwarningON ..  `i -> 1 `i 2382  ]
+{
+[; ;motore.c: 215: PORTAbits.RA1 = 1;
+"215
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 216: delay_ms(200);
+"216
+[e ( _delay_ms (1 -> -> 200 `i `ui ]
+[; ;motore.c: 217: PORTAbits.RA1 = 0;
+"217
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 218: delay_ms(200);
+"218
+[e ( _delay_ms (1 -> -> 200 `i `ui ]
+[; ;motore.c: 219: PORTAbits.RA1 = 1;
+"219
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 220: COMSTATbits.TXWARN = 0;
+"220
+[e = . . _COMSTATbits 1 2 -> -> 0 `i `uc ]
+[; ;motore.c: 221: COMSTATbits.RXWARN = 0;
+"221
+[e = . . _COMSTATbits 1 1 -> -> 0 `i `uc ]
+"222
+}
+[; ;motore.c: 222: } else {
+[e $U 2383  ]
+[e :U 2382 ]
+{
+[; ;motore.c: 223: PORTAbits.RA1 = 0;
+"223
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+"224
+}
+[e :U 2383 ]
+[; ;motore.c: 224: }
+[; ;motore.c: 227: if ((timeCounter - previousTimeCounter) > 500) {
+"227
+[e $ ! > - _timeCounter _previousTimeCounter -> -> -> 500 `i `l `ul 2384  ]
+{
+[; ;motore.c: 228: if (request_sent == 0) {
+"228
+[e $ ! == -> _request_sent `i -> 0 `i 2385  ]
+{
+[; ;motore.c: 229: CANsendMessage(0b00000000000000000000000000010, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+"229
+[e ( _CANsendMessage (4 , , , -> -> -> 2 `i `l `ul &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
+[; ;motore.c: 230: request_sent = 1;
+"230
+[e = _request_sent -> -> 1 `i `b ]
+"231
+}
+[e :U 2385 ]
+[; ;motore.c: 231: }
+[; ;motore.c: 232: if (request_sent == 1) {
+"232
+[e $ ! == -> _request_sent `i -> 1 `i 2386  ]
+{
+[; ;motore.c: 234: if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) {
+"234
+[e $ ! && && == -> _centralina_abs `i -> 1 `i == -> _centralina_sterzo `i -> 1 `i == -> _centralina_comando `i -> 1 `i 2387  ]
+{
+[; ;motore.c: 235: centralina_abs = 0;
+"235
+[e = _centralina_abs -> -> 0 `i `b ]
+[; ;motore.c: 236: centralina_sterzo = 0;
+"236
+[e = _centralina_sterzo -> -> 0 `i `b ]
+[; ;motore.c: 237: centralina_comando = 0;
+"237
+[e = _centralina_comando -> -> 0 `i `b ]
+[; ;motore.c: 238: PORTAbits.RA1 = 0;
+"238
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+"239
+}
+[; ;motore.c: 239: } else {
+[e $U 2388  ]
+[e :U 2387 ]
+{
+[; ;motore.c: 241: PORTAbits.RA1 = 1;
+"241
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 242: delay_ms(200);
+"242
+[e ( _delay_ms (1 -> -> 200 `i `ui ]
+"243
 }
 [e :U 2388 ]
-[; ;motore.c: 206: }
-[; ;motore.c: 207: if (request_sent == 1) {
-"207
-[e $ ! == -> _request_sent `i -> 1 `i 2389  ]
-{
-[; ;motore.c: 209: if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) {
-"209
-[e $ ! && && == -> _centralina_abs `i -> 1 `i == -> _centralina_sterzo `i -> 1 `i == -> _centralina_comando `i -> 1 `i 2390  ]
-{
-[; ;motore.c: 210: centralina_abs = 0;
-"210
-[e = _centralina_abs -> -> 0 `i `b ]
-[; ;motore.c: 211: centralina_sterzo = 0;
-"211
-[e = _centralina_sterzo -> -> 0 `i `b ]
-[; ;motore.c: 212: centralina_comando = 0;
-"212
-[e = _centralina_comando -> -> 0 `i `b ]
-[; ;motore.c: 213: PORTAbits.RA7 = 0;
-"213
-[e = . . _PORTAbits 0 7 -> -> 0 `i `uc ]
-"214
-}
-[; ;motore.c: 214: } else {
-[e $U 2391  ]
-[e :U 2390 ]
-{
-[; ;motore.c: 215: SetDCEPWM1(0);
-"215
-[e ( _SetDCEPWM1 (1 -> -> 0 `i `ui ]
-[; ;motore.c: 216: PORTAbits.RA7 = 1;
-"216
-[e = . . _PORTAbits 0 7 -> -> 1 `i `uc ]
-"217
-}
-[e :U 2391 ]
-"218
-}
-[e :U 2389 ]
-[; ;motore.c: 217: }
-[; ;motore.c: 218: }
-[; ;motore.c: 219: previousTimeCounter = timeCounter;
-"219
-[e = _previousTimeCounter _timeCounter ]
-"220
-}
-[e :U 2387 ]
-[; ;motore.c: 220: }
-[; ;motore.c: 221: if ((timeCounter - previousTimeCounter2 >= 100)) {
-"221
-[e $ ! >= - _timeCounter _previousTimeCounter2 -> -> -> 100 `i `l `ul 2392  ]
-{
-[; ;motore.c: 223: battery_measure();
-"223
-[e ( _battery_measure ..  ]
-[; ;motore.c: 224: previousTimeCounter2 = timeCounter;
-"224
-[e = _previousTimeCounter2 _timeCounter ]
-"225
-}
-[e :U 2392 ]
-"226
-}
-[e :U 2369 ]
-"147
-[e $U 2370  ]
-[e :U 2371 ]
-[; ;motore.c: 225: }
-[; ;motore.c: 226: }
-[; ;motore.c: 227: }
-"227
-[e :UE 2368 ]
-}
-"229
-[v _send_data `(v ~T0 @X0 1 ef ]
-{
-[; ;motore.c: 229: void send_data(void) {
-[e :U _send_data ]
-[f ]
-[; ;motore.c: 230: if (CANisTxReady()) {
-"230
-[e $ ! != -> ( _CANisTxReady ..  `i -> -> -> 0 `i `uc `i 2394  ]
-{
-[; ;motore.c: 231: if (remote_frame == 1) {
-"231
-[e $ ! == -> _remote_frame `i -> 1 `i 2395  ]
-{
-[; ;motore.c: 232: CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-"232
-[e ( _CANsendMessage (4 , , , _id &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 10 `i -> . `E16866 1 `i `E16866 ]
-[; ;motore.c: 233: remote_frame = 0;
-"233
-[e = _remote_frame -> -> 0 `i `b ]
-"234
-}
-[e :U 2395 ]
-[; ;motore.c: 234: }
-[; ;motore.c: 235: if (can_retry == 1) {
-"235
-[e $ ! == -> _can_retry `i -> 1 `i 2396  ]
-{
-[; ;motore.c: 236: CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-"236
-[e ( _CANsendMessage (4 , , , _id1 &U _data_array1 -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 10 `i -> . `E16866 1 `i `E16866 ]
-"237
-}
-[e :U 2396 ]
-"238
-}
-[e :U 2394 ]
-[; ;motore.c: 237: }
-[; ;motore.c: 238: }
-[; ;motore.c: 239: if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
-"239
-[e $ ! || != -> . . _TXB0CONbits 0 6 `i -> -> -> 0 `i `Vuc `i != -> . . _TXB1CONbits 0 6 `i -> -> -> 0 `i `Vuc `i 2397  ]
-{
-[; ;motore.c: 240: can_retry = 1;
-"240
-[e = _can_retry -> -> 1 `i `b ]
-[; ;motore.c: 241: id1 = id;
-"241
-[e = _id1 _id ]
-[; ;motore.c: 242: remote_frame1 = remote_frame;
-"242
-[e = _remote_frame1 _remote_frame ]
-[; ;motore.c: 243: for (char i = 0; i < 8; i++) {
-"243
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 2398  ]
-[e $U 2399  ]
-[e :U 2398 ]
-{
-[; ;motore.c: 244: data_array1[i] = data_array[i];
 "244
-[e = *U + &U _data_array1 * -> _i `ux -> -> # *U &U _data_array1 `ui `ux *U + &U _data_array * -> _i `ux -> -> # *U &U _data_array `ui `ux ]
-"245
 }
-"243
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 2398  ]
-[e :U 2399 ]
+[e :U 2386 ]
+[; ;motore.c: 243: }
+[; ;motore.c: 244: }
+[; ;motore.c: 245: previousTimeCounter = timeCounter;
 "245
-}
+[e = _previousTimeCounter _timeCounter ]
 "246
 }
-[; ;motore.c: 245: }
-[; ;motore.c: 246: } else {
-[e $U 2401  ]
-[e :U 2397 ]
-{
-[; ;motore.c: 247: can_retry = 0;
+[e :U 2384 ]
+[; ;motore.c: 246: }
+[; ;motore.c: 247: if ((timeCounter - previousTimeCounter2 >= 100)) {
 "247
-[e = _can_retry -> -> 0 `i `b ]
-[; ;motore.c: 248: if (remote_frame1 != 0) {
-"248
-[e $ ! != -> _remote_frame1 `i -> 0 `i 2402  ]
+[e $ ! >= - _timeCounter _previousTimeCounter2 -> -> -> 100 `i `l `ul 2389  ]
 {
-[; ;motore.c: 249: remote_frame = remote_frame1;
+[; ;motore.c: 249: battery_measure();
 "249
-[e = _remote_frame _remote_frame1 ]
-[; ;motore.c: 250: id = id1;
+[e ( _battery_measure ..  ]
+[; ;motore.c: 250: previousTimeCounter2 = timeCounter;
 "250
-[e = _id _id1 ]
-[; ;motore.c: 251: message_sent = 1;
+[e = _previousTimeCounter2 _timeCounter ]
 "251
-[e = _message_sent -> -> 1 `i `b ]
-[; ;motore.c: 252: remote_frame1 = 0;
+}
+[e :U 2389 ]
 "252
-[e = _remote_frame1 -> -> 0 `i `b ]
+}
+[e :U 2370 ]
+"167
+[e $U 2371  ]
+[e :U 2372 ]
+[; ;motore.c: 251: }
+[; ;motore.c: 252: }
+[; ;motore.c: 253: }
 "253
+[e :UE 2369 ]
 }
-[; ;motore.c: 253: } else {
-[e $U 2403  ]
-[e :U 2402 ]
+"254
+[v _send_data `(v ~T0 @X0 1 ef ]
 {
-[; ;motore.c: 255: message_sent = 0;
+[; ;motore.c: 254: void send_data(void) {
+[e :U _send_data ]
+[f ]
+[; ;motore.c: 255: if (CANisTxReady()) {
 "255
-[e = _message_sent -> -> 0 `i `b ]
+[e $ ! != -> ( _CANisTxReady ..  `i -> -> -> 0 `i `uc `i 2391  ]
+{
+[; ;motore.c: 256: if (remote_frame == 1) {
 "256
-}
-[e :U 2403 ]
+[e $ ! == -> _remote_frame `i -> 1 `i 2392  ]
+{
+[; ;motore.c: 257: CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 "257
-}
-[e :U 2401 ]
-[; ;motore.c: 256: }
-[; ;motore.c: 257: }
+[e ( _CANsendMessage (4 , , , _id &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 10 `i -> . `E16866 1 `i `E16866 ]
 [; ;motore.c: 258: remote_frame = 0;
 "258
 [e = _remote_frame -> -> 0 `i `b ]
-[; ;motore.c: 259: }
 "259
-[e :UE 2393 ]
 }
+[e :U 2392 ]
+[; ;motore.c: 259: }
+[; ;motore.c: 260: if (can_retry == 1) {
+"260
+[e $ ! == -> _can_retry `i -> 1 `i 2393  ]
+{
+[; ;motore.c: 261: CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 "261
-[v _battery_measure `(v ~T0 @X0 1 ef ]
-{
-[; ;motore.c: 261: void battery_measure(void) {
-[e :U _battery_measure ]
-[f ]
-[; ;motore.c: 262: ADCON0bits.GO = 1;
+[e ( _CANsendMessage (4 , , , _id1 &U _data_array1 -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 10 `i -> . `E16866 1 `i `E16866 ]
 "262
-[e = . . _ADCON0bits 5 1 -> -> 1 `i `uc ]
-[; ;motore.c: 263: while (ADCON0bits.GO);
-"263
-[e $U 2405  ]
-[e :U 2406 ]
-[e :U 2405 ]
-[e $ != -> . . _ADCON0bits 5 1 `i -> -> -> 0 `i `Vuc `i 2406  ]
-[e :U 2407 ]
-[; ;motore.c: 264: vBatt = ADRESH;
-"264
-[e = _vBatt -> _ADRESH `i ]
-[; ;motore.c: 265: vBatt = (vBatt * 14) / 235;
-"265
-[e = _vBatt / * _vBatt -> 14 `i -> 235 `i ]
-[; ;motore.c: 266: if (vBatt < 10) {
-"266
-[e $ ! < _vBatt -> 10 `i 2408  ]
-{
-[; ;motore.c: 268: while (!CANisTxReady());
-"268
-[e $U 2409  ]
-[e :U 2410 ]
-[e :U 2409 ]
-[e $ ! != -> ( _CANisTxReady ..  `i -> -> -> 0 `i `uc `i 2410  ]
-[e :U 2411 ]
-[; ;motore.c: 269: CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-"269
-[e ( _CANsendMessage (4 , , , -> -> -> 9 `i `l `ul &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
-"270
 }
-[e :U 2408 ]
-[; ;motore.c: 270: }
-[; ;motore.c: 271: }
+[e :U 2393 ]
+"263
+}
+[e :U 2391 ]
+[; ;motore.c: 262: }
+[; ;motore.c: 263: }
+[; ;motore.c: 264: if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
+"264
+[e $ ! || != -> . . _TXB0CONbits 0 6 `i -> -> -> 0 `i `Vuc `i != -> . . _TXB1CONbits 0 6 `i -> -> -> 0 `i `Vuc `i 2394  ]
+{
+[; ;motore.c: 265: can_retry = 1;
+"265
+[e = _can_retry -> -> 1 `i `b ]
+[; ;motore.c: 266: id1 = id;
+"266
+[e = _id1 _id ]
+[; ;motore.c: 267: remote_frame1 = remote_frame;
+"267
+[e = _remote_frame1 _remote_frame ]
+[; ;motore.c: 268: for (char i = 0; i < 8; i++) {
+"268
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 2395  ]
+[e $U 2396  ]
+[e :U 2395 ]
+{
+[; ;motore.c: 269: data_array1[i] = data_array[i];
+"269
+[e = *U + &U _data_array1 * -> _i `ux -> -> # *U &U _data_array1 `ui `ux *U + &U _data_array * -> _i `ux -> -> # *U &U _data_array `ui `ux ]
+[; ;motore.c: 270: TXB0CONbits.TXABT = 0;
+"270
+[e = . . _TXB0CONbits 0 6 -> -> 0 `i `uc ]
+[; ;motore.c: 271: TXB1CONbits.TXABT = 0;
 "271
-[e :UE 2404 ]
+[e = . . _TXB1CONbits 0 6 -> -> 0 `i `uc ]
+"272
+}
+"268
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 2395  ]
+[e :U 2396 ]
+"272
 }
 "273
+}
+[; ;motore.c: 272: }
+[; ;motore.c: 273: } else {
+[e $U 2398  ]
+[e :U 2394 ]
+{
+[; ;motore.c: 274: can_retry = 0;
+"274
+[e = _can_retry -> -> 0 `i `b ]
+[; ;motore.c: 275: if (remote_frame1 != 0) {
+"275
+[e $ ! != -> _remote_frame1 `i -> 0 `i 2399  ]
+{
+[; ;motore.c: 276: remote_frame = remote_frame1;
+"276
+[e = _remote_frame _remote_frame1 ]
+[; ;motore.c: 277: id = id1;
+"277
+[e = _id _id1 ]
+[; ;motore.c: 278: message_sent = 1;
+"278
+[e = _message_sent -> -> 1 `i `b ]
+[; ;motore.c: 279: remote_frame1 = 0;
+"279
+[e = _remote_frame1 -> -> 0 `i `b ]
+"280
+}
+[; ;motore.c: 280: } else {
+[e $U 2400  ]
+[e :U 2399 ]
+{
+[; ;motore.c: 282: message_sent = 0;
+"282
+[e = _message_sent -> -> 0 `i `b ]
+"283
+}
+[e :U 2400 ]
+"284
+}
+[e :U 2398 ]
+[; ;motore.c: 283: }
+[; ;motore.c: 284: }
+[; ;motore.c: 285: remote_frame = 0;
+"285
+[e = _remote_frame -> -> 0 `i `b ]
+[; ;motore.c: 286: }
+"286
+[e :UE 2390 ]
+}
+"288
+[v _battery_measure `(v ~T0 @X0 1 ef ]
+{
+[; ;motore.c: 288: void battery_measure(void) {
+[e :U _battery_measure ]
+[f ]
+[; ;motore.c: 289: ADCON0bits.GO = 1;
+"289
+[e = . . _ADCON0bits 5 1 -> -> 1 `i `uc ]
+[; ;motore.c: 290: while (ADCON0bits.GO);
+"290
+[e $U 2402  ]
+[e :U 2403 ]
+[e :U 2402 ]
+[e $ != -> . . _ADCON0bits 5 1 `i -> -> -> 0 `i `Vuc `i 2403  ]
+[e :U 2404 ]
+[; ;motore.c: 291: vBatt = ADRESH;
+"291
+[e = _vBatt -> _ADRESH `i ]
+[; ;motore.c: 292: vBatt = (vBatt * 14) / 255;
+"292
+[e = _vBatt / * _vBatt -> 14 `i -> 255 `i ]
+[; ;motore.c: 293: if (vBatt < 8) {
+"293
+[e $ ! < _vBatt -> 8 `i 2405  ]
+{
+[; ;motore.c: 298: while (!CANisTxReady());
+"298
+[e $U 2406  ]
+[e :U 2407 ]
+[e :U 2406 ]
+[e $ ! != -> ( _CANisTxReady ..  `i -> -> -> 0 `i `uc `i 2407  ]
+[e :U 2408 ]
+[; ;motore.c: 299: CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+"299
+[e ( _CANsendMessage (4 , , , -> -> -> 9 `i `l `ul &U _data_array -> -> 8 `i `uc -> & & -> . `E16844 11 `i -> . `E16866 9 `i -> . `E16866 1 `i `E16866 ]
+[; ;motore.c: 300: PORTCbits.RC1 = 1;
+"300
+[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
+"301
+}
+[; ;motore.c: 301: } else {
+[e $U 2409  ]
+[e :U 2405 ]
+{
+[; ;motore.c: 302: PORTCbits.RC1 = 0;
+"302
+[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+"304
+}
+[e :U 2409 ]
+[; ;motore.c: 304: }
+[; ;motore.c: 305: }
+"305
+[e :UE 2401 ]
+}
+"307
 [v _configurazione_iniziale `(v ~T0 @X0 1 ef ]
 {
-[; ;motore.c: 273: void configurazione_iniziale(void) {
+[; ;motore.c: 307: void configurazione_iniziale(void) {
 [e :U _configurazione_iniziale ]
 [f ]
-[; ;motore.c: 276: CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAMPLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
-"276
-[e ( _CANInitialize (4 , , , , , -> -> 4 `i `uc -> -> 6 `i `uc -> -> 5 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> & & & -> . `E16844 6 `i -> . `E16844 8 `i -> . `E16844 20 `i -> . `E16844 14 `i `E16844 ]
-[; ;motore.c: 277: RCONbits.IPEN = 1;
-"277
-[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
-[; ;motore.c: 278: INTCONbits.INT0IF = 0;
-"278
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 279: PIR3bits.RXB1IF = 0;
-"279
-[e = . . _PIR3bits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 280: PIR3bits.RXB0IF = 0;
-"280
-[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 282: IPR3bits.RXB1IP = 0;
-"282
-[e = . . _IPR3bits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 283: IPR3bits.RXB0IP = 0;
-"283
-[e = . . _IPR3bits 0 0 -> -> 0 `i `uc ]
-[; ;motore.c: 284: INTCONbits.GIEH = 0;
-"284
-[e = . . _INTCONbits 2 7 -> -> 0 `i `uc ]
-[; ;motore.c: 285: INTCONbits.GIEL = 1;
-"285
-[e = . . _INTCONbits 2 6 -> -> 1 `i `uc ]
-[; ;motore.c: 286: INTCON2bits.INTEDG0 = 1;
-"286
-[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
-[; ;motore.c: 289: T3CON = 0x01;
-"289
-[e = _T3CON -> -> 1 `i `uc ]
-[; ;motore.c: 290: PIR2bits.TMR3IF = 0;
-"290
-[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 291: IPR2bits.TMR3IP = 0;
-"291
-[e = . . _IPR2bits 0 1 -> -> 0 `i `uc ]
-[; ;motore.c: 292: TMR3H = 0x63;
-"292
-[e = _TMR3H -> -> 99 `i `uc ]
-[; ;motore.c: 293: TMR3L = 0xC0;
-"293
-[e = _TMR3L -> -> 192 `i `uc ]
-[; ;motore.c: 298: ADCON0bits.ADON = 1;
-"298
-[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
-[; ;motore.c: 299: ADCON0bits.CHS0 = 0;
-"299
-[e = . . _ADCON0bits 3 2 -> -> 0 `i `uc ]
-[; ;motore.c: 300: ADCON0bits.CHS1 = 0;
-"300
-[e = . . _ADCON0bits 3 3 -> -> 0 `i `uc ]
-[; ;motore.c: 301: ADCON0bits.CHS2 = 0;
-"301
-[e = . . _ADCON0bits 3 4 -> -> 0 `i `uc ]
-[; ;motore.c: 302: ADCON0bits.CHS3 = 0;
-"302
-[e = . . _ADCON0bits 3 5 -> -> 0 `i `uc ]
-[; ;motore.c: 303: ADCON1bits.PCFG0 = 0;
-"303
-[e = . . _ADCON1bits 1 0 -> -> 0 `i `uc ]
-[; ;motore.c: 304: ADCON1bits.PCFG1 = 1;
-"304
-[e = . . _ADCON1bits 1 1 -> -> 1 `i `uc ]
-[; ;motore.c: 305: ADCON1bits.PCFG2 = 1;
-"305
-[e = . . _ADCON1bits 1 2 -> -> 1 `i `uc ]
-[; ;motore.c: 306: ADCON1bits.PCFG3 = 1;
-"306
-[e = . . _ADCON1bits 1 3 -> -> 1 `i `uc ]
-[; ;motore.c: 307: ADCON1bits.VCFG0 = 0;
-"307
-[e = . . _ADCON1bits 1 4 -> -> 0 `i `uc ]
-[; ;motore.c: 308: ADCON1bits.VCFG1 = 0;
-"308
-[e = . . _ADCON1bits 1 5 -> -> 0 `i `uc ]
-[; ;motore.c: 309: ADCON2bits.ADCS0 = 1;
-"309
-[e = . . _ADCON2bits 1 0 -> -> 1 `i `uc ]
-[; ;motore.c: 310: ADCON2bits.ADCS1 = 0;
+[; ;motore.c: 310: CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAMPLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
 "310
-[e = . . _ADCON2bits 1 1 -> -> 0 `i `uc ]
-[; ;motore.c: 311: ADCON2bits.ADCS2 = 1;
+[e ( _CANInitialize (4 , , , , , -> -> 4 `i `uc -> -> 6 `i `uc -> -> 5 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> & & & -> . `E16844 6 `i -> . `E16844 8 `i -> . `E16844 20 `i -> . `E16844 14 `i `E16844 ]
+[; ;motore.c: 311: RCONbits.IPEN = 1;
 "311
-[e = . . _ADCON2bits 1 2 -> -> 1 `i `uc ]
-[; ;motore.c: 312: ADCON2bits.ACQT0 = 0;
+[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
+[; ;motore.c: 312: INTCONbits.INT0IF = 0;
 "312
-[e = . . _ADCON2bits 1 3 -> -> 0 `i `uc ]
-[; ;motore.c: 313: ADCON2bits.ACQT1 = 1;
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 313: PIR3bits.RXB1IF = 0;
 "313
-[e = . . _ADCON2bits 1 4 -> -> 1 `i `uc ]
-[; ;motore.c: 314: ADCON2bits.ACQT2 = 1;
+[e = . . _PIR3bits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 314: PIR3bits.RXB0IF = 0;
 "314
-[e = . . _ADCON2bits 1 5 -> -> 1 `i `uc ]
-[; ;motore.c: 315: ADCON2bits.ADFM = 0;
-"315
-[e = . . _ADCON2bits 0 3 -> -> 0 `i `uc ]
-[; ;motore.c: 318: INTCONbits.INT0IE = 1;
+[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
+[; ;motore.c: 316: IPR3bits.RXB1IP = 0;
+"316
+[e = . . _IPR3bits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 317: IPR3bits.RXB0IP = 0;
+"317
+[e = . . _IPR3bits 0 0 -> -> 0 `i `uc ]
+[; ;motore.c: 318: INTCONbits.GIEH = 1;
 "318
-[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;motore.c: 319: PIE3bits.RXB1IE = 1;
+[e = . . _INTCONbits 2 7 -> -> 1 `i `uc ]
+[; ;motore.c: 319: INTCONbits.GIEL = 1;
 "319
-[e = . . _PIE3bits 0 1 -> -> 1 `i `uc ]
-[; ;motore.c: 320: PIE3bits.RXB0IE = 1;
-"320
-[e = . . _PIE3bits 0 0 -> -> 1 `i `uc ]
-[; ;motore.c: 321: PIE2bits.TMR3IE = 1;
-"321
-[e = . . _PIE2bits 0 1 -> -> 1 `i `uc ]
-[; ;motore.c: 323: LATA = 0x00;
+[e = . . _INTCONbits 2 6 -> -> 1 `i `uc ]
+[; ;motore.c: 322: T3CON = 0x01;
+"322
+[e = _T3CON -> -> 1 `i `uc ]
+[; ;motore.c: 323: PIR2bits.TMR3IF = 0;
 "323
-[e = _LATA -> -> 0 `i `uc ]
-[; ;motore.c: 324: TRISA = 0b01111101;
+[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 324: IPR2bits.TMR3IP = 0;
 "324
-[e = _TRISA -> -> 125 `i `uc ]
-[; ;motore.c: 326: LATB = 0x00;
+[e = . . _IPR2bits 0 1 -> -> 0 `i `uc ]
+[; ;motore.c: 325: TMR3H = 0x63;
+"325
+[e = _TMR3H -> -> 99 `i `uc ]
+[; ;motore.c: 326: TMR3L = 0xC0;
 "326
-[e = _LATB -> -> 0 `i `uc ]
-[; ;motore.c: 327: TRISB = 0b11111011;
-"327
-[e = _TRISB -> -> 251 `i `uc ]
-[; ;motore.c: 329: LATC = 0x00;
-"329
-[e = _LATC -> -> 0 `i `uc ]
-[; ;motore.c: 330: TRISC = 0x00;
-"330
-[e = _TRISC -> -> 0 `i `uc ]
-[; ;motore.c: 332: LATD = 0x00;
+[e = _TMR3L -> -> 192 `i `uc ]
+[; ;motore.c: 331: ADCON0bits.ADON = 1;
+"331
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;motore.c: 332: ADCON0bits.CHS0 = 0;
 "332
-[e = _LATD -> -> 0 `i `uc ]
-[; ;motore.c: 333: TRISD = 0x00;
+[e = . . _ADCON0bits 3 2 -> -> 0 `i `uc ]
+[; ;motore.c: 333: ADCON0bits.CHS1 = 0;
 "333
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;motore.c: 335: LATE = 0x00;
+[e = . . _ADCON0bits 3 3 -> -> 0 `i `uc ]
+[; ;motore.c: 334: ADCON0bits.CHS2 = 0;
+"334
+[e = . . _ADCON0bits 3 4 -> -> 0 `i `uc ]
+[; ;motore.c: 335: ADCON0bits.CHS3 = 0;
 "335
-[e = _LATE -> -> 0 `i `uc ]
-[; ;motore.c: 336: TRISE = 0xFF;
+[e = . . _ADCON0bits 3 5 -> -> 0 `i `uc ]
+[; ;motore.c: 336: ADCON1bits.PCFG0 = 0;
 "336
-[e = _TRISE -> -> 255 `i `uc ]
-[; ;motore.c: 337: delay_ms(2);
+[e = . . _ADCON1bits 1 0 -> -> 0 `i `uc ]
+[; ;motore.c: 337: ADCON1bits.PCFG1 = 1;
 "337
-[e ( _delay_ms (1 -> -> 2 `i `ui ]
-[; ;motore.c: 338: }
+[e = . . _ADCON1bits 1 1 -> -> 1 `i `uc ]
+[; ;motore.c: 338: ADCON1bits.PCFG2 = 1;
 "338
-[e :UE 2412 ]
+[e = . . _ADCON1bits 1 2 -> -> 1 `i `uc ]
+[; ;motore.c: 339: ADCON1bits.PCFG3 = 1;
+"339
+[e = . . _ADCON1bits 1 3 -> -> 1 `i `uc ]
+[; ;motore.c: 340: ADCON1bits.VCFG0 = 0;
+"340
+[e = . . _ADCON1bits 1 4 -> -> 0 `i `uc ]
+[; ;motore.c: 341: ADCON1bits.VCFG1 = 0;
+"341
+[e = . . _ADCON1bits 1 5 -> -> 0 `i `uc ]
+[; ;motore.c: 342: ADCON2bits.ADCS0 = 1;
+"342
+[e = . . _ADCON2bits 1 0 -> -> 1 `i `uc ]
+[; ;motore.c: 343: ADCON2bits.ADCS1 = 0;
+"343
+[e = . . _ADCON2bits 1 1 -> -> 0 `i `uc ]
+[; ;motore.c: 344: ADCON2bits.ADCS2 = 1;
+"344
+[e = . . _ADCON2bits 1 2 -> -> 1 `i `uc ]
+[; ;motore.c: 345: ADCON2bits.ACQT0 = 0;
+"345
+[e = . . _ADCON2bits 1 3 -> -> 0 `i `uc ]
+[; ;motore.c: 346: ADCON2bits.ACQT1 = 1;
+"346
+[e = . . _ADCON2bits 1 4 -> -> 1 `i `uc ]
+[; ;motore.c: 347: ADCON2bits.ACQT2 = 1;
+"347
+[e = . . _ADCON2bits 1 5 -> -> 1 `i `uc ]
+[; ;motore.c: 348: ADCON2bits.ADFM = 0;
+"348
+[e = . . _ADCON2bits 0 3 -> -> 0 `i `uc ]
+[; ;motore.c: 351: PIE3bits.RXB1IE = 1;
+"351
+[e = . . _PIE3bits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 352: PIE3bits.RXB0IE = 1;
+"352
+[e = . . _PIE3bits 0 0 -> -> 1 `i `uc ]
+[; ;motore.c: 353: PIE2bits.TMR3IE = 1;
+"353
+[e = . . _PIE2bits 0 1 -> -> 1 `i `uc ]
+[; ;motore.c: 355: LATA = 0x00;
+"355
+[e = _LATA -> -> 0 `i `uc ]
+[; ;motore.c: 356: TRISA = 0b01111101;
+"356
+[e = _TRISA -> -> 125 `i `uc ]
+[; ;motore.c: 358: LATB = 0x00;
+"358
+[e = _LATB -> -> 0 `i `uc ]
+[; ;motore.c: 359: TRISB = 0b11111011;
+"359
+[e = _TRISB -> -> 251 `i `uc ]
+[; ;motore.c: 361: LATC = 0x00;
+"361
+[e = _LATC -> -> 0 `i `uc ]
+[; ;motore.c: 362: TRISC = 0x00;
+"362
+[e = _TRISC -> -> 0 `i `uc ]
+[; ;motore.c: 364: LATD = 0x00;
+"364
+[e = _LATD -> -> 0 `i `uc ]
+[; ;motore.c: 365: TRISD = 0x00;
+"365
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;motore.c: 367: LATE = 0x00;
+"367
+[e = _LATE -> -> 0 `i `uc ]
+[; ;motore.c: 368: TRISE = 0xFF;
+"368
+[e = _TRISE -> -> 255 `i `uc ]
+[; ;motore.c: 369: delay_ms(2);
+"369
+[e ( _delay_ms (1 -> -> 2 `i `ui ]
+[; ;motore.c: 370: SetOutputEPWM1(0b01111111, 0b11111100);
+"370
+[e ( _SetOutputEPWM1 (2 , -> -> 127 `i `uc -> -> 252 `i `uc ]
+[; ;motore.c: 372: }
+"372
+[e :UE 2410 ]
 }
