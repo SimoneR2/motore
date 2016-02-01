@@ -1,4 +1,3 @@
-#define USE_AND_MASKS
 /*==============================================================================
  *PROGRAM: MOTORE
  *WRITTEN BY: Simone Righetti
@@ -33,7 +32,7 @@
 
  */
 #include <xc.h>
-#include "PIC18F4480_config.h"
+#include "motore.h"
 #include "CANlib.h"
 #include "delay.h"
 #include "delay.c"
@@ -89,28 +88,20 @@ BYTE data_array_debug [8] = 0;
 
 __interrupt(low_priority) void ISR_bassa(void) {
     if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-        //        PORTCbits.RC1 = 1;
-        //        delay_ms(100);
-        //        PORTCbits.RC0 = 0;
-        //        delay_ms(100);
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
-            //if (msg.RTR == 1) { //Se il messaggio arrivato è un remote frame
-             //   id = msg.identifier;
-            //    remote_frame = msg.RTR;
-            //}
             if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
                 //TOGLIERE DUE COMMENTI!!!!
                 requestSpeed = msg.data[0]; //velocità richiesta 
                 dir = msg.data[1]; //direzione richiesta
                 if (dir == 1) { //direzione avanti
-                SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-            }
-            if (dir == 0) { //direzione indietro
-                SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
-            }
+                    SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+                }
+                if (dir == 0) { //direzione indietro
+                    SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
+                }
                 //--------------------------
-               // requestSpeed = 
+                // requestSpeed = 
                 //previousTimeCounter = timeCounter;
             }
             if (msg.identifier == EMERGENCY) { //stop di emergenza
@@ -161,52 +152,41 @@ int main(void) {
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-    SetDCEPWM1 (300);
+    SetDCEPWM1(300);
     delay_ms(500);
-    //etDCEPWM1 (0);
+    SetDCEPWM1(0);
     while (1) {
-       // if (PORTAbits.RA1 == 0) {
-      
-     //speed_fetched = 1; //DEBUG
-            
-            
-            if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
-                    
-                CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-                if (speed_fetched == 1) {
-                    PORTCbits.RC1 = ~PORTCbits.RC1; //debug
-                    speed_fetched = 0;
-                    currentSpeed = ((left_speed + right_speed) / 2);
-                    //currentSpeed = 1; //DEBUG
-                    requestSpeed = 25; //DEBUG
-                    //if ((currentSpeed - requestSpeed) > 0) {//RAMPE
-                        errore = abs((currentSpeed - requestSpeed)*10);
-                        correzione = ((errore / 17)*(errore / 17))*2;
-                        if (correzione > 3) {
-                            
-                            if ((currentSpeed - requestSpeed) > 0) {
-                                duty_set = previousPwm - correzione;
-                                if (duty_set < 0) {
-                                    duty_set = 0;
-                                }
-                            }
-                            else {
-                                duty_set = previousPwm + correzione;
-                                 if (duty_set > 1024){
-                                    duty_set = 1023;
-                                }
-                            }
-                        //}
-                    }
-                        else {
-                            duty_set = previousPwm;
+        // if (PORTAbits.RA1 == 0) {
+        if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
+            CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+            if (speed_fetched == 1) {
+                PORTCbits.RC1 = ~PORTCbits.RC1; //debug
+                speed_fetched = 0;
+                currentSpeed = ((left_speed + right_speed) / 2);
+                requestSpeed = 25; //DEBUG
+                errore = abs((currentSpeed - requestSpeed)*10);
+                correzione = ((errore / 17)*(errore / 17))*2;
+                if (correzione > 3) {
+                    if ((currentSpeed - requestSpeed) > 0) {
+                        duty_set = previousPwm - correzione;
+                        if (duty_set < 0) {
+                            duty_set = 0;
                         }
-                        previousPwm = duty_set; 
+                    } else {
+                        duty_set = previousPwm + correzione;
+                        if (duty_set > 1024) {
+                            duty_set = 1023;
+                        }
                     }
-                previousTimeCounter1 = timeCounter;
-                 SetDCEPWM1(duty_set); //imposta pwm
+                } else {
+                    duty_set = previousPwm;
+                }
+                previousPwm = duty_set;
             }
-       
+            previousTimeCounter1 = timeCounter;
+            SetDCEPWM1(duty_set); //imposta pwm
+        }
+
         if ((remote_frame == 1) || (can_retry == 1)) { //se è arrivato un remote frame la risposta è immediata
             send_data();
         }
@@ -237,7 +217,7 @@ int main(void) {
                     centralina_comando = 0;
                     PORTAbits.RA1 = 0;
                 } else {
-                   // SetDCEPWM1(0);
+                    // SetDCEPWM1(0);
                     PORTAbits.RA1 = 1;
                     delay_ms(200);
                 }
@@ -251,6 +231,7 @@ int main(void) {
         }
     }
 }
+
 void send_data(void) {
     if (CANisTxReady()) { //è disponibile almeno un buffer per l'invio dei dati
         if (remote_frame == 1) { //se è una risposta a un remote frame deve avere lo stesso id della richiesta
@@ -291,10 +272,6 @@ void battery_measure(void) {
     vBatt = ADRESH;
     vBatt = (vBatt * 14) / 255; //
     if (vBatt < 8) {
-        //        PORTCbits.RC1 = 1;
-        //        delay_ms(1000);
-        //        PORTCbits.RC1 = 0;
-        //        delay_ms(200);
         while (!CANisTxReady());
         CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
         PORTCbits.RC1 = 1;
@@ -367,6 +344,6 @@ void configurazione_iniziale(void) {
     LATE = 0x00;
     TRISE = 0xFF;
     delay_ms(2);
-     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-    
+    SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+
 }
