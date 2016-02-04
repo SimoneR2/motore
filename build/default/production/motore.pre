@@ -19316,7 +19316,7 @@ extern __nonreentrant void _delaywdt(unsigned long);
 extern __nonreentrant void _delay3(unsigned char);
 
 
-# 11 "PIC18F4480_config.h"
+# 11 "motore.h"
 #pragma config OSC = HS
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
@@ -20560,7 +20560,7 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 48 "motore.c"
+# 47 "motore.c"
 void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
@@ -20586,8 +20586,8 @@ unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
 int previousPwm = 200;
-char left_speed = 0;
-char right_speed = 0;
+unsigned int left_speed = 0;
+unsigned int right_speed = 0;
 int duty_set = 200;
 int duty_cycle = 0;
 int errore = 0;
@@ -20599,19 +20599,11 @@ BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
 
-# 90
+# 89
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-
-
-
-
 if (CANisRxReady()) {
 CANreceiveMessage(&msg);
-
-
-
-
 if (msg.identifier == 0b00000000000000000000000000011) {
 
 requestSpeed = msg.data[0];
@@ -20632,7 +20624,8 @@ PORTAbits.RA1 = 1;
 }
 if (msg.identifier == 0b00000000000000000000000000110) {
 
-left_speed = msg.data[0];
+left_speed = msg.data[1];
+left_speed = ((left_speed<<8)|(msg.data[0]));
 right_speed = msg.data[1];
 speed_fetched = 1;
 
@@ -20674,41 +20667,33 @@ period = 0xFE;
 OpenEPWM1(period);
 speed_fetched = 1;
 SetOutputEPWM1(0b01111111, 0b11111100);
-SetDCEPWM1 (300);
+SetDCEPWM1(300);
 delay_ms(500);
-
+SetDCEPWM1(0);
 while (1) {
 
-# 173
 if ((timeCounter - previousTimeCounter1 >= 15)) {
-
 CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 if (speed_fetched == 1) {
 PORTCbits.RC1 = ~PORTCbits.RC1;
 speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
-
 requestSpeed = 25;
-
 errore = abs((currentSpeed - requestSpeed)*10);
 correzione = ((errore / 17)*(errore / 17))*2;
 if (correzione > 3) {
-
 if ((currentSpeed - requestSpeed) > 0) {
 duty_set = previousPwm - correzione;
 if (duty_set < 0) {
 duty_set = 0;
 }
-}
-else {
+} else {
 duty_set = previousPwm + correzione;
-if (duty_set > 1024){
+if (duty_set > 1024) {
 duty_set = 1023;
 }
 }
-
-}
-else {
+} else {
 duty_set = previousPwm;
 }
 previousPwm = duty_set;
@@ -20761,6 +20746,7 @@ previousTimeCounter2 = timeCounter;
 }
 }
 }
+
 void send_data(void) {
 if (CANisTxReady()) {
 if (remote_frame == 1) {
@@ -20801,10 +20787,6 @@ while (ADCON0bits.GO);
 vBatt = ADRESH;
 vBatt = (vBatt * 14) / 255;
 if (vBatt < 8) {
-
-
-
-
 while (!CANisTxReady());
 CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 PORTCbits.RC1 = 1;

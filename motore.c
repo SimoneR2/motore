@@ -69,8 +69,8 @@ unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
 int previousPwm = 200;
-char left_speed = 0;
-char right_speed = 0;
+unsigned int left_speed = 0;
+unsigned int right_speed = 0;
 int duty_set = 200;
 int duty_cycle = 0;
 int errore = 0;
@@ -82,9 +82,9 @@ BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
 
-//****************************************************************
+//====================================================================
 //ISR Gestione messaggi can e funzione di conteggio temporale
-//****************************************************************
+//====================================================================
 
 __interrupt(low_priority) void ISR_bassa(void) {
     if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
@@ -100,7 +100,7 @@ __interrupt(low_priority) void ISR_bassa(void) {
                 if (dir == 0) { //direzione indietro
                     SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
                 }
-                //--------------------------
+                //==================================
                 // requestSpeed = 
                 //previousTimeCounter = timeCounter;
             }
@@ -109,11 +109,16 @@ __interrupt(low_priority) void ISR_bassa(void) {
                 PORTAbits.RA1 = 1;
             }
             if (msg.identifier == ACTUAL_SPEED) {
-
-                left_speed = msg.data[0];
-                right_speed = msg.data[1];
+                /*==================================
+                *La velocita' viene trasmessa a 2 BYTE
+                *così facendo si ottiene una maggiore precisione
+                *e puo' esprimere in mm/s
+                 ==================================*/
+                left_speed = msg.data[1];
+                left_speed = ((left_speed << 8) | (msg.data[0]));
+                right_speed = msg.data[3];
+                right_speed = ((right_speed << 8) | (msg.data[2]));
                 speed_fetched = 1;
-
             }
             if (msg.identifier == ECU_STATE) { //funzione per presenza centraline
                 switch (msg.data[0]) {
