@@ -42,7 +42,7 @@
 #include "idCan.h"
 #include "timers.h"
 #define _XTAL_FREQ 16000000
-#define attesaRampa 15
+#define attesaRampa 30
 
 void configurazione_iniziale(void);
 void send_data(void);
@@ -59,8 +59,8 @@ bit centralina_sterzo = 0;
 bit centralina_abs = 0;
 bit centralina_comando = 0;
 volatile unsigned int dir = 1;
-volatile unsigned char currentSpeed = 1;
-volatile unsigned char requestSpeed = 0;
+volatile long currentSpeed = 1;
+volatile long requestSpeed = 0;
 unsigned long counter = 0;
 unsigned long id = 0;
 unsigned long id1 = 0;
@@ -68,12 +68,12 @@ unsigned long timeCounter = 0; //1 = 10mS
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
-int previousPwm = 200;
+unsigned int previousPwm = 0;
 unsigned int left_speed = 0;
 unsigned int right_speed = 0;
-int duty_set = 200;
+int duty_set = 0;
 int duty_cycle = 0;
-int errore = 0;
+unsigned int errore = 0;
 int vBatt = 0; //tensione batteria
 unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
@@ -157,27 +157,25 @@ int main(void) {
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-    SetDCEPWM1(300);
-    delay_ms(500);
-    SetDCEPWM1(0);
     while (1) {
         // if (PORTAbits.RA1 == 0) {
         if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
             CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
             if (speed_fetched == 1) {
-                PORTCbits.RC1 = ~PORTCbits.RC1; //debug
                 speed_fetched = 0;
                 currentSpeed = ((left_speed + right_speed) / 2);
-                requestSpeed = 25; //DEBUG
-                errore = abs((currentSpeed - requestSpeed)*10);
-                correzione = ((errore / 17)*(errore / 17))*2;
-                if (correzione > 3) {
-                    if ((currentSpeed - requestSpeed) > 0) {
+                requestSpeed = 200; //DEBUG
+                errore = abs((currentSpeed - requestSpeed));
+                correzione = ((errore / 100)*(errore / 100))*2;
+                if (correzione > 1) {
+                    
+                    if (currentSpeed > requestSpeed) {
                         duty_set = previousPwm - correzione;
                         if (duty_set < 0) {
                             duty_set = 0;
                         }
                     } else {
+                        PORTCbits.RC1 = ~PORTCbits.RC1; //debug
                         duty_set = previousPwm + correzione;
                         if (duty_set > 1024) {
                             duty_set = 1023;

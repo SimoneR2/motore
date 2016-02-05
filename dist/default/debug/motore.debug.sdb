@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 18F4480 ]
 [d frameptr 4065 ]
-"207 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"207 D:\Documenti\GitHub\motore\CANlib.h
 [e E16838 CAN_OP_MODE `uc
 CAN_OP_MODE_NORMAL 0
 CAN_OP_MODE_SLEEP 32
@@ -82,6 +82,8 @@ CAN_RX_BUFFER_2_OVFL 2
 [v ___ftmul __ftmul `(f  1 e 4 0 ]
 "20 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "245
@@ -103,7 +105,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v i1_SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
 "17 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
 [v _OpenTimer2 OpenTimer2 `(v  1 e 0 0 ]
-"206 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"206 D:\Documenti\GitHub\motore\CANlib.h
 [v _CANOperationMode CANOperationMode `(v  1 e 0 0 ]
 "218
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
@@ -123,17 +125,17 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisTxReady CANisTxReady `(uc  1 e 1 0 ]
 "1163
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
-"61 D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
+"61 D:\Documenti\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
-"89 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"89 D:\Documenti\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
-"143
+"147
 [v _main main `(i  1 e 2 0 ]
-"236
+"238
 [v _send_data send_data `(v  1 e 0 0 ]
-"270
+"272
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
-"285
+"287
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 "16255 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4480.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
@@ -1522,12 +1524,12 @@ CAN_RX_BUFFER_2_OVFL 2
 "34968
 "34968
 [v _INTCONbits INTCONbits `VES2446  1 e 1 @4082 ]
-"49 D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
+"49 D:\Documenti\GitHub\motore\delay.c
 [v _delay_quartz_frequency_value delay_quartz_frequency_value `VEuc  1 e 1 0 ]
 "50
 [v _clock_counter_reference clock_counter_reference `VEui  1 e 2 0 ]
 [s S853 . 15 `ul 1 identifier 4 0 `[8]uc 1 data 8 4 `uc 1 type 1 12 `uc 1 length 1 13 `uc 1 RTR 1 14 ]
-"51 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"51 D:\Documenti\GitHub\motore\motore.c
 [v _msg msg `S853  1 e 15 0 ]
 "52
 [v _remote_frame remote_frame `b  1 e 0 0 ]
@@ -1550,9 +1552,9 @@ CAN_RX_BUFFER_2_OVFL 2
 "61
 [v _dir dir `VEui  1 e 2 0 ]
 "62
-[v _currentSpeed currentSpeed `VEuc  1 e 1 0 ]
+[v _currentSpeed currentSpeed `VEl  1 e 4 0 ]
 "63
-[v _requestSpeed requestSpeed `VEuc  1 e 1 0 ]
+[v _requestSpeed requestSpeed `VEl  1 e 4 0 ]
 "65
 [v _id id `ul  1 e 4 0 ]
 "66
@@ -1566,7 +1568,7 @@ CAN_RX_BUFFER_2_OVFL 2
 "70
 [v _previousTimeCounter2 previousTimeCounter2 `ul  1 e 4 0 ]
 "71
-[v _previousPwm previousPwm `i  1 e 2 0 ]
+[v _previousPwm previousPwm `ui  1 e 2 0 ]
 "72
 [v _left_speed left_speed `ui  1 e 2 0 ]
 "73
@@ -1574,7 +1576,7 @@ CAN_RX_BUFFER_2_OVFL 2
 "74
 [v _duty_set duty_set `i  1 e 2 0 ]
 "76
-[v _errore errore `i  1 e 2 0 ]
+[v _errore errore `ui  1 e 2 0 ]
 "77
 [v _vBatt vBatt `i  1 e 2 0 ]
 "78
@@ -1585,29 +1587,29 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _data_array1 data_array1 `[8]uc  1 e 8 0 ]
 "83
 [v _data_array_debug data_array_debug `[8]uc  1 e 8 0 ]
-"143
+"147
 [v _main main `(i  1 e 2 0 ]
 {
-"144
+"148
 [v main@period period `uc  1 a 1 34 ]
-"234
-} 0
 "236
+} 0
+"238
 [v _send_data send_data `(v  1 e 0 0 ]
 {
-"250
+"252
 [v send_data@i i `uc  1 a 1 16 ]
-"268
+"270
 } 0
-"285
+"287
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
-"350
+"352
 } 0
-"61 D:\DOCUMENTI LUIGINO\GitHub\motore\delay.c
+"61 D:\Documenti\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
 {
-[v delay_ms@value_ms value_ms `ui  1 p 2 14 ]
+[v delay_ms@value_ms value_ms `ui  1 p 2 13 ]
 "96
 } 0
 "18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
@@ -1620,7 +1622,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v SetOutputEPWM1@outputconfig outputconfig `uc  1 a 1 1 ]
 "45
 } 0
-"218 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"218 D:\Documenti\GitHub\motore\CANlib.h
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
 {
 [v CANInitialize@propSeg propSeg `uc  1 a 1 wreg ]
@@ -1676,35 +1678,35 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANOperationMode@mode mode `E16838  1 a 1 0 ]
 "211
 } 0
-"270 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"272 D:\Documenti\GitHub\motore\motore.c
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
 {
-"283
+"285
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 12 ]
+[v ___wmul@product product `ui  1 a 2 11 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 8 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 10 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 7 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 9 ]
 "53
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "11
-[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+[v ___awdiv@quotient quotient `i  1 a 2 19 ]
 "12
-[v ___awdiv@sign sign `uc  1 a 1 5 ]
-[v ___awdiv@counter counter `uc  1 a 1 4 ]
+[v ___awdiv@sign sign `uc  1 a 1 18 ]
+[v ___awdiv@counter counter `uc  1 a 1 17 ]
 "8
-[v ___awdiv@dividend dividend `i  1 p 2 0 ]
-[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+[v ___awdiv@dividend dividend `i  1 p 2 13 ]
+[v ___awdiv@divisor divisor `i  1 p 2 15 ]
 "42
 } 0
-"294 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"294 D:\Documenti\GitHub\motore\CANlib.h
 [v _CANsendMessage CANsendMessage `(v  1 e 0 0 ]
 {
 "296
@@ -1724,8 +1726,20 @@ CAN_RX_BUFFER_2_OVFL 2
 "4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
 {
-[v abs@a a `i  1 p 2 14 ]
+[v abs@a a `i  1 p 2 0 ]
 "9
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 4 ]
+"8
+[v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
+"31
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c
 [v _SetDCEPWM1 SetDCEPWM1 `(v  1 e 0 0 ]
@@ -1755,7 +1769,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenEPWM1@period period `uc  1 a 1 0 ]
 "23
 } 0
-"1119 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"1119 D:\Documenti\GitHub\motore\CANlib.h
 [v _CANisTXwarningON CANisTXwarningON `(uc  1 e 1 0 ]
 {
 "1122
@@ -1765,10 +1779,10 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1130
 } 0
-"89 D:\DOCUMENTI LUIGINO\GitHub\motore\motore.c
+"89 D:\Documenti\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
-"141
+"145
 } 0
 "18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
 [v i1_SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
@@ -1780,7 +1794,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v i1SetOutputEPWM1@outputconfig outputconfig `uc  1 a 1 1 ]
 "45
 } 0
-"528 D:\DOCUMENTI LUIGINO\GitHub\motore\CANlib.h
+"528 D:\Documenti\GitHub\motore\CANlib.h
 [v _CANreceiveMessage CANreceiveMessage `(uc  1 e 1 0 ]
 {
 "530

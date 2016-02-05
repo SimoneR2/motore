@@ -20576,8 +20576,8 @@ bit centralina_sterzo = 0;
 bit centralina_abs = 0;
 bit centralina_comando = 0;
 volatile unsigned int dir = 1;
-volatile unsigned char currentSpeed = 1;
-volatile unsigned char requestSpeed = 0;
+volatile long currentSpeed = 1;
+volatile long requestSpeed = 0;
 unsigned long counter = 0;
 unsigned long id = 0;
 unsigned long id1 = 0;
@@ -20585,12 +20585,12 @@ unsigned long timeCounter = 0;
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
-int previousPwm = 200;
+unsigned int previousPwm = 0;
 unsigned int left_speed = 0;
 unsigned int right_speed = 0;
-int duty_set = 200;
+int duty_set = 0;
 int duty_cycle = 0;
-int errore = 0;
+unsigned int errore = 0;
 int vBatt = 0;
 unsigned int correzione = 0;
 BYTE counter_array [8] = 0;
@@ -20624,11 +20624,12 @@ PORTAbits.RA1 = 1;
 }
 if (msg.identifier == 0b00000000000000000000000000110) {
 
+# 117
 left_speed = msg.data[1];
-left_speed = ((left_speed<<8)|(msg.data[0]));
-right_speed = msg.data[1];
+left_speed = ((left_speed << 8) | (msg.data[0]));
+right_speed = msg.data[3];
+right_speed = ((right_speed << 8) | (msg.data[2]));
 speed_fetched = 1;
-
 }
 if (msg.identifier == 0b00000000000000000000000000010) {
 switch (msg.data[0]) {
@@ -20667,27 +20668,25 @@ period = 0xFE;
 OpenEPWM1(period);
 speed_fetched = 1;
 SetOutputEPWM1(0b01111111, 0b11111100);
-SetDCEPWM1(300);
-delay_ms(500);
-SetDCEPWM1(0);
 while (1) {
 
-if ((timeCounter - previousTimeCounter1 >= 15)) {
+if ((timeCounter - previousTimeCounter1 >= 30)) {
 CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 if (speed_fetched == 1) {
-PORTCbits.RC1 = ~PORTCbits.RC1;
 speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
-requestSpeed = 25;
-errore = abs((currentSpeed - requestSpeed)*10);
-correzione = ((errore / 17)*(errore / 17))*2;
-if (correzione > 3) {
-if ((currentSpeed - requestSpeed) > 0) {
+requestSpeed = 200;
+errore = abs((currentSpeed - requestSpeed));
+correzione = ((errore / 100)*(errore / 100))*2;
+if (correzione > 1) {
+
+if (currentSpeed > requestSpeed) {
 duty_set = previousPwm - correzione;
 if (duty_set < 0) {
 duty_set = 0;
 }
 } else {
+PORTCbits.RC1 = ~PORTCbits.RC1;
 duty_set = previousPwm + correzione;
 if (duty_set > 1024) {
 duty_set = 1023;
