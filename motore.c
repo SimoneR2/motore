@@ -1,3 +1,4 @@
+#define USE_AND_MASKS
 /*==============================================================================
  *PROGRAM: MOTORE
  *WRITTEN BY: Simone Righetti
@@ -41,8 +42,9 @@
 #include <stdlib.h>
 #include "idCan.h"
 #include "timers.h"
+#include <usart.h>//debug
 #define _XTAL_FREQ 16000000
-#define attesaRampa 30
+#define attesaRampa 10
 
 void configurazione_iniziale(void);
 void send_data(void);
@@ -71,17 +73,19 @@ unsigned long previousTimeCounter2 = 0;
 unsigned int previousPwm = 0;
 unsigned int left_speed = 0;
 unsigned int right_speed = 0;
-int duty_set = 0;
+long duty_set = 0;
 int duty_cycle = 0;
 unsigned int errore = 0;
 int vBatt = 0; //tensione batteria
-unsigned int correzione = 0;
+long correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
-
+char current[] = 0;
+unsigned char scrittura =0;
+unsigned char UART1Config = 0, baud = 0; //debug
 //====================================================================
 //ISR Gestione messaggi can e funzione di conteggio temporale
 //====================================================================
@@ -110,10 +114,17 @@ __interrupt(low_priority) void ISR_bassa(void) {
             }
             if (msg.identifier == ACTUAL_SPEED) {
                 /*==================================
-                *La velocita' viene trasmessa a 2 BYTE
-                *così facendo si ottiene una maggiore precisione
-                *e puo' esprimere in mm/s
+                 *La velocita' viene trasmessa a 2 BYTE
+                 *così facendo si ottiene una maggiore precisione
+                 *e puo' esprimere in mm/s
                  ==================================*/
+
+                //DEBUG
+                for (int i = 0; i < 8; i++) {
+                    current[i] = msg.data[i];
+                }
+                //END DEBUG
+
                 left_speed = msg.data[1];
                 left_speed = ((left_speed << 8) | (msg.data[0]));
                 right_speed = msg.data[3];
@@ -157,25 +168,38 @@ int main(void) {
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+    TRISCbits.RC6 = 0; //DEBUG TX pin set as output
+    TRISCbits.RC7 = 1; //DEBUG RX pin set as input
+    UART1Config = USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_BRGH_HIGH;
+    baud = 103;
+    OpenUSART(UART1Config, baud);
+    WriteUSART(1);
     while (1) {
         // if (PORTAbits.RA1 == 0) {
         if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
             CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
             if (speed_fetched == 1) {
+               //DEBUG SEQUENCE
+                WriteUSART(0b11111111);
+                for (int i = 0; i<8; i++){
+                    scrittura = current[i];
+                    WriteUSART(scrittura);
+                }
+                
                 speed_fetched = 0;
                 currentSpeed = ((left_speed + right_speed) / 2);
-                requestSpeed = 200; //DEBUG
+
+                requestSpeed = 1000; //DEBUG
                 errore = abs((currentSpeed - requestSpeed));
                 correzione = ((errore / 100)*(errore / 100))*2;
                 if (correzione > 1) {
-                    
                     if (currentSpeed > requestSpeed) {
+                       
                         duty_set = previousPwm - correzione;
                         if (duty_set < 0) {
                             duty_set = 0;
                         }
                     } else {
-                        PORTCbits.RC1 = ~PORTCbits.RC1; //debug
                         duty_set = previousPwm + correzione;
                         if (duty_set > 1024) {
                             duty_set = 1023;
@@ -227,8 +251,9 @@ int main(void) {
             }
             previousTimeCounter = timeCounter;
         }
-        if ((timeCounter - previousTimeCounter2 >= 100)) { //misura la tensione della batteria ogni secondo
-
+        if ((timeCounter - previousTimeCounter2 > 100)) { //misura la tensione della batteria ogni secondo
+            PORTCbits.RC1 = ~PORTCbits.RC1; //debug
+            
             battery_measure();
             previousTimeCounter2 = timeCounter;
         }
@@ -274,6 +299,7 @@ void battery_measure(void) {
     while (ADCON0bits.GO);
     vBatt = ADRESH;
     vBatt = (vBatt * 14) / 255; //
+    WriteUSART(vBatt);
     if (vBatt < 8) {
         while (!CANisTxReady());
         CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
