@@ -41,7 +41,7 @@ Standard and Extended messages are supported
  
 *******************************************************
 *******************************************************/
-
+#include <xc.h>
 #ifndef CAN_FLAG	//it allows to include the library in multiple points
 #define CAN_FLAG
 
