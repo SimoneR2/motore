@@ -82,6 +82,7 @@ BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
+BYTE data_debug1 [8] = 0; //DEBUG
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
 unsigned char UART1Config = 0, baud = 0; //debug
@@ -186,6 +187,8 @@ int main(void) {
             while (CANisTxReady() != 1) {
             }
             CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+            data_debug1[0] = 0x96; //DEBUG
+            CANsendMessage(STEERING_CHANGE, data_debug1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0); //DEBUG
             if (speed_fetched == 1) {
                 //DEBUG SEQUENCE
                 //                WriteUSART(0b11111111);
@@ -198,7 +201,7 @@ int main(void) {
                 speed_fetched = 0;
                 currentSpeed = ((left_speed + right_speed) / 2);
 
-                requestSpeed = 1500; //DEBUG
+                requestSpeed = 3000; //DEBUG
                 errore = abs((currentSpeed - requestSpeed));
                 correzione = ((errore / 150)*(errore / 150))*2;
                 if (correzione > 1) {

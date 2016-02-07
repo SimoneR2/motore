@@ -123,13 +123,13 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
 "61 D:\Documenti\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
-"93 D:\Documenti\GitHub\motore\motore.c
+"94 D:\Documenti\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
-"163
+"164
 [v _main main `(i  1 e 2 0 ]
-"311
+"314
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
-"329
+"332
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 "16255 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4480.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
@@ -1582,20 +1582,22 @@ CAN_RX_BUFFER_2_OVFL 2
 "84
 [v _data_array_debug data_array_debug `[8]uc  1 e 8 0 ]
 "85
-[v _current current `VE[1]uc  1 e 1 0 ]
+[v _data_debug1 data_debug1 `[8]uc  1 e 8 0 ]
 "86
+[v _current current `VE[1]uc  1 e 1 0 ]
+"87
 [v _scrittura scrittura `VEuc  1 e 1 0 ]
-"163
+"164
 [v _main main `(i  1 e 2 0 ]
 {
-"165
+"166
 [v main@period period `uc  1 a 1 34 ]
-"274
+"277
 } 0
-"329
+"332
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
-"394
+"397
 } 0
 "18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
 [v _SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
@@ -1663,10 +1665,10 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANOperationMode@mode mode `E16838  1 a 1 0 ]
 "211
 } 0
-"311 D:\Documenti\GitHub\motore\motore.c
+"314 D:\Documenti\GitHub\motore\motore.c
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
 {
-"327
+"330
 } 0
 "61 D:\Documenti\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
@@ -1760,10 +1762,10 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenEPWM1@period period `uc  1 a 1 0 ]
 "23
 } 0
-"93 D:\Documenti\GitHub\motore\motore.c
+"94 D:\Documenti\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
-"161
+"162
 } 0
 "18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
 [v i1_SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]

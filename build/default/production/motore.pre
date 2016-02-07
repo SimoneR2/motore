@@ -20597,6 +20597,7 @@ BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
+BYTE data_debug1 [8] = 0;
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
 unsigned char UART1Config = 0, baud = 0;
@@ -20630,7 +20631,7 @@ PORTAbits.RA1 = 1;
 }
 if (msg.identifier == 0b00000000000000000000000000110) {
 
-# 129
+# 130
 left_speed = msg.data[1];
 left_speed = ((left_speed << 8) | (msg.data[0]));
 right_speed = msg.data[3];
@@ -20691,13 +20692,15 @@ if ((timeCounter - previousTimeCounter1 >= 30)) {
 while (CANisTxReady() != 1) {
 }
 CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+data_debug1[0] = 0x96;
+CANsendMessage(0b00000000000000000000000000101, data_debug1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 if (speed_fetched == 1) {
 
-# 198
+# 201
 speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
 
-requestSpeed = 1500;
+requestSpeed = 3000;
 errore = abs((currentSpeed - requestSpeed));
 correzione = ((errore / 150)*(errore / 150))*2;
 if (correzione > 1) {
@@ -20721,7 +20724,7 @@ previousTimeCounter1 = timeCounter;
 SetDCEPWM1(duty_set);
 }
 
-# 244
+# 247
 if ((timeCounter - previousTimeCounter) > 500) {
 if (request_sent == 0) {
 while (CANisTxReady() != 1) {
@@ -20766,7 +20769,7 @@ CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & C
 }
 if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
 
-# 306
+# 309
 remote_frame = 0;
 }
 
