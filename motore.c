@@ -97,9 +97,9 @@ __interrupt(low_priority) void ISR_bassa(void) {
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
             if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
-                //TOGLIERE DUE COMMENTI!!!!
-                requestSpeed = msg.data[0]; //velocità richiesta 
-                dir = msg.data[1]; //direzione richiesta
+                requestSpeed = msg.data[1]; //velocità richiesta 
+                requestSpeed = ((requestSpeed<<8)|msg.data[0]);
+                dir = msg.data[2]; //direzione richiesta
                 if (dir == 1) { //direzione avanti
                     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
                 }
