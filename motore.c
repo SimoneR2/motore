@@ -49,8 +49,11 @@
 void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
+void can_interpreter(void);
+void rampe(void);
 
 CANmessage msg;
+volatile bit new_message = 0;
 volatile bit remote_frame = 0;
 volatile bit remote_frame1 = 0;
 volatile bit speed_fetched = 0;
@@ -64,7 +67,6 @@ volatile unsigned int dir = 1;
 volatile long currentSpeed = 1;
 volatile long requestSpeed = 0;
 volatile unsigned long id = 0;
-volatile unsigned long id1 = 0;
 volatile unsigned long timeCounter = 0; //1 = 10mS
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
@@ -80,79 +82,28 @@ long correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
-BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
-BYTE data_debug1 [8] = 0; //DEBUG
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
-unsigned char UART1Config = 0, baud = 0; //debug
-BYTE data_debug1[8]; //DEBUG
 //====================================================================
 //ISR Gestione messaggi can e funzione di conteggio temporale
 //====================================================================
 
 __interrupt(low_priority) void ISR_bassa(void) {
     if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-        PORTCbits.RC1 = ~PORTCbits.RC1;
         if (CANisRxReady()) { //Se il messaggio è arrivato
             CANreceiveMessage(&msg); //leggilo e salvalo
-            if (msg.identifier == SPEED_CHANGE) { //variazione velocità 
-                requestSpeed = msg.data[1]; //velocità richiesta 
-                requestSpeed = ((requestSpeed<<8)|msg.data[0]);
-                dir = msg.data[2]; //direzione richiesta
-                if (dir == 1) { //direzione avanti
-                    SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-                }
-                if (dir == 0) { //direzione indietro
-                    SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
-                }
-                //==================================
-                // requestSpeed = 
-                //previousTimeCounter = timeCounter;
+            remote_frame = msg.RTR;
+            id = msg.identifier; //salvo il dato per interpretarlo
+            for (char i = 0; i < 8; i++) {
+                data_array[i] = msg.data[i]; //salvo il dato per interpretarlo
             }
-            if (msg.identifier == EMERGENCY) { //stop di emergenza
-                requestSpeed = 0;
-                PORTAbits.RA1 = 1;
-            }
-            if (msg.identifier == ACTUAL_SPEED) {
-                /*==================================
-                 *La velocita' viene trasmessa a 2 BYTE
-                 *così facendo si ottiene una maggiore precisione
-                 *e puo' esprimere in mm/s
-                 ==================================*/
-
-                //DEBUG
-                //                for (int i = 0; i < 8; i++) {
-                //                    current[i] = msg.data[i];
-                //                }
-                //END DEBUG
-
-                left_speed = msg.data[1];
-                left_speed = ((left_speed << 8) | (msg.data[0]));
-                right_speed = msg.data[3];
-                right_speed = ((right_speed << 8) | (msg.data[2]));
-                speed_fetched = 1;
-            }
-            if (msg.identifier == ECU_STATE) { //funzione per presenza centraline
-                //PORTCbits.RC1 = ~PORTCbits.RC1; //debug
-                if (msg.data[0] == 0x01) {
-                    centralina_abs = 1;
-                    PORTCbits.RC5 = 0; //DEBUG
-                }
-                if (msg.data[0] == 0x02) {
-                    centralina_sterzo = 1;
-                    centralina_comando = 1; //debug
-                    PORTCbits.RC4 = 0; //DEBUG
-                }
-                if (msg.data[0] == 0x03) {
-                    centralina_comando = 1;
-                }
-
-            }
+            new_message = 1;
         }
         PIR3bits.RXB0IF = 0;
         PIR3bits.RXB1IF = 0;
     }
+
     if (PIR2bits.TMR3IF) { //interrupt timer, ogni 10mS
         timeCounter++; //incrementa di 1 la variabile timer
         TMR3H = 0x63; //reimposta il timer
@@ -162,7 +113,6 @@ __interrupt(low_priority) void ISR_bassa(void) {
 }
 
 int main(void) {
-
     unsigned char period;
     configurazione_iniziale();
     PORTAbits.RA1 = 1;
@@ -175,74 +125,16 @@ int main(void) {
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-    PORTCbits.RC5 = 1; //DEBUG
-    PORTCbits.RC4 = 1; //DEBUG
-    //    UART1Config = USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_BRGH_HIGH;
-    //    baud = 103;
-    //    OpenUSART(UART1Config, baud);
-    //    WriteUSART(1);
     while (1) {
-        // if (PORTAbits.RA1 == 0) {
-        if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
-            while (CANisTxReady() != 1) {
+        can_interpreter();
+        if ((PORTAbits.RA1 == 0)&&(PORTCbits.RC1 == 0)) {
+            if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
+                rampe();
             }
-            CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-            data_debug1[0] = 0x96; //DEBUG
-            CANsendMessage(STEERING_CHANGE, data_debug1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0); //DEBUG
-            if (speed_fetched == 1) {
-                //DEBUG SEQUENCE
-                //                WriteUSART(0b11111111);
-                //                for (int i = 0; i < 8; i++) {
-                //                    scrittura = current[i];
-                //                    WriteUSART(scrittura);
-                //                    while (BusyUSART());
-                //                }
-
-                speed_fetched = 0;
-                currentSpeed = ((left_speed + right_speed) / 2);
-
-                requestSpeed = 3000; //DEBUG
-                errore = abs((currentSpeed - requestSpeed));
-                correzione = ((errore / 150)*(errore / 150))*2;
-                if (correzione > 1) {
-                    if (currentSpeed - requestSpeed > 0) {
-                        duty_set = previousPwm - correzione;
-                        if (duty_set < 0) {
-                            duty_set = 0;
-                        }
-                    } else {
-                        duty_set = previousPwm + correzione;
-                        if (duty_set > 1024) {
-                            duty_set = 1023;
-                        }
-                    }
-                } else {
-                    duty_set = previousPwm;
-                }
-                previousPwm = duty_set;
-            }
-            previousTimeCounter1 = timeCounter;
-            SetDCEPWM1(duty_set); //imposta pwm
         }
-        /* DEBUG
-                if ((remote_frame == 1) || (can_retry == 1)) { //se è arrivato un remote frame la risposta è immediata
-                    send_data();
-                }
-         * */
-
-        //        DEBUG
-        //        if (CANisBusOFF()) {
-        //            SetDCEPWM1(0); //ferma il mezzo DEBUG
-        //            PORTAbits.RA1 = 1; //accendi led errore
-        //            delay_ms(200);
-        //            PORTAbits.RA1 = 0;
-        //            delay_ms(200);
-        //            PORTAbits.RA1 = 1;
-        //            CANInitialize(4, 6, 5, 1, 3, CAN_CONFIG_LINE_FILTER_OFF & CAN_CONFIG_SAMPLE_ONCE & CAN_CONFIG_ALL_VALID_MSG & CAN_CONFIG_DBL_BUFFER_ON);
-        //        } else {
-        //            PORTAbits.RA1 = 0;
-        //        }
-
+        if ((can_retry == 1)&&(remote_frame)) {
+            send_data();
+        }
         //FUNZIONE DI SICUREZZA
         if ((timeCounter - previousTimeCounter) > 500) {
             if (request_sent == 0) {
@@ -276,57 +168,112 @@ int main(void) {
     }
 }
 
+void rampe(void) {
+    while (CANisTxReady() != 1);
+    CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+    if (speed_fetched == 1) {
+        if (dir == 1) { //direzione avanti
+            SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+        }
+        if (dir == 0) { //direzione indietro
+            SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
+        }
+        speed_fetched = 0;
+        currentSpeed = ((left_speed + right_speed) / 2);
+        errore = abs((currentSpeed - requestSpeed));
+        correzione = ((errore / 150)*(errore / 150))*2;
+        if (correzione > 1) {
+            if (currentSpeed - requestSpeed > 0) {
+                duty_set = previousPwm - correzione;
+                if (duty_set < 0) {
+                    duty_set = 0;
+                }
+            } else {
+                duty_set = previousPwm + correzione;
+                if (duty_set > 1024) {
+                    duty_set = 1023;
+                }
+            }
+        } else {
+            duty_set = previousPwm;
+        }
+        previousPwm = duty_set;
+    }
+    previousTimeCounter1 = timeCounter;
+    SetDCEPWM1(duty_set); //imposta pwm
+}
+
 void send_data(void) {
     if (CANisTxReady()) { //è disponibile almeno un buffer per l'invio dei dati
         if (remote_frame == 1) { //se è una risposta a un remote frame deve avere lo stesso id della richiesta
             CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
             remote_frame = 0; //azzero flag risposta remote frame
         }
-        if (can_retry == 1) {
-            CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-        }
     }
     if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) { //se l'invio è stato abortito
-        //        can_retry = 1;
-        //        id1 = id;
-        //        remote_frame1 = remote_frame;
-        //        for (char i = 0; i < 8; i++) {
-        //            data_array1[i] = data_array[i];
-        //            TXB0CONbits.TXABT = 0;
-        //            TXB1CONbits.TXABT = 0;
-        //        }
-        //    } else {
-        //        can_retry = 0;
-        //        if (remote_frame1 != 0) {
-        //            remote_frame = remote_frame1;
-        //            id = id1;
-        //            message_sent = 1;
-        //            remote_frame1 = 0;
-        //        } else {
-        //
-        //            message_sent = 0;
-        //        }
-        remote_frame = 0; //azzero flag risposta remote frame
+        can_retry = 1;
+    } else {
+        can_retry = 0;
     }
-
 }
 
 void battery_measure(void) {
-
     ADCON0bits.GO = 1; //abilita conversione ADC;
     while (ADCON0bits.GO);
     vBatt = ADRESH;
     vBatt = (vBatt * 14) / 255; //
     if (vBatt < 8) {
-        while (CANisTxReady() != 1) {
-        }
+        while (CANisTxReady() != 1);
         CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-        //PORTCbits.RC1 = 1;
-        delay_ms(1000);
+        PORTCbits.RC1 = 1;
     } else {
-        //PORTCbits.RC1 = 0;
-
+        PORTCbits.RC1 = 0;
     }
+}
+
+void can_interpreter(void) {
+    if (new_message == 1) {
+        if (id == SPEED_CHANGE) { //variazione velocità 
+            requestSpeed = data_array[1]; //velocità richiesta 
+            requestSpeed = ((requestSpeed << 8) | msg.data[0]);
+            dir = data_array[2]; //direzione richiesta
+
+        }
+
+        if (id == EMERGENCY) { //stop di emergenza
+            requestSpeed = 0;
+            PORTAbits.RA1 = 1;
+        }
+
+        if (id == ACTUAL_SPEED) {
+            /*==================================
+             *La velocita' viene trasmessa a 2 BYTE
+             *così facendo si ottiene una maggiore precisione
+             *e puo' esprimere in mm/s
+             ==================================*/
+            left_speed = data_array[1];
+            left_speed = ((left_speed << 8) | (data_array[0]));
+            right_speed = data_array[3];
+            right_speed = ((right_speed << 8) | (data_array[2]));
+            speed_fetched = 1;
+        }
+
+        if (id == ECU_STATE) { //funzione per presenza centraline
+            if (data_array[0] == 0x01) {
+                centralina_abs = 1;
+                PORTCbits.RC5 = 0; //DEBUG
+            }
+            if (data_array[0] == 0x02) {
+                centralina_sterzo = 1;
+                centralina_comando = 1; //debug
+                PORTCbits.RC4 = 0; //DEBUG
+            }
+            if (data_array[0] == 0x03) {
+                centralina_comando = 1;
+            }
+        }
+    }
+    new_message = 0;
 }
 
 void configurazione_iniziale(void) {

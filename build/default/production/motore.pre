@@ -20564,8 +20564,11 @@ extern char * ftoa(float f, int * status);
 void configurazione_iniziale(void);
 void send_data(void);
 void battery_measure(void);
+void can_interpreter(void);
+void rampe(void);
 
 CANmessage msg;
+volatile bit new_message = 0;
 volatile bit remote_frame = 0;
 volatile bit remote_frame1 = 0;
 volatile bit speed_fetched = 0;
@@ -20579,7 +20582,6 @@ volatile unsigned int dir = 1;
 volatile long currentSpeed = 1;
 volatile long requestSpeed = 0;
 volatile unsigned long id = 0;
-volatile unsigned long id1 = 0;
 volatile unsigned long timeCounter = 0;
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
@@ -20595,69 +20597,28 @@ long correzione = 0;
 BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
-BYTE data_array1 [8] = 0;
 BYTE data_array_debug [8] = 0;
-BYTE data_debug1 [8] = 0;
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
-unsigned char UART1Config = 0, baud = 0;
-BYTE data_debug1[8];
 
 
 
 
 __attribute__((interrupt("__low_priority"))) void ISR_bassa(void) {
 if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-PORTCbits.RC1 = ~PORTCbits.RC1;
 if (CANisRxReady()) {
 CANreceiveMessage(&msg);
-if (msg.identifier == 0b00000000000000000000000000011) {
-
-requestSpeed = msg.data[0];
-dir = msg.data[1];
-if (dir == 1) {
-SetOutputEPWM1(0b01111111, 0b11111100);
+remote_frame = msg.RTR;
+id = msg.identifier;
+for (char i = 0; i < 8; i++) {
+data_array[i] = msg.data[i];
 }
-if (dir == 0) {
-SetOutputEPWM1(0b11111111, 0b11111100);
-}
-
-
-
-}
-if (msg.identifier == 0b00000000000000000000000000001) {
-requestSpeed = 0;
-PORTAbits.RA1 = 1;
-}
-if (msg.identifier == 0b00000000000000000000000000110) {
-
-# 130
-left_speed = msg.data[1];
-left_speed = ((left_speed << 8) | (msg.data[0]));
-right_speed = msg.data[3];
-right_speed = ((right_speed << 8) | (msg.data[2]));
-speed_fetched = 1;
-}
-if (msg.identifier == 0b00000000000000000000000000010) {
-
-if (msg.data[0] == 0x01) {
-centralina_abs = 1;
-PORTCbits.RC5 = 0;
-}
-if (msg.data[0] == 0x02) {
-centralina_sterzo = 1;
-centralina_comando = 1;
-PORTCbits.RC4 = 0;
-}
-if (msg.data[0] == 0x03) {
-centralina_comando = 1;
-}
-
-}
+new_message = 1;
 }
 PIR3bits.RXB0IF = 0;
 PIR3bits.RXB1IF = 0;
 }
+
 if (PIR2bits.TMR3IF) {
 timeCounter++;
 TMR3H = 0x63;
@@ -20667,7 +20628,6 @@ PIR2bits.TMR3IF = 0;
 }
 
 int main(void) {
-
 unsigned char period;
 configurazione_iniziale();
 PORTAbits.RA1 = 1;
@@ -20680,51 +20640,17 @@ period = 0xFE;
 OpenEPWM1(period);
 speed_fetched = 1;
 SetOutputEPWM1(0b01111111, 0b11111100);
-PORTCbits.RC5 = 1;
-PORTCbits.RC4 = 1;
-
-
-
-
 while (1) {
-
+can_interpreter();
+if ((PORTAbits.RA1 == 0)&&(PORTCbits.RC1 == 0)) {
 if ((timeCounter - previousTimeCounter1 >= 30)) {
-while (CANisTxReady() != 1) {
-}
-CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-data_debug1[0] = 0x96;
-CANsendMessage(0b00000000000000000000000000101, data_debug1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-if (speed_fetched == 1) {
-
-# 201
-speed_fetched = 0;
-currentSpeed = ((left_speed + right_speed) / 2);
-
-requestSpeed = 3000;
-errore = abs((currentSpeed - requestSpeed));
-correzione = ((errore / 150)*(errore / 150))*2;
-if (correzione > 1) {
-if (currentSpeed - requestSpeed > 0) {
-duty_set = previousPwm - correzione;
-if (duty_set < 0) {
-duty_set = 0;
-}
-} else {
-duty_set = previousPwm + correzione;
-if (duty_set > 1024) {
-duty_set = 1023;
+rampe();
 }
 }
-} else {
-duty_set = previousPwm;
-}
-previousPwm = duty_set;
-}
-previousTimeCounter1 = timeCounter;
-SetDCEPWM1(duty_set);
+if ((can_retry == 1)&&(remote_frame)) {
+send_data();
 }
 
-# 247
 if ((timeCounter - previousTimeCounter) > 500) {
 if (request_sent == 0) {
 while (CANisTxReady() != 1) {
@@ -20757,40 +20683,107 @@ previousTimeCounter2 = timeCounter;
 }
 }
 
+void rampe(void) {
+while (CANisTxReady() != 1);
+CANsendMessage(0b00000000000000000000000000110, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+if (speed_fetched == 1) {
+if (dir == 1) {
+SetOutputEPWM1(0b01111111, 0b11111100);
+}
+if (dir == 0) {
+SetOutputEPWM1(0b11111111, 0b11111100);
+}
+speed_fetched = 0;
+currentSpeed = ((left_speed + right_speed) / 2);
+errore = abs((currentSpeed - requestSpeed));
+correzione = ((errore / 150)*(errore / 150))*2;
+if (correzione > 1) {
+if (currentSpeed - requestSpeed > 0) {
+duty_set = previousPwm - correzione;
+if (duty_set < 0) {
+duty_set = 0;
+}
+} else {
+duty_set = previousPwm + correzione;
+if (duty_set > 1024) {
+duty_set = 1023;
+}
+}
+} else {
+duty_set = previousPwm;
+}
+previousPwm = duty_set;
+}
+previousTimeCounter1 = timeCounter;
+SetDCEPWM1(duty_set);
+}
+
 void send_data(void) {
 if (CANisTxReady()) {
 if (remote_frame == 1) {
 CANsendMessage(id, data_array, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 remote_frame = 0;
 }
-if (can_retry == 1) {
-CANsendMessage(id1, data_array1, 8, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
-}
 }
 if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) {
-
-# 309
-remote_frame = 0;
+can_retry = 1;
 }
-
 }
 
 void battery_measure(void) {
-
 ADCON0bits.GO = 1;
 while (ADCON0bits.GO);
 vBatt = ADRESH;
 vBatt = (vBatt * 14) / 255;
 if (vBatt < 8) {
-while (CANisTxReady() != 1) {
-}
+while (CANisTxReady() != 1);
 CANsendMessage(0b00000000000000000000000001001, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-
-delay_ms(1000);
+PORTCbits.RC1 = 1;
 } else {
+PORTCbits.RC1 = 0;
+}
+}
 
+void can_interpreter(void) {
+if (new_message == 1) {
+if (id == 0b00000000000000000000000000011) {
+requestSpeed = data_array[1];
+requestSpeed = ((requestSpeed << 8) | msg.data[0]);
+dir = data_array[2];
 
 }
+
+if (id == 0b00000000000000000000000000001) {
+requestSpeed = 0;
+PORTAbits.RA1 = 1;
+}
+
+if (id == 0b00000000000000000000000000110) {
+
+# 252
+left_speed = data_array[1];
+left_speed = ((left_speed << 8) | (data_array[0]));
+right_speed = data_array[3];
+right_speed = ((right_speed << 8) | (data_array[2]));
+speed_fetched = 1;
+}
+
+if (id == 0b00000000000000000000000000010) {
+if (data_array[0] == 0x01) {
+centralina_abs = 1;
+PORTCbits.RC5 = 0;
+}
+if (data_array[0] == 0x02) {
+centralina_sterzo = 1;
+centralina_comando = 1;
+PORTCbits.RC4 = 0;
+}
+if (data_array[0] == 0x03) {
+centralina_comando = 1;
+}
+}
+}
+new_message = 0;
 }
 
 void configurazione_iniziale(void) {
