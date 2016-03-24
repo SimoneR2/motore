@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
   -h+dist/default/production\motore.production.sym \
   --cmf=dist/default/production\motore.production.cmf -z -Q18F4480 \
-  -oC:\Users\simon\AppData\Local\Temp\sci4.2 \
+  -oC:\Users\Simone\AppData\Local\Temp\s6uc.2 \
   -Mdist/default/production/motore.production.map -E1 -ver=XC8 --acfsm=1493 \
   -ASTACK=0C9h-02ffh -pstack=STACK -ACODE=00h-03FFFh -ACONST=00h-03FFFh \
   -ASMALLCONST=0300h-03FFhx61 -AMEDIUMCONST=0300h-03FFFh -ACOMRAM=01h-05Fh \
@@ -21,7 +21,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\simon\AppData\Local\Temp\sci4.obj \
+  C:\Users\Simone\AppData\Local\Temp\s6uc.obj \
   dist/default/production\motore.production.obj 
 
 Object code version is 3.11
@@ -34,77 +34,75 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\simon\AppData\Local\Temp\sci4.obj
-                end_init                            136      136        4        C       0
+C:\Users\Simone\AppData\Local\Temp\s6uc.obj
+                end_init                            13A      13A        4        C       0
                 reset_vec                             0        0        4        0       0
                 config                           300000   300000        E   300000       0
 dist/default/production\motore.production.obj
-                intcodelo                            18       18      11E        C       0
+                intcodelo                            18       18      122        C       0
                 temp                                 41       41        1        1       1
-                text23                             26C0     26C0       16        C       0
-                text22                             12F4     12F4      50C        C       0
-                text20                             26E8     26E8       10        C       0
-                text19                             26A4     26A4       1C        C       0
-                text18                             2686     2686       1E        C       0
-                text17                              B80      B80      774        C       0
-                text16                             227C     227C       BE        C       0
-                text15                             2628     2628       36        C       0
-                text14                             23E8     23E8       96        C       0
-                text13                             21A8     21A8       D4        C       0
-                text12                             26D6     26D6       12        C       0
-                text11                              13A      13A      A46        C       0
-                text10                             1800     1800      35E        C       0
-                text9                              1FF6     1FF6      1B2        C       0
-                text8                              2570     2570       44        C       0
-                text7                              25EE     25EE       3A        C       0
-                text6                              233A     233A       AE        C       0
-                text5                              25B4     25B4       3A        C       0
-                text4                              247E     247E       5E        C       0
-                text3                              265E     265E       28        C       0
-                text2                              1B5E     1B5E      264        C       0
-                text1                              2526     2526       4A        C       0
-                text0                              1DC2     1DC2      234        C       0
+                text22                             2538     2538       16        C       0
+                text21                             12F8     12F8      50C        C       0
+                text19                             2560     2560       10        C       0
+                text18                             251C     251C       1C        C       0
+                text17                             2578     2578        2     12BC       0
+                text16                             2184     2184       CE        C       0
+                text15                             254E     254E       12        C       0
+                text14                              13E      13E      A46        C       0
+                text13                             1804     1804      35E        C       0
+                text12                             1FD2     1FD2      1B2        C       0
+                text11                             23F6     23F6       44        C       0
+                text10                             24AC     24AC       2A        C       0
+                text9                              2474     2474       38        C       0
+                text8                              2252     2252       AE        C       0
+                text7                              24FE     24FE       1E        C       0
+                text6                               B84      B84      774        C       0
+                text5                              243A     243A       3A        C       0
+                text4                              2300     2300       5E        C       0
+                text3                              24D6     24D6       28        C       0
+                text2                              1DA4     1DA4      22E        C       0
+                text1                              235E     235E       4E        C       0
+                text0                              1B62     1B62      242        C       0
                 cstackCOMRAM                          1        1       23        1       1
                 cstackBANK0                          AB       AB       1E       60       1
                 bssBANK0                             60       60       4B       60       1
                 dataCOMRAM                           3A       3A        7        1       1
                 bssCOMRAM                            24       24       14        1       1
                 bitbssCOMRAM                        1C0       38        A        1       1     8
-                cinit                              24DC     24DC       4A        C       0
-                idataCOMRAM                        26F8     26F8        7        C       0
+                cinit                              23AC     23AC       4A        C       0
+                idataCOMRAM                        2570     2570        7        C       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
 
         CLASS   CODE           
-                end_init                            136      136        4         0
-                intcodelo                            18       18      11E         0
+                end_init                            13A      13A        4         0
+                intcodelo                            18       18      122         0
                 reset_vec                             0        0        4         0
-                text23                             26C0     26C0       16         0
-                text22                             12F4     12F4      50C         0
-                text20                             26E8     26E8       10         0
-                text19                             26A4     26A4       1C         0
-                text18                             2686     2686       1E         0
-                text17                              B80      B80      774         0
-                text16                             227C     227C       BE         0
-                text15                             2628     2628       36         0
-                text14                             23E8     23E8       96         0
-                text13                             21A8     21A8       D4         0
-                text12                             26D6     26D6       12         0
-                text11                              13A      13A      A46         0
-                text10                             1800     1800      35E         0
-                text9                              1FF6     1FF6      1B2         0
-                text8                              2570     2570       44         0
-                text7                              25EE     25EE       3A         0
-                text6                              233A     233A       AE         0
-                text5                              25B4     25B4       3A         0
-                text4                              247E     247E       5E         0
-                text3                              265E     265E       28         0
-                text2                              1B5E     1B5E      264         0
-                text1                              2526     2526       4A         0
-                text0                              1DC2     1DC2      234         0
-                cinit                              24DC     24DC       4A         0
-                idataCOMRAM                        26F8     26F8        7         0
+                text22                             2538     2538       16         0
+                text21                             12F8     12F8      50C         0
+                text19                             2560     2560       10         0
+                text18                             251C     251C       1C         0
+                text17                             2578     2578        2         0
+                text16                             2184     2184       CE         0
+                text15                             254E     254E       12         0
+                text14                              13E      13E      A46         0
+                text13                             1804     1804      35E         0
+                text12                             1FD2     1FD2      1B2         0
+                text11                             23F6     23F6       44         0
+                text10                             24AC     24AC       2A         0
+                text9                              2474     2474       38         0
+                text8                              2252     2252       AE         0
+                text7                              24FE     24FE       1E         0
+                text6                               B84      B84      774         0
+                text5                              243A     243A       3A         0
+                text4                              2300     2300       5E         0
+                text3                              24D6     24D6       28         0
+                text2                              1DA4     1DA4      22E         0
+                text1                              235E     235E       4E         0
+                text0                              1B62     1B62      242         0
+                cinit                              23AC     23AC       4A         0
+                idataCOMRAM                        2570     2570        7         0
 
         CLASS   CONST          
 
@@ -150,8 +148,9 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
                 cstackCOMRAM                   000001  000041  000042         1       1  COMRAM  
-                intcodelo                      000018  0026E7  0026FF         C       0  CODE    
+                intcodelo                      000018  00255F  002577         C       0  CODE    
                 bssBANK0                       000060  000069  0000C9        60       1  BANK0   
+                text17                         002578  000002  00257A      12BC       0  CODE    
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
 
@@ -164,23 +163,26 @@ UNUSED ADDRESS RANGES
         BIGRAM           000042-00005F               1E
                          0000C9-0002FF              237
         CODE             000004-000017               14
-                         0026FF-003FFF             1901
+                         002577-002577                1
+                         00257A-003FFF             1A86
         COMRAM           000042-00005F               1E
         CONST            000004-000017               14
-                         0026FF-003FFF             1901
+                         002577-002577                1
+                         00257A-003FFF             1A86
         EEDATA           F00000-F000FF              100
         IDLOC            200000-200007                8
-        MEDIUMCONST      0026FF-003FFF             1901
+        MEDIUMCONST      002577-002577                1
+                         00257A-003FFF             1A86
         RAM              0000C9-0002FF              100
         SFR              000D00-000FFF              100
-        SMALLCONST       0026FF-003FFF              100
+        SMALLCONST       002577-002577                1
+                         00257A-003FFF              100
         STACK            0000C9-0002FF              237
 
                                   Symbol Table
 
-?___awdiv                         cstackBANK0  0000B4
 ?___lwdiv                         cstackCOMRAM 00001F
-?___wmul                          cstackBANK0  0000AE
+?___wmul                          cstackCOMRAM 00001F
 ?_abs                             cstackCOMRAM 00001F
 CANInitialize@BRP                 cstackBANK0  0000B7
 CANInitialize@FilterConfig1       cstackBANK0  0000BE
@@ -217,7 +219,6 @@ SetOutputEPWM1@outputmode         cstackCOMRAM 00001F
 _ADCON0bits                       (abs)        000FC2
 _ADCON1bits                       (abs)        000FC1
 _ADCON2bits                       (abs)        000FC0
-_ADRESH                           (abs)        000FC4
 _BRGCON1                          (abs)        000F70
 _BRGCON2                          (abs)        000F71
 _BRGCON2bits                      (abs)        000F71
@@ -225,17 +226,17 @@ _BRGCON3                          (abs)        000F72
 _BRGCON3bits                      (abs)        000F72
 _CANCON                           (abs)        000F6F
 _CANCONbits                       (abs)        000F6F
-_CANInitialize                    text9        001FF6
-_CANOperationMode                 text12       0026D6
+_CANInitialize                    text12       001FD2
+_CANOperationMode                 text15       00254E
 _CANSTAT                          (abs)        000F6E
-_CANSetFilter                     text11       00013A
-_CANSetMask                       text10       001800
-_CANisRxReady                     text23       0026C0
-_CANisRxReady$3003                cstackCOMRAM 000001
-_CANisTxReady                     text18       002686
-_CANisTxReady$3001                cstackCOMRAM 00001F
-_CANreceiveMessage                text22       0012F4
-_CANsendMessage                   text17       000B80
+_CANSetFilter                     text14       00013E
+_CANSetMask                       text13       001804
+_CANisRxReady                     text22       002538
+_CANisRxReady$3002                cstackCOMRAM 000001
+_CANisTxReady                     text7        0024FE
+_CANisTxReady$3000                cstackCOMRAM 00001F
+_CANreceiveMessage                text21       0012F8
+_CANsendMessage                   text6        000B84
 _COMSTATbits                      (abs)        000F74
 _ECCP1CON                         (abs)        000FBA
 _ECCPR1L                          (abs)        000FBB
@@ -248,8 +249,8 @@ _LATB                             (abs)        000F8A
 _LATC                             (abs)        000F8B
 _LATD                             (abs)        000F8C
 _LATE                             (abs)        000F8D
-_OpenEPWM1                        text20       0026E8
-_OpenTimer2                       text19       0026A4
+_OpenEPWM1                        text19       002560
+_OpenTimer2                       text18       00251C
 _PIE1bits                         (abs)        000F9D
 _PIE2bits                         (abs)        000FA0
 _PIE3bits                         (abs)        000FA3
@@ -335,8 +336,8 @@ _RXM1EIDL                         (abs)        000F1F
 _RXM1SIDH                         (abs)        000F1C
 _RXM1SIDL                         (abs)        000F1D
 _RXM1SIDLbits                     (abs)        000F1D
-_SetDCEPWM1                       text5        0025B4
-_SetOutputEPWM1                   text8        002570
+_SetDCEPWM1                       text5        00243A
+_SetOutputEPWM1                   text11       0023F6
 _T2CON                            (abs)        000FCA
 _T2CONbits                        (abs)        000FCA
 _T3CON                            (abs)        000FB1
@@ -447,7 +448,7 @@ __HcstackCOMRAM                   cstackCOMRAM 000000
 __Hdata                           data         000000
 __HdataCOMRAM                     dataCOMRAM   000000
 __Heeprom_data                    eeprom_data  000000
-__Hend_init                       end_init     00013A
+__Hend_init                       end_init     00013E
 __Hfarbss                         farbss       000000
 __Hfardata                        fardata      000000
 __Hibigdata                       ibigdata     000000
@@ -455,10 +456,10 @@ __Hidata                          idata        000000
 __HidataCOMRAM                    idataCOMRAM  000000
 __Hidloc                          idloc        000000
 __Hifardata                       ifardata     000000
-__Hinit                           init         000136
+__Hinit                           init         00013A
 __Hintcode                        intcode      000004
 __Hintcode_body                   intcode_body 000000
-__Hintcodelo                      intcodelo    000136
+__Hintcodelo                      intcodelo    00013A
 __Hintentry                       intentry     000000
 __Hintret                         intret       000000
 __Hintsave_regs                   intsave_regs 000000
@@ -468,7 +469,7 @@ __HnvFARRAM                       nvFARRAM     000000
 __Hnvbit                          nvbit        000000
 __Hnvrram                         nvrram       000000
 __Hparam                          rparam       000000
-__Hpowerup                        powerup      000136
+__Hpowerup                        powerup      00013A
 __Hram                            ram          000000
 __Hramtop                         ramtop       000300
 __Hrbit                           rbit         000000
@@ -498,9 +499,8 @@ __Htext17                         text17       000000
 __Htext18                         text18       000000
 __Htext19                         text19       000000
 __Htext2                          text2        000000
-__Htext20                         text20       000000
+__Htext21                         text21       000000
 __Htext22                         text22       000000
-__Htext23                         text23       000000
 __Htext3                          text3        000000
 __Htext4                          text4        000000
 __Htext5                          text5        000000
@@ -530,7 +530,7 @@ __LcstackCOMRAM                   cstackCOMRAM 000000
 __Ldata                           data         000000
 __LdataCOMRAM                     dataCOMRAM   000000
 __Leeprom_data                    eeprom_data  000000
-__Lend_init                       end_init     000136
+__Lend_init                       end_init     00013A
 __Lfarbss                         farbss       000000
 __Lfardata                        fardata      000000
 __Libigdata                       ibigdata     000000
@@ -538,7 +538,7 @@ __Lidata                          idata        000000
 __LidataCOMRAM                    idataCOMRAM  000000
 __Lidloc                          idloc        000000
 __Lifardata                       ifardata     000000
-__Linit                           init         000136
+__Linit                           init         00013A
 __Lintcode                        intcode      000004
 __Lintcode_body                   intcode_body 000000
 __Lintcodelo                      intcodelo    000018
@@ -551,7 +551,7 @@ __LnvFARRAM                       nvFARRAM     000000
 __Lnvbit                          nvbit        000000
 __Lnvrram                         nvrram       000000
 __Lparam                          rparam       000000
-__Lpowerup                        powerup      000136
+__Lpowerup                        powerup      00013A
 __Lram                            ram          000000
 __Lramtop                         ramtop       000300
 __Lrbit                           rbit         000000
@@ -581,9 +581,8 @@ __Ltext17                         text17       000000
 __Ltext18                         text18       000000
 __Ltext19                         text19       000000
 __Ltext2                          text2        000000
-__Ltext20                         text20       000000
+__Ltext21                         text21       000000
 __Ltext22                         text22       000000
-__Ltext23                         text23       000000
 __Ltext3                          text3        000000
 __Ltext4                          text4        000000
 __Ltext5                          text5        000000
@@ -594,15 +593,9 @@ __Ltext9                          text9        000000
 __S0                              (abs)        30000E
 __S1                              (abs)        0000C9
 __S2                              (abs)        000000
-___awdiv                          text16       00227C
-___awdiv@counter                  cstackBANK0  0000B8
-___awdiv@dividend                 cstackBANK0  0000B4
-___awdiv@divisor                  cstackBANK0  0000B6
-___awdiv@quotient                 cstackBANK0  0000BA
-___awdiv@sign                     cstackBANK0  0000B9
 ___inthi_sp                       stack        000000
 ___intlo_sp                       stack        000000
-___lwdiv                          text4        00247E
+___lwdiv                          text4        002300
 ___lwdiv@counter                  cstackBANK0  0000AB
 ___lwdiv@dividend                 cstackCOMRAM 00001F
 ___lwdiv@divisor                  cstackCOMRAM 000021
@@ -610,71 +603,69 @@ ___lwdiv@quotient                 cstackBANK0  0000AC
 ___param_bank                     (abs)        000010
 ___rparam_used                    (abs)        000001
 ___sp                             stack        000000
-___wmul                           text15       002628
-___wmul@multiplicand              cstackBANK0  0000B0
-___wmul@multiplier                cstackBANK0  0000AE
-___wmul@product                   cstackBANK0  0000B2
+___wmul                           text10       0024AC
+___wmul@multiplicand              cstackCOMRAM 000021
+___wmul@multiplier                cstackCOMRAM 00001F
+___wmul@product                   cstackBANK0  0000AB
 __accesstop                       (abs)        000060
 __activetblptr                    (abs)        000002
-__end_of_CANInitialize            text9        0021A8
-__end_of_CANOperationMode         text12       0026E8
-__end_of_CANSetFilter             text11       000B80
-__end_of_CANSetMask               text10       001B5E
-__end_of_CANisRxReady             text23       0026D6
-__end_of_CANisTxReady             text18       0026A4
-__end_of_CANreceiveMessage        text22       001800
-__end_of_CANsendMessage           text17       0012F4
-__end_of_ISR_bassa                intcodelo    000136
-__end_of_OpenEPWM1                text20       0026F8
-__end_of_OpenTimer2               text19       0026C0
-__end_of_SetDCEPWM1               text5        0025EE
-__end_of_SetOutputEPWM1           text8        0025B4
-__end_of___awdiv                  text16       00233A
-__end_of___lwdiv                  text4        0024DC
-__end_of___wmul                   text15       00265E
-__end_of__initialization          cinit        002518
-__end_of_abs                      text3        002686
-__end_of_battery_measure          text14       00247E
-__end_of_can_interpreter          text13       00227C
-__end_of_configurazione_iniziale  text6        0023E8
-__end_of_delay_ms                 text7        002628
-__end_of_main                     text0        001FF6
-__end_of_rampe                    text2        001DC2
-__end_of_send_data                text1        002570
-__initialization                  cinit        0024DC
+__end_of_CANInitialize            text12       002184
+__end_of_CANOperationMode         text15       002560
+__end_of_CANSetFilter             text14       000B84
+__end_of_CANSetMask               text13       001B62
+__end_of_CANisRxReady             text22       00254E
+__end_of_CANisTxReady             text7        00251C
+__end_of_CANreceiveMessage        text21       001804
+__end_of_CANsendMessage           text6        0012F8
+__end_of_ISR_bassa                intcodelo    00013A
+__end_of_OpenEPWM1                text19       002570
+__end_of_OpenTimer2               text18       002538
+__end_of_SetDCEPWM1               text5        002474
+__end_of_SetOutputEPWM1           text11       00243A
+__end_of___lwdiv                  text4        00235E
+__end_of___wmul                   text10       0024D6
+__end_of__initialization          cinit        0023E8
+__end_of_abs                      text3        0024FE
+__end_of_battery_measure          text17       00257A
+__end_of_can_interpreter          text16       002252
+__end_of_configurazione_iniziale  text8        002300
+__end_of_delay_ms                 text9        0024AC
+__end_of_main                     text0        001DA4
+__end_of_rampe                    text2        001FD2
+__end_of_send_data                text1        0023AC
+__initialization                  cinit        0023AC
 __mediumconst                     mediumconst  000000
 __pbitbssCOMRAM                   bitbssCOMRAM 0001C0
 __pbssBANK0                       bssBANK0     000060
 __pbssCOMRAM                      bssCOMRAM    000024
-__pcinit                          cinit        0024DC
+__pcinit                          cinit        0023AC
 __pcstackBANK0                    cstackBANK0  0000AB
 __pcstackCOMRAM                   cstackCOMRAM 000001
 __pdataCOMRAM                     dataCOMRAM   00003A
-__pidataCOMRAM                    idataCOMRAM  0026F8
+__pidataCOMRAM                    idataCOMRAM  002570
 __pintcodelo                      intcodelo    000018
-__ptext0                          text0        001DC2
-__ptext1                          text1        002526
-__ptext10                         text10       001800
-__ptext11                         text11       00013A
-__ptext12                         text12       0026D6
-__ptext13                         text13       0021A8
-__ptext14                         text14       0023E8
-__ptext15                         text15       002628
-__ptext16                         text16       00227C
-__ptext17                         text17       000B80
-__ptext18                         text18       002686
-__ptext19                         text19       0026A4
-__ptext2                          text2        001B5E
-__ptext20                         text20       0026E8
-__ptext22                         text22       0012F4
-__ptext23                         text23       0026C0
-__ptext3                          text3        00265E
-__ptext4                          text4        00247E
-__ptext5                          text5        0025B4
-__ptext6                          text6        00233A
-__ptext7                          text7        0025EE
-__ptext8                          text8        002570
-__ptext9                          text9        001FF6
+__ptext0                          text0        001B62
+__ptext1                          text1        00235E
+__ptext10                         text10       0024AC
+__ptext11                         text11       0023F6
+__ptext12                         text12       001FD2
+__ptext13                         text13       001804
+__ptext14                         text14       00013E
+__ptext15                         text15       00254E
+__ptext16                         text16       002184
+__ptext17                         text17       002578
+__ptext18                         text18       00251C
+__ptext19                         text19       002560
+__ptext2                          text2        001DA4
+__ptext21                         text21       0012F8
+__ptext22                         text22       002538
+__ptext3                          text3        0024D6
+__ptext4                          text4        002300
+__ptext5                          text5        00243A
+__ptext6                          text6        000B84
+__ptext7                          text7        0024FE
+__ptext8                          text8        002252
+__ptext9                          text9        002474
 __ramtop                          ramtop       000300
 __size_of_CANInitialize           (abs)        000000
 __size_of_CANOperationMode        (abs)        000000
@@ -689,7 +680,6 @@ __size_of_OpenEPWM1               (abs)        000000
 __size_of_OpenTimer2              (abs)        000000
 __size_of_SetDCEPWM1              (abs)        000000
 __size_of_SetOutputEPWM1          (abs)        000000
-__size_of___awdiv                 (abs)        000000
 __size_of___lwdiv                 (abs)        000000
 __size_of___wmul                  (abs)        000000
 __size_of_abs                     (abs)        000000
@@ -701,15 +691,15 @@ __size_of_main                    (abs)        000000
 __size_of_rampe                   (abs)        000000
 __size_of_send_data               (abs)        000000
 __smallconst                      smallconst   000000
-_abs                              text3        00265E
-_battery_measure                  text14       0023E8
-_can_interpreter                  text13       0021A8
+_abs                              text3        0024D6
+_battery_measure                  text17       002578
+_can_interpreter                  text16       002184
 _can_retry                        bitbssCOMRAM 0001C0
 _centralina_abs                   bitbssCOMRAM 0001C1
 _centralina_comando               bitbssCOMRAM 0001C2
 _centralina_sterzo                bitbssCOMRAM 0001C3
 _clock_counter_reference          bssBANK0     000084
-_configurazione_iniziale          text6        00233A
+_configurazione_iniziale          text8        002252
 _correzione                       bssBANK0     000070
 _counter_array                    bssBANK0     000060
 _current                          bssCOMRAM    000036
@@ -717,7 +707,7 @@ _currentSpeed                     dataCOMRAM   00003A
 _currentSpeed_array               bssBANK0     000068
 _data_array                       bssBANK0     00009B
 _data_array_debug                 bssBANK0     0000A3
-_delay_ms                         text7        0025EE
+_delay_ms                         text9        002474
 _delay_quartz_frequency_value     dataCOMRAM   000040
 _dir                              dataCOMRAM   00003E
 _duty_cycle                       bssBANK0     000086
@@ -725,7 +715,7 @@ _duty_set                         bssCOMRAM    000024
 _errore                           bssBANK0     000088
 _id                               bssCOMRAM    000028
 _left_speed                       bssCOMRAM    000030
-_main                             text0        001DC2
+_main                             text0        001B62
 _message_sent                     bitbssCOMRAM 0001C4
 _msg                              bssBANK0     00008C
 _new_message                      bitbssCOMRAM 0001C5
@@ -733,21 +723,21 @@ _previousPwm                      bssCOMRAM    000032
 _previousTimeCounter              bssBANK0     000074
 _previousTimeCounter1             bssBANK0     000078
 _previousTimeCounter2             bssBANK0     00007C
-_rampe                            text2        001B5E
+_rampe                            text2        001DA4
 _remote_frame                     bitbssCOMRAM 0001C6
 _remote_frame1                    bitbssCOMRAM 0001C7
 _requestSpeed                     bssCOMRAM    00002C
 _request_sent                     bitbssCOMRAM 0001C8
 _right_speed                      bssCOMRAM    000034
 _scrittura                        bssCOMRAM    000037
-_send_data                        text1        002526
+_send_data                        text1        00235E
 _speed_fetched                    bitbssCOMRAM 0001C9
 _timeCounter                      bssBANK0     000080
 _vBatt                            bssBANK0     00008A
 abs@a                             cstackCOMRAM 00001F
 btemp                             temp         000041
-delay_ms@value_ms                 cstackBANK0  0000B4
-end_of_initialization             cinit        002518
+delay_ms@value_ms                 cstackBANK0  0000AD
+end_of_initialization             cinit        0023E8
 int$flags                         temp         000041
 intlevel0                         text         000000
 intlevel1                         text         000000
@@ -756,21 +746,21 @@ intlevel3                         text         000000
 main@period                       cstackBANK0  0000C8
 stackhi                           (abs)        0002FF
 stacklo                           (abs)        0000C9
-start                             init         000136
-start_initialization              cinit        0024DC
+start                             init         00013A
+start_initialization              cinit        0023AC
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 115 in file "motore.c"
+		line 118 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
   period          1   29[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
-                  2  663[None  ] int 
+                  2  662[None  ] int 
  Registers used:
 		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
  Tracked objects:
@@ -789,6 +779,7 @@ Total ram usage:        9 bytes
 		_CANsendMessage
 		_OpenEPWM1
 		_OpenTimer2
+		_SetDCEPWM1
 		_SetOutputEPWM1
 		_battery_measure
 		_can_interpreter
@@ -803,7 +794,7 @@ Total ram usage:        9 bytes
 
  *************** function _send_data *****************
  Defined at:
-		line 206 in file "motore.c"
+		line 214 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -834,7 +825,7 @@ Total ram usage:        0 bytes
 
  *************** function _rampe *****************
  Defined at:
-		line 171 in file "motore.c"
+		line 178 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -842,7 +833,7 @@ Total ram usage:        0 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -861,7 +852,6 @@ Total ram usage:        8 bytes
 		_SetDCEPWM1
 		_SetOutputEPWM1
 		___lwdiv
-		___wmul
 		_abs
  This function is called by:
 		_main
@@ -956,13 +946,82 @@ Total ram usage:        6 bytes
  This function calls:
 		Nothing
  This function is called by:
+		_main
 		_rampe
+ This function uses a non-reentrant model
+
+
+ *************** function _CANsendMessage *****************
+ Defined at:
+		line 294 in file "CANlib.h"
+ Parameters:    Size  Location     Type
+  identifier      4    0[BANK0 ] unsigned long 
+  data            2    4[BANK0 ] PTR unsigned char 
+		 -> data_array_debug(8), data_array(8), 
+  dataLength      1    6[BANK0 ] unsigned char 
+  flags           1    7[BANK0 ] enum E16866
+ Auto vars:     Size  Location     Type
+  tamp            4    8[BANK0 ] unsigned long 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       8       0       0
+      Locals:         0       4       0       0
+      Temps:          4       0       0       0
+      Totals:         4      12       0       0
+Total ram usage:       16 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+		_rampe
+		_send_data
+ This function uses a non-reentrant model
+
+
+ *************** function _CANisTxReady *****************
+ Defined at:
+		line 1154 in file "CANlib.h"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         1       0       0       0
+      Temps:          0       0       0       0
+      Totals:         1       0       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+		_rampe
+		_send_data
  This function uses a non-reentrant model
 
 
  *************** function _configurazione_iniziale *****************
  Defined at:
-		line 277 in file "motore.c"
+		line 288 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -996,7 +1055,7 @@ Total ram usage:        0 bytes
  Defined at:
 		line 61 in file "delay.c"
  Parameters:    Size  Location     Type
-  value_ms        2    9[BANK0 ] unsigned int 
+  value_ms        2    2[BANK0 ] unsigned int 
  Auto vars:     Size  Location     Type
 		None
  Return value:  Size  Location     Type
@@ -1021,6 +1080,37 @@ Total ram usage:        2 bytes
 		_main
 		_configurazione_iniziale
 		_delay_s
+ This function uses a non-reentrant model
+
+
+ *************** function ___wmul *****************
+ Defined at:
+		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c"
+ Parameters:    Size  Location     Type
+  multiplier      2   30[COMRAM] unsigned int 
+  multiplicand    2   32[COMRAM] unsigned int 
+ Auto vars:     Size  Location     Type
+  product         2    0[BANK0 ] unsigned int 
+ Return value:  Size  Location     Type
+                  2   30[COMRAM] unsigned int 
+ Registers used:
+		wreg, status,2, status,0, prodl, prodh
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         4       0       0       0
+      Locals:         0       2       0       0
+      Temps:          0       0       0       0
+      Totals:         4       2       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		Nothing
+ This function is called by:
+		_delay_ms
  This function uses a non-reentrant model
 
 
@@ -1194,7 +1284,7 @@ Total ram usage:        1 bytes
 
  *************** function _can_interpreter *****************
  Defined at:
-		line 232 in file "motore.c"
+		line 242 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1224,7 +1314,7 @@ Total ram usage:        4 bytes
 
  *************** function _battery_measure *****************
  Defined at:
-		line 218 in file "motore.c"
+		line 228 in file "motore.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1232,7 +1322,7 @@ Total ram usage:        4 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+		None
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -1244,150 +1334,11 @@ Total ram usage:        4 bytes
       Totals:         0       0       0       0
 Total ram usage:        0 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_CANisTxReady
-		_CANsendMessage
-		___awdiv
-		___wmul
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function ___wmul *****************
- Defined at:
-		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c"
- Parameters:    Size  Location     Type
-  multiplier      2    3[BANK0 ] unsigned int 
-  multiplicand    2    5[BANK0 ] unsigned int 
- Auto vars:     Size  Location     Type
-  product         2    7[BANK0 ] unsigned int 
- Return value:  Size  Location     Type
-                  2    3[BANK0 ] unsigned int 
- Registers used:
-		wreg, status,2, status,0, prodl, prodh
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       2       0       0
-      Temps:          0       0       0       0
-      Totals:         0       6       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_delay_ms
-		_rampe
-		_battery_measure
- This function uses a non-reentrant model
-
-
- *************** function ___awdiv *****************
- Defined at:
-		line 8 in file "C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c"
- Parameters:    Size  Location     Type
-  dividend        2    9[BANK0 ] int 
-  divisor         2   11[BANK0 ] int 
- Auto vars:     Size  Location     Type
-  quotient        2   15[BANK0 ] int 
-  sign            1   14[BANK0 ] unsigned char 
-  counter         1   13[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  2    9[BANK0 ] int 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       4       0       0
-      Temps:          0       0       0       0
-      Totals:         0       8       0       0
-Total ram usage:        8 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_battery_measure
- This function uses a non-reentrant model
-
-
- *************** function _CANsendMessage *****************
- Defined at:
-		line 294 in file "CANlib.h"
- Parameters:    Size  Location     Type
-  identifier      4    0[BANK0 ] unsigned long 
-  data            2    4[BANK0 ] PTR unsigned char 
-		 -> data_array_debug(8), data_array(8), 
-  dataLength      1    6[BANK0 ] unsigned char 
-  flags           1    7[BANK0 ] enum E16866
- Auto vars:     Size  Location     Type
-  tamp            4    8[BANK0 ] unsigned long 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       8       0       0
-      Locals:         0       4       0       0
-      Temps:          4       0       0       0
-      Totals:         4      12       0       0
-Total ram usage:       16 bytes
- Hardware stack levels used:    1
  Hardware stack levels required when called:    2
  This function calls:
 		Nothing
  This function is called by:
 		_main
-		_rampe
-		_send_data
-		_battery_measure
- This function uses a non-reentrant model
-
-
- *************** function _CANisTxReady *****************
- Defined at:
-		line 1154 in file "CANlib.h"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         1       0       0       0
-      Temps:          0       0       0       0
-      Totals:         1       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
-		_rampe
-		_send_data
-		_battery_measure
  This function uses a non-reentrant model
 
 
@@ -1547,75 +1498,70 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 delay.c
-		_delay_ms      		CODE           	25EE	0000	59
+		_delay_ms      		CODE           	2474	0000	57
 
-delay.c estimated size: 59
-
-C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
-		___awdiv       		CODE           	227C	0000	191
-
-C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c estimated size: 191
+delay.c estimated size: 57
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c
-		_SetDCEPWM1    		CODE           	25B4	0000	59
+		_SetDCEPWM1    		CODE           	243A	0000	59
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c estimated size: 59
 
 CANlib.h
-		_CANSetFilter  		CODE           	013A	0000	2631
-		_CANisRxReady  		CODE           	26C0	0000	23
-		_CANreceiveMessage		CODE           	12F4	0000	1293
-		_CANsendMessage		CODE           	0B80	0000	1909
-		_CANInitialize 		CODE           	1FF6	0000	435
-		_CANOperationMode		CODE           	26D6	0000	19
-		_CANisTxReady  		CODE           	2686	0000	31
-		_CANSetMask    		CODE           	1800	0000	863
+		_CANSetFilter  		CODE           	013E	0000	2631
+		_CANisRxReady  		CODE           	2538	0000	23
+		_CANreceiveMessage		CODE           	12F8	0000	1293
+		_CANsendMessage		CODE           	0B84	0000	1909
+		_CANInitialize 		CODE           	1FD2	0000	435
+		_CANOperationMode		CODE           	254E	0000	19
+		_CANisTxReady  		CODE           	24FE	0000	31
+		_CANSetMask    		CODE           	1804	0000	863
 
 CANlib.h estimated size: 7204
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
-		_OpenTimer2    		CODE           	26A4	0000	29
+		_OpenTimer2    		CODE           	251C	0000	29
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c estimated size: 29
 
 motore.c
-		_rampe         		CODE           	1B5E	0000	613
-		_configurazione_iniziale		CODE           	233A	0000	175
-		_send_data     		CODE           	2526	0000	75
-		_main          		CODE           	1DC2	0000	565
-		_can_interpreter		CODE           	21A8	0000	213
-		_battery_measure		CODE           	23E8	0000	151
-		_ISR_bassa     		CODE           	0018	0000	287
+		_rampe         		CODE           	1DA4	0000	559
+		_configurazione_iniziale		CODE           	2252	0000	175
+		_send_data     		CODE           	235E	0000	79
+		_main          		CODE           	1B62	0000	579
+		_can_interpreter		CODE           	2184	0000	207
+		_battery_measure		CODE           	2578	0000	3
+		_ISR_bassa     		CODE           	0018	0000	291
 
-motore.c estimated size: 2079
+motore.c estimated size: 1893
 
 shared
-		__initialization		CODE           	24DC	0000	61
+		__initialization		CODE           	23AC	0000	61
 
 shared estimated size: 61
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1open.c
-		_OpenEPWM1     		CODE           	26E8	0000	17
+		_OpenEPWM1     		CODE           	2560	0000	17
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1open.c estimated size: 17
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
-		_SetOutputEPWM1		CODE           	2570	0000	69
+		_SetOutputEPWM1		CODE           	23F6	0000	69
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c estimated size: 69
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
-		___lwdiv       		CODE           	247E	0000	95
+		___lwdiv       		CODE           	2300	0000	95
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c estimated size: 95
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
-		___wmul        		CODE           	2628	0000	55
+		___wmul        		CODE           	24AC	0000	43
 
-C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c estimated size: 55
+C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c estimated size: 43
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c
-		_abs           		CODE           	265E	0000	41
+		_abs           		CODE           	24D6	0000	41
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c estimated size: 41
 
