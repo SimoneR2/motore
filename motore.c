@@ -190,6 +190,9 @@ void rampe(void) {
         errore = abs((currentSpeed - requestSpeed));
       //  correzione = ((errore / 150)*(errore / 150))*2;
         correzione = errore / 20 ;
+        if (correzione > 200){
+            correzione = 200;
+        }
         if (correzione > 10) {
             if (currentSpeed - requestSpeed > 0) {
                 duty_set = previousPwm - correzione;

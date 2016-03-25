@@ -20705,6 +20705,9 @@ currentSpeed = ((left_speed + right_speed) / 2);
 errore = abs((currentSpeed - requestSpeed));
 
 correzione = errore / 20 ;
+if (correzione > 200){
+correzione = 200;
+}
 if (correzione > 10) {
 if (currentSpeed - requestSpeed > 0) {
 duty_set = previousPwm - correzione;
@@ -20742,7 +20745,7 @@ can_retry = 0;
 
 void battery_measure(void) {
 
-# 240
+# 243
 }
 
 void can_interpreter(void) {
@@ -20761,7 +20764,7 @@ PORTAbits.RA1 = 1;
 
 if (id == 0b00000000110) {
 
-# 262
+# 265
 left_speed = data_array[1];
 left_speed = ((left_speed << 8) | (data_array[0]));
 right_speed = data_array[3];
