@@ -33,7 +33,8 @@
 
  */
 #include <xc.h>
-#include "motore.h"
+//#include "motore.h" DEBUG!!
+#include "motore4685.h"
 #include "CANlib.h"
 #include "delay.h"
 #include "delay.c"
@@ -44,7 +45,7 @@
 #include "timers.h"
 //#include <usart.h>//debug
 #define _XTAL_FREQ 16000000
-#define attesaRampa 40
+#define attesaRampa 20
 
 void configurazione_iniziale(void);
 void send_data(void);
@@ -91,7 +92,7 @@ volatile unsigned char scrittura = 0;
 
 __interrupt(low_priority) void ISR_bassa(void) {
     if ((PIR3bits.RXB0IF == 1) || (PIR3bits.RXB1IF == 1)) {
-        if (PIR3bits.RXB0IF ==1){
+        if (PIR3bits.RXB0IF == 1) {
             PORTCbits.RC1 = 1;
         }
         if (CANisRxReady()) { //Se il messaggio è arrivato
@@ -123,27 +124,26 @@ int main(void) {
     delay_ms(500);
     PORTAbits.RA1 = 0;
     PORTCbits.RC1 = 0;
-    OpenTimer2(TIMER_INT_OFF & T2_PS_1_16 & T2_POST_1_1);
+    OpenTimer2(TIMER_INT_OFF & T2_PS_1_16 & T2_POST_1_16);
     period = 0xFE;
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
     while (1) {
         can_interpreter();
-        if (PORTAbits.RA1 == 0){
-        // if ((PORTAbits.RA1 == 0)&&(PORTCbits.RC1 == 0)) {
+        if (PORTAbits.RA1 == 0) {
+            // if ((PORTAbits.RA1 == 0)&&(PORTCbits.RC1 == 0)) {
             if ((timeCounter - previousTimeCounter1 >= attesaRampa)) {
                 rampe();
             }
-        }
-        else {
+        } else {
             SetDCEPWM1(0);
         }
         if ((can_retry == 1)&&(remote_frame)) {
             send_data();
         }
         //FUNZIONE DI SICUREZZA
-        if ((timeCounter - previousTimeCounter) > 500) {
+        if (((timeCounter - previousTimeCounter) > 500)||(PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
             if (request_sent == 0) {
                 while (CANisTxReady() != 1) {
                 }
@@ -176,42 +176,52 @@ int main(void) {
 }
 
 void rampe(void) {
-    while (CANisTxReady() != 1);
-    CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-    if (speed_fetched == 1) {
-        if (dir == 1) { //direzione avanti
-            SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
-        }
-        if (dir == 0) { //direzione indietro
-            SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
-        }
-        speed_fetched = 0;
-        currentSpeed = ((left_speed + right_speed) / 2);
-        errore = abs((currentSpeed - requestSpeed));
-      //  correzione = ((errore / 150)*(errore / 150))*2;
-        correzione = errore / 20 ;
-        if (correzione > 200){
-            correzione = 200;
-        }
-        if (correzione > 10) {
-            if (currentSpeed - requestSpeed > 0) {
-                duty_set = previousPwm - correzione;
-                if (duty_set < 0) {
-                    duty_set = 0;
+    if (requestSpeed > 1) {
+        while (CANisTxReady() != 1);
+        CANsendMessage(ACTUAL_SPEED, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+        if (speed_fetched == 1) {
+            if (dir == 1) { //direzione avanti
+                SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
+            }
+            if (dir == 0) { //direzione indietro
+                SetOutputEPWM1(FULL_OUT_REV, PWM_MODE_1);
+            }
+            speed_fetched = 0;
+            currentSpeed = ((left_speed + right_speed) / 2);
+            errore = abs((currentSpeed - requestSpeed));
+            //  correzione = ((errore / 150)*(errore / 150))*2;
+            if (errore > 1500) {
+                correzione = pow(2, (errore / 200)) - 1;
+            } else {
+                correzione = pow(2, (errore / 20)) - 1;
+            }
+            //            if (errore > 1000) {
+            //                correzione = errore / 30;
+            //            } else {
+            //                correzione = errore / 20;
+            //            }
+            if (correzione > 10) {
+                if (currentSpeed - requestSpeed > 0) {
+                    duty_set = previousPwm - correzione;
+                    if (duty_set < 0) {
+                        duty_set = 0;
+                    }
+                } else {
+                    duty_set = previousPwm + correzione;
+                    if (duty_set > 1024) {
+                        duty_set = 1023;
+                    }
                 }
             } else {
-                duty_set = previousPwm + correzione;
-                if (duty_set > 1024) {
-                    duty_set = 1023;
-                }
+                duty_set = previousPwm;
             }
-        } else {
-            duty_set = previousPwm;
+            previousPwm = duty_set;
         }
-        previousPwm = duty_set;
+        previousTimeCounter1 = timeCounter;
+        SetDCEPWM1(duty_set); //imposta pwm
+    } else {
+        SetDCEPWM1(0);
     }
-    previousTimeCounter1 = timeCounter;
-    SetDCEPWM1(duty_set); //imposta pwm
 }
 
 void send_data(void) {
@@ -229,17 +239,17 @@ void send_data(void) {
 }
 
 void battery_measure(void) {
-//    ADCON0bits.GO = 1; //abilita conversione ADC;
-//    while (ADCON0bits.GO);
-//    vBatt = ADRESH;
-//    vBatt = (vBatt * 14) / 255; //
-//    if (vBatt < 8) {
-//        while (CANisTxReady() != 1);
-//        CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
-//        PORTCbits.RC1 = 1;
-//    } else {
-//        PORTCbits.RC1 = 0;
-//    }
+    ADCON0bits.GO = 1; //abilita conversione ADC;
+    while (ADCON0bits.GO);
+    vBatt = ADRESH;
+    vBatt = (vBatt * 14) / 255; //
+    if (vBatt < 8) {
+        while (CANisTxReady() != 1);
+        CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+        PORTCbits.RC1 = 1;
+    } else {
+        PORTCbits.RC1 = 0;
+    }
 }
 
 void can_interpreter(void) {
@@ -272,11 +282,11 @@ void can_interpreter(void) {
         if (id == ECU_STATE) { //funzione per presenza centraline
             if (data_array[0] == 0x01) {
                 centralina_abs = 1;
-               // PORTCbits.RC5 = 0; //DEBUG
+                // PORTCbits.RC5 = 0; //DEBUG
             }
             if (data_array[0] == 0x02) {
                 centralina_sterzo = 1;
-                centralina_comando = 1; //DEBUG! <==
+                //centralina_comando = 1; //DEBUG! <==
                 //centralina_comando = 1; //debug
                 //PORTCbits.RC4 = 0; //DEBUG
             }
