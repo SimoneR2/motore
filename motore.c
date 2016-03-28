@@ -65,7 +65,7 @@ volatile bit centralina_sterzo = 0;
 volatile bit centralina_abs = 0;
 volatile bit centralina_comando = 0;
 volatile unsigned int dir = 1;
-volatile long currentSpeed = 1;
+volatile long currentSpeed = 0;
 volatile long requestSpeed = 0;
 volatile unsigned long id = 0;
 volatile unsigned long timeCounter = 0; //1 = 10mS
@@ -102,6 +102,11 @@ __interrupt(low_priority) void ISR_bassa(void) {
             for (char i = 0; i < 8; i++) {
                 data_array[i] = msg.data[i]; //salvo il dato per interpretarlo
             }
+            if (id == SPEED_CHANGE) { //variazione velocità 
+                requestSpeed = data_array[1]; //velocità richiesta 
+                requestSpeed = ((requestSpeed << 8) | data_array[0]);
+                dir = data_array[2]; //direzione richiesta
+            }
             new_message = 1;
         }
         PIR3bits.RXB0IF = 0;
@@ -125,7 +130,7 @@ int main(void) {
     PORTAbits.RA1 = 0;
     PORTCbits.RC1 = 0;
     OpenTimer2(TIMER_INT_OFF & T2_PS_1_16 & T2_POST_1_16);
-    period = 0xFE;
+    period = 0xFA;
     OpenEPWM1(period);
     speed_fetched = 1;
     SetOutputEPWM1(FULL_OUT_FWD, PWM_MODE_1);
@@ -142,8 +147,8 @@ int main(void) {
         if ((can_retry == 1)&&(remote_frame)) {
             send_data();
         }
-        //FUNZIONE DI SICUREZZA
-        if (((timeCounter - previousTimeCounter) > 500)||(PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
+        //        FUNZIONE DI SICUREZZA
+        if (((timeCounter - previousTimeCounter) > 500) || (PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
             if (request_sent == 0) {
                 while (CANisTxReady() != 1) {
                 }
@@ -188,35 +193,35 @@ void rampe(void) {
             }
             speed_fetched = 0;
             currentSpeed = ((left_speed + right_speed) / 2);
-            errore = abs((currentSpeed - requestSpeed));
-            //  correzione = ((errore / 150)*(errore / 150))*2;
-            if (errore > 1500) {
-                correzione = pow(2, (errore / 200)) - 1;
-            } else {
-                correzione = pow(2, (errore / 20)) - 1;
+            if (currentSpeed == 0) {
+                SetDCEPWM1(1000);
+                previousPwm = 1000;
             }
-            //            if (errore > 1000) {
-            //                correzione = errore / 30;
-            //            } else {
-            //                correzione = errore / 20;
-            //            }
-            if (correzione > 10) {
-                if (currentSpeed - requestSpeed > 0) {
-                    duty_set = previousPwm - correzione;
-                    if (duty_set < 0) {
-                        duty_set = 0;
-                    }
-                } else {
-                    duty_set = previousPwm + correzione;
-                    if (duty_set > 1024) {
-                        duty_set = 1023;
-                    }
+            errore = abs((currentSpeed - requestSpeed));
+            // 
+            if (errore > 3000) {
+                correzione = pow(2, (errore / 200)) - 1;
+            } else if (errore > 2000) {
+                correzione = pow(2, (errore / 150)) - 1;
+            } else {
+                correzione = pow(2, (errore / 100)) - 1;
+                //                correzione = ((errore / 150)*(errore / 150))*2;
+                //                correzione = correzione / 20;
+            }
+
+            if (currentSpeed - requestSpeed > 0) {
+                duty_set = previousPwm - correzione;
+                if (duty_set < 0) {
+                    duty_set = 0;
                 }
             } else {
-                duty_set = previousPwm;
+                duty_set = previousPwm + correzione;
+                if (duty_set > 1022) {
+                    duty_set = 1023;
+                }
             }
-            previousPwm = duty_set;
         }
+        previousPwm = duty_set;
         previousTimeCounter1 = timeCounter;
         SetDCEPWM1(duty_set); //imposta pwm
     } else {
@@ -254,12 +259,7 @@ void battery_measure(void) {
 
 void can_interpreter(void) {
     if (new_message == 1) {
-        if (id == SPEED_CHANGE) { //variazione velocità 
-            requestSpeed = data_array[1]; //velocità richiesta 
-            requestSpeed = ((requestSpeed << 8) | msg.data[0]);
-            dir = data_array[2]; //direzione richiesta
 
-        }
 
         if (id == EMERGENCY) { //stop di emergenza
             requestSpeed = 0;

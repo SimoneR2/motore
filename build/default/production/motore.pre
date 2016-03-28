@@ -20639,7 +20639,7 @@ volatile bit centralina_sterzo = 0;
 volatile bit centralina_abs = 0;
 volatile bit centralina_comando = 0;
 volatile unsigned int dir = 1;
-volatile long currentSpeed = 1;
+volatile long currentSpeed = 0;
 volatile long requestSpeed = 0;
 volatile unsigned long id = 0;
 volatile unsigned long timeCounter = 0;
@@ -20676,6 +20676,11 @@ id = msg.identifier;
 for (char i = 0; i < 8; i++) {
 data_array[i] = msg.data[i];
 }
+if (id == 0b00000000011) {
+requestSpeed = data_array[1];
+requestSpeed = ((requestSpeed << 8) | data_array[0]);
+dir = data_array[2];
+}
 new_message = 1;
 }
 PIR3bits.RXB0IF = 0;
@@ -20699,7 +20704,7 @@ delay_ms(500);
 PORTAbits.RA1 = 0;
 PORTCbits.RC1 = 0;
 OpenTimer2(0b01111111 & 0b11111110 & 0b11111111);
-period = 0xFE;
+period = 0xFA;
 OpenEPWM1(period);
 speed_fetched = 1;
 SetOutputEPWM1(0b01111111, 0b11111100);
@@ -20717,7 +20722,7 @@ if ((can_retry == 1)&&(remote_frame)) {
 send_data();
 }
 
-if (((timeCounter - previousTimeCounter) > 500)||(PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
+if (((timeCounter - previousTimeCounter) > 500) || (PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
 if (request_sent == 0) {
 while (CANisTxReady() != 1) {
 }
@@ -20762,16 +20767,22 @@ SetOutputEPWM1(0b11111111, 0b11111100);
 }
 speed_fetched = 0;
 currentSpeed = ((left_speed + right_speed) / 2);
+if (currentSpeed == 0) {
+SetDCEPWM1(1000);
+previousPwm = 1000;
+}
 errore = abs((currentSpeed - requestSpeed));
 
-if (errore > 1500) {
+if (errore > 3000) {
 correzione = pow(2, (errore / 200)) - 1;
+} else if (errore > 2000) {
+correzione = pow(2, (errore / 150)) - 1;
 } else {
-correzione = pow(2, (errore / 20)) - 1;
+correzione = pow(2, (errore / 100)) - 1;
+
+
 }
 
-# 203
-if (correzione > 10) {
 if (currentSpeed - requestSpeed > 0) {
 duty_set = previousPwm - correzione;
 if (duty_set < 0) {
@@ -20779,15 +20790,12 @@ duty_set = 0;
 }
 } else {
 duty_set = previousPwm + correzione;
-if (duty_set > 1024) {
+if (duty_set > 1022) {
 duty_set = 1023;
 }
 }
-} else {
-duty_set = previousPwm;
 }
 previousPwm = duty_set;
-}
 previousTimeCounter1 = timeCounter;
 SetDCEPWM1(duty_set);
 } else {
@@ -20825,12 +20833,7 @@ PORTCbits.RC1 = 0;
 
 void can_interpreter(void) {
 if (new_message == 1) {
-if (id == 0b00000000011) {
-requestSpeed = data_array[1];
-requestSpeed = ((requestSpeed << 8) | msg.data[0]);
-dir = data_array[2];
 
-}
 
 if (id == 0b00000000001) {
 requestSpeed = 0;
