@@ -221,7 +221,7 @@ void send_data(void) {
             remote_frame = 0; //azzero flag risposta remote frame
         }
     }
-    if ((TXB0CONbits.TXABT) || (TXB1CONbits.TXABT)) { //se l'invio è stato abortito
+    if ((TXB0CONbits.TXABT == 1) || (TXB1CONbits.TXABT == 1)) { //se l'invio è stato abortito
         can_retry = 1;
     } else {
         can_retry = 0;
