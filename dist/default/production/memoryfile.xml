@@ -3,15 +3,15 @@
   <executable name="dist/default/production\motore.production.hex">
     <memory name="program">
       <units>bytes</units>
-      <length>16384</length>
-      <used>9621</used>
-      <free>6763</free>
+      <length>98304</length>
+      <used>18365</used>
+      <free>79939</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
-      <length>768</length>
-      <used>170</used>
-      <free>598</free>
+      <length>3328</length>
+      <used>288</used>
+      <free>3040</free>
     </memory>
   </executable>
 </project>
