@@ -62,6 +62,8 @@ volatile bit message_sent = 0;
 volatile bit can_retry = 0;
 volatile bit request_sent = 0;
 volatile bit centralina_sterzo = 0;
+volatile unsigned char ecu_cycle = 0;
+volatile bit ECU_error = 0;
 volatile bit centralina_abs = 0;
 volatile bit centralina_comando = 0;
 volatile unsigned int dir = 1;
@@ -72,6 +74,7 @@ volatile unsigned long timeCounter = 0; //1 = 10mS
 unsigned long previousTimeCounter = 0;
 unsigned long previousTimeCounter1 = 0;
 unsigned long previousTimeCounter2 = 0;
+unsigned long previousTimeCounter3 = 0;
 unsigned int previousPwm = 0;
 volatile unsigned int left_speed = 0;
 volatile unsigned int right_speed = 0;
@@ -144,35 +147,43 @@ int main(void) {
         } else {
             SetDCEPWM1(0);
         }
-        if ((can_retry == 1)&&(remote_frame)) {
+        if ((can_retry == 1) && (remote_frame)) {
             send_data();
         }
+
         //        FUNZIONE DI SICUREZZA
-        if (((timeCounter - previousTimeCounter) > 500) || (PORTAbits.RA1 == 1)&&((timeCounter - previousTimeCounter) > 5)) {
-            if (request_sent == 0) {
-                while (CANisTxReady() != 1) {
-                }
-                CANsendMessage(ECU_STATE, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0); //remote frame per richiedere presenza centraline
-                request_sent = 1;
+        if (((timeCounter - previousTimeCounter) > 20) || ((PORTAbits.RA1 == 1) && ((timeCounter - previousTimeCounter) > 5))) {
+            ecu_cycle++;
+            if (ecu_cycle > 2) {
+                ecu_cycle = 0;
+            }
+            if (ECU_error == 1) {
+                PORTAbits.RA1 = 1;
             } else {
-                if ((centralina_abs == 1)&&(centralina_sterzo == 1)&&(centralina_comando == 1)) {
-                    centralina_abs = 0;
-                    centralina_sterzo = 0;
-                    centralina_comando = 0;
-                    PORTAbits.RA1 = 0;
-                    request_sent = 0;
-                } else {
-                    // SetDCEPWM1(0);
-                    PORTAbits.RA1 = 1;
-                    delay_ms(200);
-                    PORTAbits.RA1 = 0;
-                    delay_ms(200);
-                    PORTAbits.RA1 = 1;
-                    request_sent = 0;
-                }
+                PORTAbits.RA1 = 0;
+            }
+            while (CANisTxReady() != 1) {
+            }
+            switch (ecu_cycle) {
+                case 0:
+                    while (!CanisTxReady());
+                    CANsendMessage(ECU_STATE_EPS, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+                    ECU_error = 1;
+                    break;
+                case 1:
+                    while (!CanisTxReady());
+                    CANsendMessage(ECU_STATE_ABS, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+                    ECU_error = 1;
+                    break;
+                case 2:
+                    while (!CanisTxReady());
+                    CANsendMessage(ECU_STATE_REMOTECAN, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
+                    ECU_error = 1;
+                    break;
             }
             previousTimeCounter = timeCounter;
         }
+
         if ((timeCounter - previousTimeCounter2 > 100)) { //misura la tensione della batteria ogni secondo
             battery_measure();
             previousTimeCounter2 = timeCounter;
@@ -198,7 +209,7 @@ void rampe(void) {
                 previousPwm = 1000;
             }
             errore = abs((currentSpeed - requestSpeed));
-            // 
+            //
             if (errore > 3000) {
                 correzione = pow(2, (errore / 200)) - 1;
             } else if (errore > 2000) {
@@ -259,13 +270,10 @@ void battery_measure(void) {
 
 void can_interpreter(void) {
     if (new_message == 1) {
-
-
         if (id == EMERGENCY) { //stop di emergenza
             requestSpeed = 0;
             PORTAbits.RA1 = 1;
         }
-
         if (id == ACTUAL_SPEED) {
             /*==================================
              *La velocita' viene trasmessa a 2 BYTE
@@ -278,21 +286,9 @@ void can_interpreter(void) {
             right_speed = ((right_speed << 8) | (data_array[2]));
             speed_fetched = 1;
         }
-
-        if (id == ECU_STATE) { //funzione per presenza centraline
-            if (data_array[0] == 0x01) {
-                centralina_abs = 1;
-                // PORTCbits.RC5 = 0; //DEBUG
-            }
-            if (data_array[0] == 0x02) {
-                centralina_sterzo = 1;
-                //centralina_comando = 1; //DEBUG! <==
-                //centralina_comando = 1; //debug
-                //PORTCbits.RC4 = 0; //DEBUG
-            }
-            if (data_array[0] == 0x03) {
-                centralina_comando = 1;
-            }
+        //PRESENZA CENTRALINE
+        if ((id == ECU_STATE_ABS) || (id == ECU_STATE_EPS) || (id == ECU_STATE_REMOTECAN)) {
+            ECU_error = 0;
         }
     }
     new_message = 0;
@@ -309,7 +305,7 @@ void configurazione_iniziale(void) {
 
     IPR3bits.RXB1IP = 0; //interrupt bassa priorità per can
     IPR3bits.RXB0IP = 0; //interrupt bassa priorità per can
-    INTCONbits.GIEH = 1; //abilita interrupt 
+    INTCONbits.GIEH = 1; //abilita interrupt
     INTCONbits.GIEL = 1; //abilita interrupt periferiche
 
     //impostazione timer3 per contatore========
@@ -344,7 +340,7 @@ void configurazione_iniziale(void) {
 
     PIE3bits.RXB1IE = 1; //abilita interrupt ricezione can bus buffer1
     PIE3bits.RXB0IE = 1; //abilita interrupt ricezione can bus buffer0
-    PIE2bits.TMR3IE = 1; //abilita interrupt timer 3 
+    PIE2bits.TMR3IE = 1; //abilita interrupt timer 3
     //impostazione porte
     LATA = 0x00;
     TRISA = 0b01111101;
