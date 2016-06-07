@@ -166,17 +166,17 @@ int main(void) {
             }
             switch (ecu_cycle) {
                 case 0:
-                    while (!CanisTxReady());
+                    while (CANisTxReady() != 1);
                     CANsendMessage(ECU_STATE_EPS, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
                     ECU_error = 1;
                     break;
                 case 1:
-                    while (!CanisTxReady());
+                    while (CANisTxReady() != 1);
                     CANsendMessage(ECU_STATE_ABS, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
                     ECU_error = 1;
                     break;
                 case 2:
-                    while (!CanisTxReady());
+                    while (CANisTxReady() != 1);
                     CANsendMessage(ECU_STATE_REMOTECAN, data_array_debug, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
                     ECU_error = 1;
                     break;
@@ -204,25 +204,30 @@ void rampe(void) {
             }
             speed_fetched = 0;
             currentSpeed = ((left_speed + right_speed) / 2);
-            if (currentSpeed == 0) {
+            if ((currentSpeed == 0)&&(requestSpeed > 1000)) {
                 SetDCEPWM1(1000);
                 previousPwm = 1000;
             }
+            if ((currentSpeed == 0)&&(requestSpeed < 1000)) {
+                SetDCEPWM1(600);
+                previousPwm = 600;
+            }
             errore = abs((currentSpeed - requestSpeed));
-            //
+            // 
             if (errore > 3000) {
-                correzione = pow(2, (errore / 200)) - 1;
+                correzione = pow(2, (errore / 800)) - 1;
             } else if (errore > 2000) {
-                correzione = pow(2, (errore / 150)) - 1;
-            } else {
-                correzione = pow(2, (errore / 100)) - 1;
+                correzione = pow(2, (errore / 400)) - 1;
+            } else if (errore > 1000) {
+                correzione = pow(2, (errore / 200)) - 1;
                 //                correzione = ((errore / 150)*(errore / 150))*2;
                 //                correzione = correzione / 20;
+            } else if (errore < 1000) {
+                correzione = pow(2, (errore / 200)) - 1;
             }
-
             if (currentSpeed - requestSpeed > 0) {
-                duty_set = previousPwm - correzione;
-                if (duty_set < 0) {
+                duty_set = previousPwm - (correzione / 10);
+                if (duty_set < 1) {
                     duty_set = 0;
                 }
             } else {
@@ -259,7 +264,7 @@ void battery_measure(void) {
     while (ADCON0bits.GO);
     vBatt = ADRESH;
     vBatt = (vBatt * 14) / 255; //
-    if (vBatt < 8) {
+    if (vBatt < 10) {
         while (CANisTxReady() != 1);
         CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
         PORTCbits.RC1 = 1;

@@ -3,8 +3,8 @@
 [d edition pro ]
 [d chip 18F4685 ]
 [d frameptr 4065 ]
-"207 D:\Documenti\GitHub\motore\CANlib.h
-[e E16881 CAN_OP_MODE `uc
+"207 C:\Users\simone\Documents\GitHub\motore\CANlib.h
+[e E16922 CAN_OP_MODE `uc
 CAN_OP_MODE_NORMAL 0
 CAN_OP_MODE_SLEEP 32
 CAN_OP_MODE_LOOP 64
@@ -12,7 +12,7 @@ CAN_OP_MODE_LISTEN 96
 CAN_OP_MODE_CONFIG 128
 ]
 "219
-[e E16887 CAN_CONFIG_FLAGS `uc
+[e E16928 CAN_CONFIG_FLAGS `uc
 CAN_CONFIG_DEFAULT 255
 CAN_CONFIG_PHSEG2_PRG_BIT 1
 CAN_CONFIG_PHSEG2_PRG_ON 255
@@ -36,12 +36,12 @@ CAN_CONFIG_VALID_STD_MSG 191
 CAN_CONFIG_ALL_VALID_MSG 159
 ]
 "259
-[e E16921 CAN_MASK `uc
+[e E16962 CAN_MASK `uc
 CAN_MASK_B1 1
 CAN_MASK_B2 2
 ]
 "280
-[e E16924 CAN_FILTER `uc
+[e E16965 CAN_FILTER `uc
 CAN_FILTER_B1_F1 0
 CAN_FILTER_B1_F2 1
 CAN_FILTER_B2_F1 2
@@ -50,7 +50,7 @@ CAN_FILTER_B2_F3 4
 CAN_FILTER_B2_F4 5
 ]
 "295
-[e E16909 CAN_TX_MSG_FLAGS `uc
+[e E16950 CAN_TX_MSG_FLAGS `uc
 CAN_TX_PRIORITY_MASK 3
 CAN_TX_PRIORITY_0 252
 CAN_TX_PRIORITY_1 253
@@ -64,69 +64,79 @@ CAN_REMOTE_TX_FRAME 255
 CAN_NORMAL_TX_FRAME 191
 ]
 "534
-[e E16931 CAN_RX_ERRORS `uc
+[e E16972 CAN_RX_ERRORS `uc
 CAN_RX_BUFFER_1_OVFL 1
 CAN_RX_BUFFER_2_OVFL 2
 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"36 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\altofl.c
+[v ___altofl __altofl `(d  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\evalpoly.c
+"31 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awtofl.c
+[v ___awtofl __awtofl `(d  1 e 4 0 ]
+"63 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\double.c
+[v ___flpack __flpack `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\evalpoly.c
 [v _eval_poly eval_poly `(d  1 e 4 0 ]
-"12 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\exp.c
+"12 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\exp.c
 [v _exp exp `(d  1 e 4 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\flge.c
+"88 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fladd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fldiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flge.c
 [v ___flge __flge `(b  1 e 0 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\flneg.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flneg.c
 [v ___flneg __flneg `(d  1 e 4 0 ]
-"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\float.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 4 0 ]
-"13 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\floor.c
+"13 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\floor.c
 [v _floor floor `(d  1 e 4 0 ]
-"43 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\fltol.c
+"20 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flsub.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
-"254 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\frexp.c
+"254 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c
 [v _frexp frexp `(d  1 e 4 0 ]
 "277
 [v _ldexp ldexp `(d  1 e 4 0 ]
-"86 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftadd.c
+"86 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftadd.c
 [v ___ftadd __ftadd `(f  1 e 4 0 ]
-"54 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftdiv.c
+"54 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c
 [v ___ftdiv __ftdiv `(f  1 e 4 0 ]
-"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftmul.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftmul.c
 [v ___ftmul __ftmul `(f  1 e 4 0 ]
-"20 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftsub.c
+"20 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\log.c
+"30 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lltofl.c
+[v ___lltofl __lltofl `(d  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\log.c
 [v _log log `(d  1 e 4 0 ]
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\pow.c
+"28 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtofl.c
+[v ___lwtofl __lwtofl `(d  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
-"10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcadd.c
-[v ___fladd __fladd `(d  1 e 4 0 ]
-"245
-[v ___flsub __flsub `(d  1 e 4 0 ]
-"11 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcdiv.c
-[v ___fldiv __fldiv `(d  1 e 4 0 ]
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcmul.c
-[v ___flmul __flmul `(d  1 e 4 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul32.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\xxtofl.c
-[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1open.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1open.c
 [v _OpenEPWM1 OpenEPWM1 `(v  1 e 0 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1setdc.c
 [v _SetDCEPWM1 SetDCEPWM1 `(v  1 e 0 0 ]
-"18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
+"18 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1setoc.c
 [v _SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
-"17 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
+"17 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\Timers\t2open.c
 [v _OpenTimer2 OpenTimer2 `(v  1 e 0 0 ]
-"206 D:\Documenti\GitHub\motore\CANlib.h
+"206 C:\Users\simone\Documents\GitHub\motore\CANlib.h
 [v _CANOperationMode CANOperationMode `(v  1 e 0 0 ]
 "218
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
@@ -142,23 +152,23 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisTxReady CANisTxReady `(uc  1 e 1 0 ]
 "1163
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
-"61 D:\Documenti\GitHub\motore\delay.c
+"61 C:\Users\simone\Documents\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
-"93 D:\Documenti\GitHub\motore\motore.c
+"96 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
-"124
+"127
 [v _main main `(i  1 e 2 0 ]
-"183
+"194
 [v _rampe rampe `(v  1 e 0 0 ]
-"232
+"248
 [v _send_data send_data `(v  1 e 0 0 ]
-"246
+"262
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
-"260
+"276
 [v _can_interpreter can_interpreter `(v  1 e 0 0 ]
-"301
+"302
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
-"16255 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f4685.h
+"16255 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
 "16387
 [v _RXF0SIDL RXF0SIDL `VEuc  1 e 1 @3841 ]
@@ -1156,7 +1166,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "30325
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S3232 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S3235 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -1166,7 +1176,7 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "30357
-[s S3241 . 1 `uc 1 RD0 1 0 :1:0 
+[s S3244 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -1175,11 +1185,11 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S3250 . 1 `S3232 1 . 1 0 `S3241 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES3250  1 e 1 @3989 ]
+[u S3253 . 1 `S3235 1 . 1 0 `S3244 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES3253  1 e 1 @3989 ]
 "30546
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S3320 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S3323 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -1189,15 +1199,15 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 PSPIE 1 0 :1:7 
 ]
 "30793
-[s S3329 . 1 `uc 1 . 1 0 :5:0 
+[s S3332 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[s S3332 . 1 `uc 1 . 1 0 :4:0 
+[s S3335 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 ]
-[u S3335 . 1 `S3320 1 . 1 0 `S3329 1 . 1 0 `S3332 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES3335  1 e 1 @3997 ]
-[s S3285 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S3338 . 1 `S3323 1 . 1 0 `S3332 1 . 1 0 `S3335 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES3338  1 e 1 @3997 ]
+[s S3288 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -1207,14 +1217,14 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "30872
-[s S3294 . 1 `uc 1 . 1 0 :5:0 
+[s S3297 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S3297 . 1 `uc 1 . 1 0 :4:0 
+[s S3300 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 ]
-[u S3300 . 1 `S3285 1 . 1 0 `S3294 1 . 1 0 `S3297 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES3300  1 e 1 @3998 ]
+[u S3303 . 1 `S3288 1 . 1 0 `S3297 1 . 1 0 `S3300 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES3303  1 e 1 @3998 ]
 [s S2704 . 1 `uc 1 ECCP1IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 HLVDIE 1 0 :1:2 
@@ -1433,12 +1443,12 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
 "33651
 [v _T2CON T2CON `VEuc  1 e 1 @4042 ]
-[s S3187 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[s S3190 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 TOUTPS 1 0 :4:3 
 ]
 "33672
-[s S3191 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S3194 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T2OUTPS0 1 0 :1:3 
@@ -1447,10 +1457,10 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 T2OUTPS3 1 0 :1:6 
 ]
 "33672
-[u S3199 . 1 `S3187 1 . 1 0 `S3191 1 . 1 0 ]
+[u S3202 . 1 `S3190 1 . 1 0 `S3194 1 . 1 0 ]
 "33672
 "33672
-[v _T2CONbits T2CONbits `VES3199  1 e 1 @4042 ]
+[v _T2CONbits T2CONbits `VES3202  1 e 1 @4042 ]
 "33721
 [v _PR2 PR2 `VEuc  1 e 1 @4043 ]
 "33830
@@ -1544,14 +1554,14 @@ CAN_RX_BUFFER_2_OVFL 2
 "35017
 "35017
 [v _INTCONbits INTCONbits `VES2458  1 e 1 @4082 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\errno.c
+"3 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\errno.c
 [v _errno errno `i  1 e 2 0 ]
-"49 D:\Documenti\GitHub\motore\delay.c
+"49 C:\Users\simone\Documents\GitHub\motore\delay.c
 [v _delay_quartz_frequency_value delay_quartz_frequency_value `VEuc  1 e 1 0 ]
 "50
 [v _clock_counter_reference clock_counter_reference `VEui  1 e 2 0 ]
 [s S853 . 15 `ul 1 identifier 4 0 `[8]uc 1 data 8 4 `uc 1 type 1 12 `uc 1 length 1 13 `uc 1 RTR 1 14 ]
-"56 D:\Documenti\GitHub\motore\motore.c
+"56 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _msg msg `S853  1 e 15 0 ]
 "57
 [v _new_message new_message `VEb  1 e 0 0 ]
@@ -1570,249 +1580,255 @@ CAN_RX_BUFFER_2_OVFL 2
 "64
 [v _centralina_sterzo centralina_sterzo `VEb  1 e 0 0 ]
 "65
-[v _centralina_abs centralina_abs `VEb  1 e 0 0 ]
+[v _ecu_cycle ecu_cycle `VEuc  1 e 1 0 ]
 "66
-[v _centralina_comando centralina_comando `VEb  1 e 0 0 ]
+[v _ECU_error ECU_error `VEb  1 e 0 0 ]
 "67
-[v _dir dir `VEui  1 e 2 0 ]
+[v _centralina_abs centralina_abs `VEb  1 e 0 0 ]
 "68
-[v _currentSpeed currentSpeed `VEl  1 e 4 0 ]
+[v _centralina_comando centralina_comando `VEb  1 e 0 0 ]
 "69
-[v _requestSpeed requestSpeed `VEl  1 e 4 0 ]
+[v _dir dir `VEui  1 e 2 0 ]
 "70
-[v _id id `VEul  1 e 4 0 ]
+[v _currentSpeed currentSpeed `VEl  1 e 4 0 ]
 "71
-[v _timeCounter timeCounter `VEul  1 e 4 0 ]
+[v _requestSpeed requestSpeed `VEl  1 e 4 0 ]
 "72
-[v _previousTimeCounter previousTimeCounter `ul  1 e 4 0 ]
+[v _id id `VEul  1 e 4 0 ]
 "73
-[v _previousTimeCounter1 previousTimeCounter1 `ul  1 e 4 0 ]
+[v _timeCounter timeCounter `VEul  1 e 4 0 ]
 "74
-[v _previousTimeCounter2 previousTimeCounter2 `ul  1 e 4 0 ]
+[v _previousTimeCounter previousTimeCounter `ul  1 e 4 0 ]
 "75
-[v _previousPwm previousPwm `ui  1 e 2 0 ]
+[v _previousTimeCounter1 previousTimeCounter1 `ul  1 e 4 0 ]
 "76
-[v _left_speed left_speed `VEui  1 e 2 0 ]
-"77
-[v _right_speed right_speed `VEui  1 e 2 0 ]
+[v _previousTimeCounter2 previousTimeCounter2 `ul  1 e 4 0 ]
 "78
-[v _duty_set duty_set `l  1 e 4 0 ]
+[v _previousPwm previousPwm `ui  1 e 2 0 ]
+"79
+[v _left_speed left_speed `VEui  1 e 2 0 ]
 "80
-[v _errore errore `ui  1 e 2 0 ]
+[v _right_speed right_speed `VEui  1 e 2 0 ]
 "81
+[v _duty_set duty_set `l  1 e 4 0 ]
+"83
+[v _errore errore `ui  1 e 2 0 ]
+"84
 [v _vBatt vBatt `i  1 e 2 0 ]
-"82
-[v _correzione correzione `l  1 e 4 0 ]
 "85
-[v _data_array data_array `[8]uc  1 e 8 0 ]
-"86
-[v _data_array_debug data_array_debug `[8]uc  1 e 8 0 ]
-"87
-[v _current current `VE[1]uc  1 e 1 0 ]
+[v _correzione correzione `l  1 e 4 0 ]
 "88
+[v _data_array data_array `[8]uc  1 e 8 0 ]
+"89
+[v _data_array_debug data_array_debug `[8]uc  1 e 8 0 ]
+"90
+[v _current current `VE[1]uc  1 e 1 0 ]
+"91
 [v _scrittura scrittura `VEuc  1 e 1 0 ]
-"124
+"127
 [v _main main `(i  1 e 2 0 ]
 {
-"125
-[v main@period period `uc  1 a 1 122 ]
-"181
+"128
+[v main@period period `uc  1 a 1 94 ]
+"192
 } 0
-"232
+"248
 [v _send_data send_data `(v  1 e 0 0 ]
 {
-"244
+"260
 } 0
-"183
+"194
 [v _rampe rampe `(v  1 e 0 0 ]
 {
-"230
+"246
 } 0
-"5 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\pow.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
 {
 "8
-[v pow@yi yi `ul  1 a 4 118 ]
+[v pow@yi yi `ul  1 a 4 9 ]
 "7
-[v pow@sign sign `uc  1 a 1 117 ]
+[v pow@sign sign `uc  1 a 1 8 ]
 "5
-[v pow@x x `d  1 p 4 101 ]
-[v pow@y y `d  1 p 4 105 ]
+[v pow@x x `d  1 p 4 78 ]
+[v pow@y y `d  1 p 4 82 ]
 "31
 } 0
-"5 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\log.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\log.c
 [v _log log `(d  1 e 4 0 ]
 {
 "7
-[v log@exponent exponent `i  1 a 2 86 ]
+[v log@exponent exponent `i  1 a 2 62 ]
 "5
-[v log@x x `d  1 p 4 82 ]
+[v log@x x `d  1 p 4 58 ]
 "9
 [v log@coeff coeff `C[9]d  1 s 36 coeff ]
 "36
 } 0
-"12 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\exp.c
+"12 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\exp.c
 [v _exp exp `(d  1 e 4 0 ]
 {
 "14
-[v exp@exponent exponent `i  1 a 2 98 ]
+[v exp@exponent exponent `i  1 a 2 75 ]
 "15
-[v exp@sign sign `uc  1 a 1 100 ]
+[v exp@sign sign `uc  1 a 1 77 ]
 "12
-[v exp@x x `d  1 p 4 90 ]
+[v exp@x x `d  1 p 4 67 ]
 "17
 [v exp@coeff coeff `C[10]d  1 s 40 coeff ]
 "57
 } 0
-"277 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\frexp.c
+"277 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c
 [v _ldexp ldexp `(d  1 e 4 0 ]
 {
-[v ldexp@value value `d  1 p 4 82 ]
-[v ldexp@newexp newexp `i  1 p 2 86 ]
+[v ldexp@value value `d  1 p 4 58 ]
+[v ldexp@newexp newexp `i  1 p 2 62 ]
 "307
 } 0
-"13 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\floor.c
+"13 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\floor.c
 [v _floor floor `(d  1 e 4 0 ]
 {
 "15
-[v floor@i i `d  1 a 4 80 ]
+[v floor@i i `d  1 a 4 61 ]
 "16
-[v floor@expon expon `i  1 a 2 84 ]
+[v floor@expon expon `i  1 a 2 65 ]
 "13
-[v floor@x x `d  1 p 4 76 ]
+[v floor@x x `d  1 p 4 57 ]
 "30
 } 0
-"254 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\frexp.c
+"254 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c
 [v _frexp frexp `(d  1 e 4 0 ]
 {
 [v frexp@value value `d  1 p 4 0 ]
 [v frexp@eptr eptr `*.39i  1 p 2 4 ]
 "274
 } 0
-"10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\xxtofl.c
-[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-{
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-"13
-[v ___xxtofl@arg arg `ul  1 a 4 17 ]
-"12
-[v ___xxtofl@exp exp `uc  1 a 1 16 ]
-"10
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-[v ___xxtofl@val val `l  1 p 4 7 ]
-"15
-[v ___xxtofl@sign sign `uc  1 a 1 15 ]
-"44
-} 0
-"43 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\fltol.c
+"43 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
 {
 "45
-[v ___fltol@exp1 exp1 `uc  1 a 1 75 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 74 ]
+[v ___fltol@exp1 exp1 `uc  1 a 1 51 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 50 ]
 "43
-[v ___fltol@f1 f1 `d  1 p 4 66 ]
+[v ___fltol@f1 f1 `d  1 p 4 42 ]
 "70
 } 0
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\flge.c
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flge.c
 [v ___flge __flge `(b  1 e 0 0 ]
 {
 [v ___flge@ff1 ff1 `d  1 p 4 0 ]
 [v ___flge@ff2 ff2 `d  1 p 4 4 ]
-"19
+"13
 } 0
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\evalpoly.c
+"36 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\altofl.c
+[v ___altofl __altofl `(d  1 e 4 0 ]
+{
+"38
+[v ___altofl@sign sign `uc  1 a 1 56 ]
+"36
+[v ___altofl@c c `l  1 p 4 52 ]
+"46
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\evalpoly.c
 [v _eval_poly eval_poly `(d  1 e 4 0 ]
 {
 "6
-[v eval_poly@res res `d  1 a 4 78 ]
+[v eval_poly@res res `d  1 a 4 54 ]
 "4
-[v eval_poly@x x `d  1 p 4 66 ]
-[v eval_poly@d d `*.32Cd  1 p 2 70 ]
-[v eval_poly@n n `i  1 p 2 72 ]
+[v eval_poly@x x `d  1 p 4 42 ]
+[v eval_poly@d d `*.32Cd  1 p 2 46 ]
+[v eval_poly@n n `i  1 p 2 48 ]
 "12
 } 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcmul.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S3668 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
-"13
-[s S3673 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S3676 . 4 `l 1 i 4 0 `d 1 f 4 0 `S3668 1 fAsBytes 4 0 `S3673 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S3676  1 a 4 40 ]
-"12
-[v ___flmul@grs grs `ul  1 a 4 35 ]
-[s S3744 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
-"14
-[u S3747 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S3744 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S3747  1 a 2 44 ]
-"10
-[v ___flmul@bexp bexp `uc  1 a 1 39 ]
-"11
-[v ___flmul@aexp aexp `uc  1 a 1 34 ]
-"9
-[v ___flmul@sign sign `uc  1 a 1 33 ]
-"8
-[v ___flmul@b b `d  1 p 4 21 ]
-[v ___flmul@a a `d  1 p 4 25 ]
-"205
+"65
+[v ___flmul@f3_as_product f3_as_product `ul  1 a 4 24 ]
+"64
+[v ___flmul@sign sign `uc  1 a 1 29 ]
+[v ___flmul@cntr cntr `uc  1 a 1 28 ]
+[v ___flmul@exp exp `uc  1 a 1 23 ]
+"62
+[v ___flmul@f1 f1 `d  1 p 4 15 ]
+[v ___flmul@f2 f2 `d  1 p 4 19 ]
+"220
 } 0
-"245 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcadd.c
+"20 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flsub.c
 [v ___flsub __flsub `(d  1 e 4 0 ]
 {
-[v ___flsub@b b `d  1 p 4 66 ]
-[v ___flsub@a a `d  1 p 4 70 ]
-"250
+[v ___flsub@f1 f1 `d  1 p 4 42 ]
+[v ___flsub@f2 f2 `d  1 p 4 46 ]
+"32
 } 0
-"10
+"88 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fladd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 {
-"17
-[v ___fladd@grs grs `uc  1 a 1 65 ]
-"15
-[v ___fladd@bexp bexp `uc  1 a 1 64 ]
-"16
-[v ___fladd@aexp aexp `uc  1 a 1 63 ]
-"13
-[v ___fladd@signs signs `uc  1 a 1 62 ]
-"10
-[v ___fladd@b b `d  1 p 4 46 ]
-[v ___fladd@a a `d  1 p 4 50 ]
-"237
+"90
+[v ___fladd@exp1 exp1 `uc  1 a 1 41 ]
+[v ___fladd@exp2 exp2 `uc  1 a 1 40 ]
+[v ___fladd@sign sign `uc  1 a 1 39 ]
+"88
+[v ___fladd@f1 f1 `d  1 p 4 30 ]
+[v ___fladd@f2 f2 `d  1 p 4 34 ]
+"149
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\flneg.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\flneg.c
 [v ___flneg __flneg `(d  1 e 4 0 ]
 {
 [v ___flneg@f1 f1 `d  1 p 4 0 ]
 "20
 } 0
-"11 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcdiv.c
+"54 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fldiv.c
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 {
-"21
-[v ___fldiv@grs grs `ul  1 a 4 19 ]
-"22
-[v ___fldiv@rem rem `ul  1 a 4 13 ]
-"20
-[v ___fldiv@new_exp new_exp `i  1 a 2 17 ]
-"19
-[v ___fldiv@aexp aexp `uc  1 a 1 24 ]
-"18
-[v ___fldiv@bexp bexp `uc  1 a 1 23 ]
-"16
-[v ___fldiv@sign sign `uc  1 a 1 12 ]
-"11
-[v ___fldiv@b b `d  1 p 4 0 ]
-[v ___fldiv@a a `d  1 p 4 4 ]
-"184
+"60
+[v ___fldiv@f3 f3 `d  1 a 4 18 ]
+"59
+[v ___fldiv@sign sign `uc  1 a 1 24 ]
+[v ___fldiv@exp exp `uc  1 a 1 23 ]
+[v ___fldiv@cntr cntr `uc  1 a 1 22 ]
+"54
+[v ___fldiv@f1 f1 `d  1 p 4 10 ]
+[v ___fldiv@f2 f2 `d  1 p 4 14 ]
+"85
 } 0
-"4 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\abs.c
+"31 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awtofl.c
+[v ___awtofl __awtofl `(d  1 e 4 0 ]
+{
+"34
+[v ___awtofl@sign sign `uc  1 a 1 14 ]
+"31
+[v ___awtofl@c c `i  1 p 2 10 ]
+"42
+} 0
+"30 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lltofl.c
+[v ___lltofl __lltofl `(d  1 e 4 0 ]
+{
+[v ___lltofl@c c `ul  1 p 4 10 ]
+"33
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
 {
 [v abs@a a `i  1 p 2 0 ]
 "9
 } 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+"28 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtofl.c
+[v ___lwtofl __lwtofl `(d  1 e 4 0 ]
+{
+[v ___lwtofl@c c `ui  1 p 2 10 ]
+"31
+} 0
+"63 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\double.c
+[v ___flpack __flpack `(d  1 e 4 0 ]
+{
+[v ___flpack@arg arg `ul  1 p 4 0 ]
+[v ___flpack@exp exp `uc  1 p 1 4 ]
+[v ___flpack@sign sign `uc  1 p 1 5 ]
+"87
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "11
@@ -1824,28 +1840,41 @@ CAN_RX_BUFFER_2_OVFL 2
 [v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
 "31
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setdc.c
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+{
+"11
+[v ___aldiv@quotient quotient `l  1 a 4 10 ]
+"12
+[v ___aldiv@sign sign `uc  1 a 1 9 ]
+[v ___aldiv@counter counter `uc  1 a 1 8 ]
+"8
+[v ___aldiv@dividend dividend `l  1 p 4 0 ]
+[v ___aldiv@divisor divisor `l  1 p 4 4 ]
+"42
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1setdc.c
 [v _SetDCEPWM1 SetDCEPWM1 `(v  1 e 0 0 ]
 {
-[u S3221 PWMDC 2 `ui 1 lpwm 2 0 `[2]uc 1 bpwm 2 0 ]
+[u S3224 PWMDC 2 `ui 1 lpwm 2 0 `[2]uc 1 bpwm 2 0 ]
 "17
-[v SetDCEPWM1@DCycle DCycle `S3221  1 a 2 4 ]
+[v SetDCEPWM1@DCycle DCycle `S3224  1 a 2 4 ]
 "15
 [v SetDCEPWM1@dutycycle dutycycle `ui  1 p 2 0 ]
 "27
 } 0
-"301 D:\Documenti\GitHub\motore\motore.c
+"302 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
-"366
+"367
 } 0
-"61 D:\Documenti\GitHub\motore\delay.c
+"61 C:\Users\simone\Documents\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
 {
 [v delay_ms@value_ms value_ms `ui  1 p 2 6 ]
 "96
 } 0
-"18 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1setoc.c
+"18 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1setoc.c
 [v _SetOutputEPWM1 SetOutputEPWM1 `(v  1 e 0 0 ]
 {
 [v SetOutputEPWM1@outputconfig outputconfig `uc  1 a 1 wreg ]
@@ -1855,7 +1884,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v SetOutputEPWM1@outputconfig outputconfig `uc  1 a 1 1 ]
 "45
 } 0
-"218 D:\Documenti\GitHub\motore\CANlib.h
+"218 C:\Users\simone\Documents\GitHub\motore\CANlib.h
 [v _CANInitialize CANInitialize `(v  1 e 0 0 ]
 {
 [v CANInitialize@propSeg propSeg `uc  1 a 1 wreg ]
@@ -1869,7 +1898,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANInitialize@phaseSeg2 phaseSeg2 `uc  1 p 1 15 ]
 [v CANInitialize@SJW SJW `uc  1 p 1 16 ]
 [v CANInitialize@BRP BRP `uc  1 p 1 17 ]
-[v CANInitialize@flags flags `E16887  1 p 1 18 ]
+[v CANInitialize@flags flags `E16928  1 p 1 18 ]
 "223
 [v CANInitialize@propSeg propSeg `uc  1 a 1 23 ]
 "289
@@ -1877,51 +1906,51 @@ CAN_RX_BUFFER_2_OVFL 2
 "640
 [v _CANSetMask CANSetMask `(v  1 e 0 0 ]
 {
-[v CANSetMask@numBuffer numBuffer `E16921  1 a 1 wreg ]
+[v CANSetMask@numBuffer numBuffer `E16962  1 a 1 wreg ]
 "641
 [v CANSetMask@tamp tamp `ul  1 a 4 10 ]
 "640
-[v CANSetMask@numBuffer numBuffer `E16921  1 a 1 wreg ]
+[v CANSetMask@numBuffer numBuffer `E16962  1 a 1 wreg ]
 [v CANSetMask@mask mask `ul  1 p 4 0 ]
-[v CANSetMask@type type `E16887  1 p 1 4 ]
+[v CANSetMask@type type `E16928  1 p 1 4 ]
 "643
-[v CANSetMask@numBuffer numBuffer `E16921  1 a 1 9 ]
+[v CANSetMask@numBuffer numBuffer `E16962  1 a 1 9 ]
 "742
 } 0
 "748
 [v _CANSetFilter CANSetFilter `(v  1 e 0 0 ]
 {
-[v CANSetFilter@numBuffer numBuffer `E16924  1 a 1 wreg ]
+[v CANSetFilter@numBuffer numBuffer `E16965  1 a 1 wreg ]
 "750
 [v CANSetFilter@tamp tamp `ul  1 a 4 10 ]
 "748
-[v CANSetFilter@numBuffer numBuffer `E16924  1 a 1 wreg ]
+[v CANSetFilter@numBuffer numBuffer `E16965  1 a 1 wreg ]
 [v CANSetFilter@filter filter `ul  1 p 4 0 ]
-[v CANSetFilter@type type `E16887  1 p 1 4 ]
+[v CANSetFilter@type type `E16928  1 p 1 4 ]
 "752
-[v CANSetFilter@numBuffer numBuffer `E16924  1 a 1 9 ]
+[v CANSetFilter@numBuffer numBuffer `E16965  1 a 1 9 ]
 "1078
 } 0
 "206
 [v _CANOperationMode CANOperationMode `(v  1 e 0 0 ]
 {
-[v CANOperationMode@mode mode `E16881  1 a 1 wreg ]
-[v CANOperationMode@mode mode `E16881  1 a 1 wreg ]
+[v CANOperationMode@mode mode `E16922  1 a 1 wreg ]
+[v CANOperationMode@mode mode `E16922  1 a 1 wreg ]
 "208
-[v CANOperationMode@mode mode `E16881  1 a 1 0 ]
+[v CANOperationMode@mode mode `E16922  1 a 1 0 ]
 "211
 } 0
-"260 D:\Documenti\GitHub\motore\motore.c
+"276 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _can_interpreter can_interpreter `(v  1 e 0 0 ]
 {
-"299
+"300
 } 0
-"246
+"262
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
 {
-"258
+"274
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
@@ -1931,7 +1960,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
+"8 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "11
@@ -1944,7 +1973,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v ___awdiv@divisor divisor `i  1 p 2 8 ]
 "42
 } 0
-"294 D:\Documenti\GitHub\motore\CANlib.h
+"294 C:\Users\simone\Documents\GitHub\motore\CANlib.h
 [v _CANsendMessage CANsendMessage `(v  1 e 0 0 ]
 {
 "296
@@ -1953,7 +1982,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANsendMessage@identifier identifier `ul  1 p 4 0 ]
 [v CANsendMessage@data data `*.39uc  1 p 2 4 ]
 [v CANsendMessage@dataLength dataLength `uc  1 p 1 6 ]
-[v CANsendMessage@flags flags `E16909  1 p 1 7 ]
+[v CANsendMessage@flags flags `E16950  1 p 1 7 ]
 "522
 } 0
 "1154
@@ -1961,7 +1990,7 @@ CAN_RX_BUFFER_2_OVFL 2
 {
 "1157
 } 0
-"17 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\Timers\t2open.c
+"17 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\Timers\t2open.c
 [v _OpenTimer2 OpenTimer2 `(v  1 e 0 0 ]
 {
 [v OpenTimer2@config config `uc  1 a 1 wreg ]
@@ -1970,7 +1999,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenTimer2@config config `uc  1 a 1 0 ]
 "31
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\pic18\plib\PWM\ew1open.c
+"15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1open.c
 [v _OpenEPWM1 OpenEPWM1 `(v  1 e 0 0 ]
 {
 [v OpenEPWM1@period period `uc  1 a 1 wreg ]
@@ -1979,14 +2008,14 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenEPWM1@period period `uc  1 a 1 0 ]
 "23
 } 0
-"93 D:\Documenti\GitHub\motore\motore.c
+"96 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
-"102
+"105
 [v ISR_bassa@i i `uc  1 a 1 33 ]
-"122
+"125
 } 0
-"528 D:\Documenti\GitHub\motore\CANlib.h
+"528 C:\Users\simone\Documents\GitHub\motore\CANlib.h
 [v _CANreceiveMessage CANreceiveMessage `(uc  1 e 1 0 ]
 {
 "530
