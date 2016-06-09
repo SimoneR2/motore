@@ -154,19 +154,19 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _CANisRxReady CANisRxReady `(uc  1 e 1 0 ]
 "61 C:\Users\simone\Documents\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
-"96 C:\Users\simone\Documents\GitHub\motore\motore.c
+"97 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
-"127
+"128
 [v _main main `(i  1 e 2 0 ]
-"194
+"195
 [v _rampe rampe `(v  1 e 0 0 ]
-"248
+"249
 [v _send_data send_data `(v  1 e 0 0 ]
-"262
+"263
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
-"276
+"288
 [v _can_interpreter can_interpreter `(v  1 e 0 0 ]
-"302
+"314
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 "16255 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3840 ]
@@ -1166,7 +1166,7 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "30325
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S3235 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S3236 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -1176,7 +1176,7 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "30357
-[s S3244 . 1 `uc 1 RD0 1 0 :1:0 
+[s S3245 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -1185,11 +1185,11 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S3253 . 1 `S3235 1 . 1 0 `S3244 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES3253  1 e 1 @3989 ]
+[u S3254 . 1 `S3236 1 . 1 0 `S3245 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES3254  1 e 1 @3989 ]
 "30546
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S3323 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S3324 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -1199,15 +1199,15 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 PSPIE 1 0 :1:7 
 ]
 "30793
-[s S3332 . 1 `uc 1 . 1 0 :5:0 
+[s S3333 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[s S3335 . 1 `uc 1 . 1 0 :4:0 
+[s S3336 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 ]
-[u S3338 . 1 `S3323 1 . 1 0 `S3332 1 . 1 0 `S3335 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES3338  1 e 1 @3997 ]
-[s S3288 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S3339 . 1 `S3324 1 . 1 0 `S3333 1 . 1 0 `S3336 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES3339  1 e 1 @3997 ]
+[s S3289 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -1217,14 +1217,14 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "30872
-[s S3297 . 1 `uc 1 . 1 0 :5:0 
+[s S3298 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S3300 . 1 `uc 1 . 1 0 :4:0 
+[s S3301 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 ]
-[u S3303 . 1 `S3288 1 . 1 0 `S3297 1 . 1 0 `S3300 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES3303  1 e 1 @3998 ]
+[u S3304 . 1 `S3289 1 . 1 0 `S3298 1 . 1 0 `S3301 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES3304  1 e 1 @3998 ]
 [s S2704 . 1 `uc 1 ECCP1IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 HLVDIE 1 0 :1:2 
@@ -1443,12 +1443,12 @@ CAN_RX_BUFFER_2_OVFL 2
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
 "33651
 [v _T2CON T2CON `VEuc  1 e 1 @4042 ]
-[s S3190 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[s S3191 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 TOUTPS 1 0 :4:3 
 ]
 "33672
-[s S3194 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S3195 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T2OUTPS0 1 0 :1:3 
@@ -1457,10 +1457,10 @@ CAN_RX_BUFFER_2_OVFL 2
 `uc 1 T2OUTPS3 1 0 :1:6 
 ]
 "33672
-[u S3202 . 1 `S3190 1 . 1 0 `S3194 1 . 1 0 ]
+[u S3203 . 1 `S3191 1 . 1 0 `S3195 1 . 1 0 ]
 "33672
 "33672
-[v _T2CONbits T2CONbits `VES3202  1 e 1 @4042 ]
+[v _T2CONbits T2CONbits `VES3203  1 e 1 @4042 ]
 "33721
 [v _PR2 PR2 `VEuc  1 e 1 @4043 ]
 "33830
@@ -1622,25 +1622,27 @@ CAN_RX_BUFFER_2_OVFL 2
 "89
 [v _data_array_debug data_array_debug `[8]uc  1 e 8 0 ]
 "90
-[v _current current `VE[1]uc  1 e 1 0 ]
+[v _data_battery data_battery `[1]uc  1 e 1 0 ]
 "91
+[v _current current `VE[1]uc  1 e 1 0 ]
+"92
 [v _scrittura scrittura `VEuc  1 e 1 0 ]
-"127
+"128
 [v _main main `(i  1 e 2 0 ]
 {
-"128
+"129
 [v main@period period `uc  1 a 1 94 ]
-"192
+"193
 } 0
-"248
+"249
 [v _send_data send_data `(v  1 e 0 0 ]
 {
-"260
+"261
 } 0
-"194
+"195
 [v _rampe rampe `(v  1 e 0 0 ]
 {
-"246
+"247
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
@@ -1856,17 +1858,17 @@ CAN_RX_BUFFER_2_OVFL 2
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\pic18\plib\PWM\ew1setdc.c
 [v _SetDCEPWM1 SetDCEPWM1 `(v  1 e 0 0 ]
 {
-[u S3224 PWMDC 2 `ui 1 lpwm 2 0 `[2]uc 1 bpwm 2 0 ]
+[u S3225 PWMDC 2 `ui 1 lpwm 2 0 `[2]uc 1 bpwm 2 0 ]
 "17
-[v SetDCEPWM1@DCycle DCycle `S3224  1 a 2 4 ]
+[v SetDCEPWM1@DCycle DCycle `S3225  1 a 2 4 ]
 "15
 [v SetDCEPWM1@dutycycle dutycycle `ui  1 p 2 0 ]
 "27
 } 0
-"302 C:\Users\simone\Documents\GitHub\motore\motore.c
+"314 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _configurazione_iniziale configurazione_iniziale `(v  1 e 0 0 ]
 {
-"367
+"379
 } 0
 "61 C:\Users\simone\Documents\GitHub\motore\delay.c
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
@@ -1940,15 +1942,15 @@ CAN_RX_BUFFER_2_OVFL 2
 [v CANOperationMode@mode mode `E16922  1 a 1 0 ]
 "211
 } 0
-"276 C:\Users\simone\Documents\GitHub\motore\motore.c
+"288 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _can_interpreter can_interpreter `(v  1 e 0 0 ]
 {
-"300
+"312
 } 0
-"262
+"263
 [v _battery_measure battery_measure `(v  1 e 0 0 ]
 {
-"274
+"286
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -2008,12 +2010,12 @@ CAN_RX_BUFFER_2_OVFL 2
 [v OpenEPWM1@period period `uc  1 a 1 0 ]
 "23
 } 0
-"96 C:\Users\simone\Documents\GitHub\motore\motore.c
+"97 C:\Users\simone\Documents\GitHub\motore\motore.c
 [v _ISR_bassa ISR_bassa `IIL(v  1 e 0 0 ]
 {
-"105
+"106
 [v ISR_bassa@i i `uc  1 a 1 33 ]
-"125
+"126
 } 0
 "528 C:\Users\simone\Documents\GitHub\motore\CANlib.h
 [v _CANreceiveMessage CANreceiveMessage `(uc  1 e 1 0 ]

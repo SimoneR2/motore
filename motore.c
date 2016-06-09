@@ -87,6 +87,7 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array_debug [8] = 0;
+ BYTE data_battery [1] = 0;
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
 //====================================================================
@@ -269,7 +270,18 @@ void battery_measure(void) {
         CANsendMessage(LOW_BATTERY, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
         PORTCbits.RC1 = 1;
     } else {
+        if (vBatt < 13) {
+            while (CANisTxReady() != 1);
+           
+            data_battery [0] = 0;
+            CANsendMessage(BATTERY_CHARGING, data_battery, 2, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
+        }
         PORTCbits.RC1 = 0;
+    }
+    if (vBatt > 13) {
+        while (CANisTxReady() != 1);
+        data_battery [0] = 1;
+        CANsendMessage(BATTERY_CHARGING, data_battery, 2, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
     }
 }
 

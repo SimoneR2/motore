@@ -20707,6 +20707,7 @@ BYTE counter_array [8] = 0;
 BYTE currentSpeed_array [8] = 0;
 BYTE data_array [8] = 0;
 BYTE data_array_debug [8] = 0;
+BYTE data_battery [1] = 0;
 volatile unsigned char current[] = 0;
 volatile unsigned char scrittura = 0;
 
@@ -20889,7 +20890,18 @@ while (CANisTxReady() != 1);
 CANsendMessage(0b00000001011, data_array, 8, CAN_CONFIG_STD_MSG & CAN_REMOTE_TX_FRAME & CAN_TX_PRIORITY_0);
 PORTCbits.RC1 = 1;
 } else {
+if (vBatt < 13) {
+while (CANisTxReady() != 1);
+
+data_battery [0] = 0;
+CANsendMessage(0b00000010010, data_battery, 2, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
+}
 PORTCbits.RC1 = 0;
+}
+if (vBatt > 13) {
+while (CANisTxReady() != 1);
+data_battery [0] = 1;
+CANsendMessage(0b00000010010, data_battery, 2, CAN_CONFIG_STD_MSG & CAN_NORMAL_TX_FRAME & CAN_TX_PRIORITY_0);
 }
 }
 
@@ -20901,7 +20913,7 @@ PORTAbits.RA1 = 1;
 }
 if (id == 0b00000001000) {
 
-# 288
+# 300
 left_speed = data_array[1];
 left_speed = ((left_speed << 8) | (data_array[0]));
 right_speed = data_array[3];
